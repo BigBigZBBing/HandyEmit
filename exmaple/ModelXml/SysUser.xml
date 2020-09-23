@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--属性-->
+<Propertys ClassNam="Test">
+  <property Type="String" Name="Name" />
+  <property Type="Int32" Name="Old" />
+  <property Type="Int64" Name="Id" />
+  <property Type="DateTime" Name="DateBirth" />
+  <property Type="Boolean" Name="Man" />
+  <property Type="Decimal" Name="Wage" />
+</Propertys>

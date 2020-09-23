@@ -1,0 +1,5 @@
+C:\Users\zbb58\source\repos\primitiveDapper\Repository.Core\bin\Debug\netstandard2.0\Repository.Core.deps.json
+C:\Users\zbb58\source\repos\primitiveDapper\Repository.Core\bin\Debug\netstandard2.0\Repository.Core.dll
+C:\Users\zbb58\source\repos\primitiveDapper\Repository.Core\obj\Debug\netstandard2.0\Repository.Core.csprojAssemblyReference.cache
+C:\Users\zbb58\source\repos\primitiveDapper\Repository.Core\obj\Debug\netstandard2.0\Repository.Core.AssemblyInfoInputs.cache
+C:\Users\zbb58\source\repos\primitiveDapper\Repository.Core\obj\Debug\netstandard2.0\Repository.Core.AssemblyInfo.cs

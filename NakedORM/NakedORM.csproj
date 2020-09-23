@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>NakedORM</AssemblyName>
+    <RootNamespace>NakedORM</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ExternalSupport\DataReaderExtensions.cs" />
+    <Compile Remove="ExternalSupport\DbColumnAttribute.cs" />
+    <Compile Remove="ExternalSupport\DbResultAttribute.cs" />
+    <Compile Remove="ExternalSupport\DynamicEmulateBLL.cs" />
+    <Compile Remove="ExternalSupport\DynamicInitBLL.cs" />
+    <Compile Remove="ExternalSupport\EmitHelper.cs" />
+    <Compile Remove="ExternalSupport\M_Base.cs" />
+    <Compile Remove="ExternalSupport\TDynamicBuilder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ExternalSupport\" />
+    <Folder Include="Changeable\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DeepCloner" Version="0.10.2" />
+    <PackageReference Include="MySql.Data" Version="8.0.21" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.90" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.Reflection" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HandyEmit\HandyEmit.csproj" />
+  </ItemGroup>
+
+</Project>

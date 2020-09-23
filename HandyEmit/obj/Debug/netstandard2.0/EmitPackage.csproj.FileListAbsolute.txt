@@ -1,0 +1,11 @@
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\bin\Debug\netstandard2.0\EmitPackage.deps.json
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\bin\Debug\netstandard2.0\EmitPackage.dll
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\bin\Debug\netstandard2.0\EmitPackage.pdb
+C:\Users\zbb58\source\repos\Bin\netstandard2.0\EmitPackage.deps.json
+C:\Users\zbb58\source\repos\Bin\netstandard2.0\EmitPackage.dll
+C:\Users\zbb58\source\repos\Bin\netstandard2.0\EmitPackage.pdb
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.0\EmitPackage.AssemblyInfoInputs.cache
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.0\EmitPackage.AssemblyInfo.cs
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.0\EmitPackage.csproj.CoreCompileInputs.cache
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.0\EmitPackage.dll
+C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.0\EmitPackage.pdb

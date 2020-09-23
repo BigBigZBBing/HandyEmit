@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)' == 'Debug|AnyCPU|net48'">
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>NET48</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)' == 'Release|AnyCPU|net48'">
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>NET48</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Debug|AnyCPU|netstandard2.0'">
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>NETCORE2.0</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Release|AnyCPU|netstandard2.0'">
+    <OutputPath>..\..\Bin\</OutputPath>
+    <DefineConstants>NETCORE2.0</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SmartEmit\Field\比较符.cs" />
+    <Compile Remove="SmartEmit\Field\运算符.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SmartEmit\Dictionary\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+</Project>

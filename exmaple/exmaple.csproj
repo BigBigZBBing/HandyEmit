@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>exmaple</AssemblyName>
+    <RootNamespace>exmaple</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HandyEmit\HandyEmit.csproj" />
+    <ProjectReference Include="..\NakedORM\NakedORM.csproj" />
+  </ItemGroup>
+
+</Project>
