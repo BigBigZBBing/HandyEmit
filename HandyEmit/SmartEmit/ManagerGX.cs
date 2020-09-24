@@ -477,6 +477,21 @@ namespace HandyEmit.SmartEmit
         }
 
         /// <summary>
+        /// 内部渗透方案(DateTime)
+        /// </summary>
+        /// <param name="il"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        internal static FieldDateTime NewDateTime(this ILGenerator il, DateTime datatime = default(DateTime))
+        {
+            LocalBuilder item = il.DeclareLocal(typeof(DateTime));
+            il.Emit(OpCodes.Ldc_I8, datatime.Ticks);
+            il.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
+            il.Emit(OpCodes.Stloc_S, item);
+            return new FieldDateTime(item, il);
+        }
+
+        /// <summary>
         /// 内部渗透方案(Array)
         /// </summary>
         /// <param name="il"></param>

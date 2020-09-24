@@ -13,7 +13,7 @@ namespace HandyEmit
     /// <summary>
     /// Emit高效模型
     /// </summary>
-    public class EmitDynamic : IEnumerable
+    public sealed class EmitDynamic : IEnumerable
     {
         /// <summary>
         /// 构造函数

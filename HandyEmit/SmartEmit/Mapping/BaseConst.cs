@@ -21,6 +21,7 @@ namespace HandyEmit.SmartEmit.Mapping
         internal static readonly MethodInfo _ArrayLastIndexOf = typeof(Array).GetMethod("LastIndexOf", new Type[] { typeof(Array), typeof(T) });
         internal static readonly MethodInfo _EnumerableContains = typeof(Enumerable).GetMethod("Contains", new Type[] { typeof(IEnumerable<T>), typeof(T) });
         internal static readonly MethodInfo _EnumerableCount = typeof(Enumerable).GetMethod("Count", new Type[] { typeof(IEnumerable<T>) });
+        internal static readonly MethodInfo _DateTimeCount = typeof(DateTime).GetMethod("Count", new Type[] { typeof(IEnumerable<T>) });
 
     }
 }

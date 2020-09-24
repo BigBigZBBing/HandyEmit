@@ -74,6 +74,15 @@ namespace HandyEmit.SmartEmit
         }
 
         /// <summary>
+        /// 初始化DateTime
+        /// </summary>
+        /// <param name="value"></param>
+        public CanCompute<Decimal> NewDateTime(DateTime value = default(DateTime))
+        {
+            return this.il.NewDateTime(value);
+        }
+
+        /// <summary>
         /// 初始化数组
         /// </summary>
         /// <typeparam name="T"></typeparam>

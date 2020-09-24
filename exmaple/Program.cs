@@ -15,6 +15,11 @@ using System.Text;
 
 namespace exmaple
 {
+    public static class test
+    {
+        public static string name { get; set; }
+    }
+
     class Program
     {
 

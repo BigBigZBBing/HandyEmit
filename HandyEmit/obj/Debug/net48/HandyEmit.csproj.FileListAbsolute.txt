@@ -13,3 +13,11 @@ C:\Users\zbb58\source\repos\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.csproj
 C:\Users\zbb58\source\repos\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.csproj.CopyComplete
 C:\Users\zbb58\source\repos\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.dll
 C:\Users\zbb58\source\repos\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.pdb
+C:\Users\zbb58\source\repos\zbb5896\Bin\net48\HandyEmit.dll
+C:\Users\zbb58\source\repos\zbb5896\Bin\net48\HandyEmit.pdb
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.AssemblyInfoInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.AssemblyInfo.cs
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.csproj.CoreCompileInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.csproj.CopyComplete
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.dll
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.pdb
