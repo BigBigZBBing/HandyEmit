@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NakedORM
 {
-    public static class SqlTemplet
+    internal static class SqlTemplet
     {
         /// <summary>
         /// 生产执行用的SQL
@@ -13,7 +13,7 @@ namespace NakedORM
         /// <param name="from">数据集</param>
         /// <param name="where">条件</param>
         /// <returns></returns>
-        public static String ProSql(String select = "", String from = "", String where = "", String GroupBy = "", String OrderBy = "")
+        internal static String ProSql(String select = "", String from = "", String where = "", String GroupBy = "", String OrderBy = "")
         {
             if (where != String.Empty)
                 where = $" WHERE {where} ";
@@ -26,7 +26,7 @@ namespace NakedORM
         /// <param name="Sql"></param>
         /// <param name="Key"></param>
         /// <returns></returns>
-        public static String OldPagerToSql(String Sql, String Key)
+        internal static String OldPagerToSql(String Sql, String Key)
         {
             return $@"SELECT PAGER.* 
                       FROM ( SELECT WITHTABLE.*,
@@ -42,7 +42,7 @@ namespace NakedORM
         /// <param name="Sql"></param>
         /// <param name="Key"></param>
         /// <returns></returns>
-        public static String PagerToSql(String Sql, String Key)
+        internal static String PagerToSql(String Sql, String Key)
         {
             return $@" SELECT PAGER.*,
                        COUNT(*) OVER() TotalCount 
@@ -58,7 +58,7 @@ namespace NakedORM
         /// <param name="Fields"></param>
         /// <param name="DataSet"></param>
         /// <returns></returns>
-        public static String InsertSql(String Table, String Fields, String DataSet)
+        internal static String InsertSql(String Table, String Fields, String DataSet)
         {
             return $@"INSERT INTO {Table} 
                       SELECT {Fields} FROM
@@ -72,7 +72,7 @@ namespace NakedORM
         /// <param name="Fields"></param>
         /// <param name="DataSet"></param>
         /// <returns></returns>
-        public static String BulkInsertSql(String Table, String Fields)
+        internal static String BulkInsertSql(String Table, String Fields)
         {
             return $@"INSERT INTO {Table} 
                       SELECT {Fields} FROM @TVP ";
@@ -85,7 +85,7 @@ namespace NakedORM
         /// <param name="Set"></param>
         /// <param name="Where"></param>
         /// <returns></returns>
-        public static String UpdateSql(String Table, String Set, String Where)
+        internal static String UpdateSql(String Table, String Set, String Where)
         {
             return $@"UPDATE {Table} SET 
                       {Set} 
@@ -99,7 +99,7 @@ namespace NakedORM
         /// <param name="Table"></param>
         /// <param name="Where"></param>
         /// <returns></returns>
-        public static String DeleteSql(String Table, String Where)
+        internal static String DeleteSql(String Table, String Where)
         {
             return $@"DELETE FROM {Table} 
                       WHERE 

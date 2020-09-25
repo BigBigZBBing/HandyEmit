@@ -1,4 +1,5 @@
 ﻿using HandyEmit.SmartEmit.Field;
+using HandyEmit;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -176,7 +177,7 @@ namespace HandyEmit.SmartEmit
             il.Emit(OpCodes.Newobj, ctor);
             il.Emit(OpCodes.Stloc, model);
 
-            EmitProperty[] emits = type.CachePropsManage();
+            EmitProperty[] emits = type.CachePropsManager();
 
             for (int i = 0; i < emits.Length; i++)
             {
@@ -206,7 +207,7 @@ namespace HandyEmit.SmartEmit
             il.Emit(OpCodes.Newobj, type);
             il.Emit(OpCodes.Stloc, model);
 
-            EmitProperty[] emits = type.CachePropsManage();
+            EmitProperty[] emits = type.CachePropsManager();
 
             for (int i = 0; i < emits.Length; i++)
             {
@@ -253,7 +254,7 @@ namespace HandyEmit.SmartEmit
         internal static FieldBoolean Comparer<T>(FieldManager<T> field, T value, params OpCode[] codes)
         {
             var res = field.il.NewBoolean();
-            field.PushLd();
+            field.Ldloc();
             foreach (var code in codes)
             {
                 field.il.EmitValue(value);
@@ -274,7 +275,7 @@ namespace HandyEmit.SmartEmit
         internal static FieldBoolean Comparer<T, T1>(CanCompute<T> field, T1 value, params OpCode[] codes)
         {
             var res = field.il.NewBoolean();
-            field.PushLd();
+            field.Ldloc();
             foreach (var code in codes)
             {
                 field.il.EmitValue(value);
@@ -295,7 +296,7 @@ namespace HandyEmit.SmartEmit
         internal static FieldBoolean Comparer<T>(FieldManager<T> field, LocalBuilder value, params OpCode[] codes)
         {
             var res = field.il.NewBoolean();
-            field.PushLd();
+            field.Ldloc();
             foreach (var code in codes)
             {
                 field.il.Emit(OpCodes.Ldloc_S, value);
@@ -316,10 +317,10 @@ namespace HandyEmit.SmartEmit
         internal static FieldBoolean Comparer<T, T1>(FieldManager<T> field, FieldManager<T1> value, params OpCode[] codes)
         {
             var res = field.il.NewBoolean();
-            field.PushLd();
+            field.Ldloc();
             foreach (var code in codes)
             {
-                value.PushLd();
+                value.Ldloc();
                 field.il.Emit(code);
             }
             field.il.Emit(OpCodes.Stloc_S, res);
@@ -336,10 +337,10 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T> Compute<T, T1>(FieldManager<T> field, T1 value, OpCode code)
         {
-            field.PushLd();
+            field.Ldloc();
             field.il.EmitValue(value);
             field.il.Emit(code);
-            field.PushSt();
+            field.Stloc();
             return field;
         }
 
@@ -353,10 +354,10 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T1> Compute<T, T1>(FieldManager<T> field, LocalBuilder value, OpCode code)
         {
-            field.PushLd();
+            field.Ldloc();
             field.il.Emit(OpCodes.Ldloc_S, value);
             field.il.Emit(code);
-            field.PushSt();
+            field.Stloc();
             return field as FieldManager<T1>;
         }
 
@@ -370,10 +371,10 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T> Compute<T, T1>(FieldManager<T> field, FieldManager<T1> value, OpCode code)
         {
-            field.PushLd();
-            value.PushLd();
+            field.Ldloc();
+            value.Ldloc();
             field.il.Emit(code);
-            field.PushSt();
+            field.Stloc();
             return field;
         }
 
@@ -489,6 +490,20 @@ namespace HandyEmit.SmartEmit
             il.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
             il.Emit(OpCodes.Stloc_S, item);
             return new FieldDateTime(item, il);
+        }
+
+        /// <summary>
+        /// 内部渗透方案(Entity)
+        /// </summary>
+        /// <param name="il"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        internal static FieldEntity<T> NewEntity<T>(this ILGenerator il) where T : class
+        {
+            LocalBuilder item = il.DeclareLocal(typeof(T));
+            il.Emit(OpCodes.Newobj, typeof(T).GetConstructor(Type.EmptyTypes));
+            il.Emit(OpCodes.Stloc_S, item);
+            return new FieldEntity<T>(item, il);
         }
 
         /// <summary>

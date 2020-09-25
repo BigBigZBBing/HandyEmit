@@ -8,7 +8,7 @@ using HandyEmit.SmartEmit;
 
 namespace HandyEmit
 {
-    public static class CacheManage
+    public static class CacheManager
     {
         /// <summary>
         /// 实体Map缓存方案
@@ -21,7 +21,7 @@ namespace HandyEmit
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static EmitProperty[] CachePropsManage(this Type type)
+        internal static EmitProperty[] CachePropsManager(this Type type)
         {
             if (!EntityCache.TryGetValue(type.FullName, out EmitProperty[] props))
             {

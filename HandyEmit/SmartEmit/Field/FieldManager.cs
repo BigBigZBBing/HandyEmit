@@ -26,17 +26,17 @@ namespace HandyEmit.SmartEmit
         /// <summary>
         /// 从内存中推入计算堆
         /// </summary>
-        public void PushLd()
+        public void Ldloc()
         {
-            il.Emit(OpCodes.Ldloc_S, this.stack);
+            base.Emit(OpCodes.Ldloc_S, this.stack);
         }
 
         /// <summary>
         /// 推出计算堆到内存
         /// </summary>
-        public void PushSt()
+        public void Stloc()
         {
-            il.Emit(OpCodes.Stloc_S, this.stack);
+            base.Emit(OpCodes.Stloc_S, this.stack);
         }
 
 

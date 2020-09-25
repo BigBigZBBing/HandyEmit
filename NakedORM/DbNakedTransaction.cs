@@ -21,8 +21,8 @@ namespace NakedORM
         /// </summary>
         public void Commit()
         {
-            if (tran != null && tran.Connection != null)
-                tran.Commit();
+            if (this.tran != null && this.tran.Connection != null)
+                this.tran.Commit();
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace NakedORM
         /// </summary>
         public void Rollback()
         {
-            if (tran != null && tran.Connection != null)
-                tran.Rollback();
+            if (this.tran != null && this.tran.Connection != null)
+                this.tran.Rollback();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -41,7 +41,8 @@ namespace NakedORM
                 if (disposing)
                 {
                     // TODO: 释放托管状态(托管对象)
-                    tran?.Dispose();
+                    this.tran?.Dispose();
+                    this.tran = null;
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并替代终结器

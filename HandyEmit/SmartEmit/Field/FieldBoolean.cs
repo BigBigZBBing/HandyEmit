@@ -101,12 +101,12 @@ namespace HandyEmit.SmartEmit.Field
         {
             var assert = field.il.NewBoolean();
             var _true = field.il.DefineLabel();
-            field.PushLd();
+            field.Ldloc();
             field.il.Emit(OpCodes.Ldc_I4_1);
             field.il.Emit(OpCodes.Beq_S, _true);
             field.il.Emit(OpCodes.Ldc_I4_0);
-            assert.PushSt();
-            value.PushLd();
+            assert.Stloc();
+            value.Ldloc();
             field.il.Emit(OpCodes.Ldc_I4_1);
             field.il.Emit(OpCodes.Beq_S, _true);
             field.il.MarkLabel(_true);
@@ -123,14 +123,14 @@ namespace HandyEmit.SmartEmit.Field
         {
             var assert = field.il.NewBoolean();
             var _false = field.il.DefineLabel();
-            field.PushLd();
+            field.Ldloc();
             field.il.Emit(OpCodes.Ldc_I4_0);
             field.il.Emit(OpCodes.Beq_S, _false);
-            value.PushLd();
+            value.Ldloc();
             field.il.Emit(OpCodes.Ldc_I4_0);
             field.il.Emit(OpCodes.Beq_S, _false);
             field.il.Emit(OpCodes.Ldc_I4_1);
-            assert.PushSt();
+            assert.Stloc();
             field.il.MarkLabel(_false);
             return assert;
         }

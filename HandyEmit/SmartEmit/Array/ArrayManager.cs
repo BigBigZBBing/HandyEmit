@@ -158,7 +158,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.EmitValue(value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._EnumerableContains);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 
@@ -172,7 +172,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.Emit(OpCodes.Ldloc_S, value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._EnumerableContains);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 
@@ -186,7 +186,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.EmitValue(value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayIndexOf);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 
@@ -200,7 +200,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.Emit(OpCodes.Ldloc_S, value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayIndexOf);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 
@@ -214,7 +214,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.EmitValue(value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayLastIndexOf);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 
@@ -228,7 +228,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.Emit(OpCodes.Ldloc_S, value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayLastIndexOf);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 

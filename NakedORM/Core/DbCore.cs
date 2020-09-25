@@ -1,5 +1,4 @@
-﻿#define STANDARD2_0
-using HandyEmit;
+﻿using HandyEmit;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ using System.Diagnostics;
 
 namespace NakedORM.Core
 {
-    public static class DbCore
+    internal static class DbCore
     {
 
         /// <summary>
@@ -28,7 +27,7 @@ namespace NakedORM.Core
         /// <param name="pager">分页参数化对象</param>
         /// <param name="tran">事务对象</param>
         /// <returns></returns>
-        public static IDataReader Read(this DbNakedContext con, String sql, IList<DbField> where, DbPager pager)
+        internal static IDataReader Read(this DbNakedContext con, String sql, IList<DbField> where, DbPager pager)
         {
             //判断连接是否打开
             if (con._Connection.State != ConnectionState.Open)
@@ -62,7 +61,7 @@ namespace NakedORM.Core
         /// <param name="Entities">新增参数化对象</param>
         /// <param name="tran">事务对象</param>
         /// <returns></returns>
-        public static DbSlice<Int32> Execute<T>(this DbNakedContext con, String sql, IList<DbField> set = null, IList<DbField> where = null, IList<T> entities = null)
+        internal static DbSlice<Int32> Execute<T>(this DbNakedContext con, String sql, IList<DbField> set = null, IList<DbField> where = null, IList<T> entities = null)
         {
             var slice = new DbSlice<Int32>();
 
@@ -114,7 +113,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <param name="command">命令对象</param>
         /// <param name="where">参数化对象</param>
-        public static void InjectParams<T>(this IDbCommand command, IList<DbField> set = null, IList<DbField> where = null, IList<T> entities = null, DbPager pager = null)
+        internal static void InjectParams<T>(this IDbCommand command, IList<DbField> set = null, IList<DbField> where = null, IList<T> entities = null, DbPager pager = null)
         {
             //数据参数对象
             IDbDataParameter parameter;
@@ -185,7 +184,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <param name="field"></param>
         /// <returns></returns>
-        public static String ToWherePropertyName(DbField field)
+        internal static String ToWherePropertyName(DbField field)
         {
             return $"{field.Field}_where";
         }
@@ -195,7 +194,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <param name="field"></param>
         /// <returns></returns>
-        public static String ToSetPropertyName(DbField field)
+        internal static String ToSetPropertyName(DbField field)
         {
             return $"{field.Field}_set";
         }
@@ -205,7 +204,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <typeparam name="T">实体对象</typeparam>
         /// <returns></returns>
-        public static String EntityKey<TEntity>()
+        internal static String EntityKey<TEntity>()
         {
             //获取实体类型
             var type = typeof(TEntity);
@@ -230,7 +229,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <typeparam name="T">实体对象</typeparam>
         /// <returns></returns>
-        public static String EntityPagerKey<TEntity>()
+        internal static String EntityPagerKey<TEntity>()
         {
             //获取实体类型
             var type = typeof(TEntity);
@@ -259,7 +258,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <typeparam name="TEntity">实体对象</typeparam>
         /// <returns></returns>
-        public static String EntityTable<TEntity>()
+        internal static String EntityTable<TEntity>()
         {
             //获取实体类型
             var type = typeof(TEntity);
@@ -283,7 +282,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <typeparam name="TEntity">实体对象</typeparam>
         /// <returns></returns>
-        public static String EntityField<TEntity>(Expression<Func<TEntity, dynamic>> Reveal)
+        internal static String EntityField<TEntity>(Expression<Func<TEntity, dynamic>> Reveal)
         {
             String[] field = new String[0];
 
@@ -325,7 +324,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        public static String EntityFieldNoKey<TEntity>()
+        internal static String EntityFieldNoKey<TEntity>()
         {
             String[] field = new String[0];
 
@@ -354,7 +353,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <param name="fields">需要查询的字段数组</param>
         /// <returns></returns>
-        public static String ParamWhere(IList<DbField> fields)
+        internal static String ParamWhere(IList<DbField> fields)
         {
             if (fields == null || fields.Count == 0) return "";
 
@@ -418,7 +417,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
-        public static String ParamSet(IList<DbField> fields)
+        internal static String ParamSet(IList<DbField> fields)
         {
             StringBuilder builder = new StringBuilder();
 
@@ -440,17 +439,13 @@ namespace NakedORM.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="Entities"></param>
         /// <returns></returns>
-        public static String InsertValues<T>(Int32 Count)
+        internal static String InsertValues<T>(Int32 Count)
         {
             StringBuilder builder = new StringBuilder();
 
             List<EmitProperty> props = typeof(T).ToEmitProps().ToList();
 
-#if STANDARD2_1
-            builder.AppendJoin(" UNION ALL ", GetInsertSet(builder, props, Count));
-#else
             builder.Append(String.Join(" UNION ALL ", GetInsertSet(builder, props, Count)));
-#endif
 
             return builder.ToString();
         }
@@ -462,7 +457,7 @@ namespace NakedORM.Core
         /// <param name="props"></param>
         /// <param name="Count"></param>
         /// <returns></returns>
-        public static IEnumerable<String> GetInsertSet(StringBuilder builder, IList<EmitProperty> props, Int32 Count)
+        internal static IEnumerable<String> GetInsertSet(StringBuilder builder, IList<EmitProperty> props, Int32 Count)
         {
             int test = 0;
             for (int i = 0; i < Count; i++)
@@ -478,7 +473,7 @@ namespace NakedORM.Core
         /// <param name="props"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static IEnumerable<String> GetInsertField(IList<EmitProperty> props, Int32 index)
+        internal static IEnumerable<String> GetInsertField(IList<EmitProperty> props, Int32 index)
         {
             foreach (var prop in props)
             {
@@ -491,7 +486,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <param name="field">查询条件</param>
         /// <returns></returns>
-        public static String AnalysisFunc(this DbField field)
+        internal static String AnalysisFunc(this DbField field)
         {
             string compare;
 
@@ -515,7 +510,7 @@ namespace NakedORM.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="OrderBy"></param>
         /// <returns></returns>
-        public static String EntityGroupBy<T>(Expression<Func<T, dynamic>> GroupBy)
+        internal static String EntityGroupBy<T>(Expression<Func<T, dynamic>> GroupBy)
         {
             //判断是否为空
             if (GroupBy == null) return "";
@@ -570,7 +565,7 @@ namespace NakedORM.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="OrderBy"></param>
         /// <returns></returns>
-        public static String EntityOrderBy<T>(Expression<Func<T, dynamic>> OrderBy)
+        internal static String EntityOrderBy<T>(Expression<Func<T, dynamic>> OrderBy)
         {
             //判断是否为空
             if (OrderBy == null) return "";
@@ -622,7 +617,7 @@ namespace NakedORM.Core
         /// <summary>
         /// Db缓存
         /// </summary>
-        static ConcurrentDictionary<String, Delegate> DbReadCache = new ConcurrentDictionary<String, Delegate>();
+        internal static ConcurrentDictionary<String, Delegate> DbReadCache = new ConcurrentDictionary<String, Delegate>();
 
         /// <summary>
         /// 执行SQL读取数据集
@@ -633,7 +628,7 @@ namespace NakedORM.Core
         /// <param name="where">查询条件</param>
         /// <param name="tran">事务对象</param>
         /// <returns></returns>
-        public static DbSlice<IEnumerable<T>> SqlRead<T>(this DbNakedContext con, string sqlStr, Expression<Func<T, dynamic>> Reveal, IList<DbField> where, DbPager pager) where T : class, new()
+        internal static DbSlice<IEnumerable<T>> SqlRead<T>(this DbNakedContext con, string sqlStr, Expression<Func<T, dynamic>> Reveal, IList<DbField> where, DbPager pager) where T : class, new()
         {
             var slice = new DbSlice<IEnumerable<T>>();
             //开辟数据集容器
@@ -699,7 +694,7 @@ namespace NakedORM.Core
         /// </summary>
         /// <param name="props"></param>
         /// <returns></returns>
-        public static IEnumerable<EmitProperty> ToEmitProps(this Type type)
+        internal static IEnumerable<EmitProperty> ToEmitProps(this Type type)
         {
             foreach (var prop in type.GetProperties()
                 .Where(x => x.CustomAttributes

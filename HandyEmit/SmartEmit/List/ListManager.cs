@@ -56,7 +56,7 @@ namespace HandyEmit.SmartEmit
             var res = this.il.NewBoolean();
             this.PushIn();
             this.il.Emit(OpCodes.Callvirt, BaseConst<T>._ListRemove);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 
@@ -87,7 +87,7 @@ namespace HandyEmit.SmartEmit
             var res = this.il.NewBoolean();
             this.PushIn();
             this.il.Emit(OpCodes.Callvirt, BaseConst<T>._ListContains);
-            res.PushSt();
+            res.Stloc();
             return res;
         }
 

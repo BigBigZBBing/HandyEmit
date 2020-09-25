@@ -63,6 +63,9 @@ namespace NakedORM
                     this._Command.Dispose();
                     this._Connection.Close();
                     this._Connection.Dispose();
+                    this._Command = null;
+                    this._Connection = null;
+                    this._Connection = null;
                 }
 
                 // TODO: 释放未托管的资源(未托管的对象)并替代终结器

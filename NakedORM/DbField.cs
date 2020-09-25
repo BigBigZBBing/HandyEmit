@@ -7,9 +7,9 @@ namespace NakedORM
     /// <summary>
     /// 查询集合对象
     /// </summary>
-    public class DbField
+    public sealed class DbField
     {
-        public DbField(string field, object value, DbFunc dbFunc = DbFunc.Equal, string orGroup = default)
+        internal DbField(string field, object value, DbFunc dbFunc = DbFunc.Equal, string orGroup = default)
         {
             Field = field;
             Value = value;
@@ -41,7 +41,7 @@ namespace NakedORM
     /// <summary>
     /// 分页集合
     /// </summary>
-    public class DbPager
+    public sealed class DbPager
     {
         public DbPager(Int32 pagerIndex = 1, Int32 pagerSize = 15, Int64 totalCount = 0)
         {

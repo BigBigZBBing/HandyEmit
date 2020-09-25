@@ -31,14 +31,14 @@ namespace exmaple
                 var long1 = il.NewInt64();
                 var int1 = il.NewInt32();
                 il.Emit(OpCodes.Ldarg_0);
-                long1.PushSt();
+                long1.Stloc();
 
                 il.Emit(OpCodes.Ldarg_1);
-                int1.PushSt();
+                int1.Stloc();
 
                 var res = long1 - int1;
 
-                res.PushLd();
+                res.Ldloc();
                 il.Emit(OpCodes.Ret);
             });
 
@@ -46,7 +46,7 @@ namespace exmaple
 
             //EmitModelTest();
 
-            DbOperation();
+            //DbOperation();
 
             Console.ReadKey();
         }
@@ -137,20 +137,26 @@ namespace exmaple
                         //    });
                         //}
 
-                        List<TestModel> model = new List<TestModel>();
-                        for (int i = 0; i < 100000; i++)
-                        {
-                            model.Add(new TestModel()
-                            {
-                                test2 = new Random().Next(0, 10000),
-                                test3 = Create(100),
-                                test4 = Convert.ToDecimal(new Random().Next(0, 10000) + new Random().NextDouble()),
-                                test5 = DateTime.Now.AddSeconds(new Random().Next(-1000, 1000)),
-                                test6 = Convert.ToSingle(new Random().Next(0, 10000) + new Random().NextDouble())
-                            });
-                        }
+                        //List<TestModel> model = new List<TestModel>();
+                        //for (int i = 0; i < 100000; i++)
+                        //{
+                        //    model.Add(new TestModel()
+                        //    {
+                        //        test2 = new Random().Next(0, 10000),
+                        //        test3 = Create(100),
+                        //        test4 = Convert.ToDecimal(new Random().Next(0, 10000) + new Random().NextDouble()),
+                        //        test5 = DateTime.Now.AddSeconds(new Random().Next(-1000, 1000)),
+                        //        test6 = Convert.ToSingle(new Random().Next(0, 10000) + new Random().NextDouble())
+                        //    });
+                        //}
+                        //var res = con.AddRange(model);
 
-                        var res = con.AddRange(model);
+                        //更新
+                        var res1 = con.Update<SysUser>(set =>
+                            set._("Name", "邓超"),
+                        where =>
+                            where._("Name", "邓超1")
+                        );
 
                         tran.Commit();
                     }
@@ -170,8 +176,6 @@ namespace exmaple
                 //个别字段查询
                 //var list2 = con.GetList<SysUser>(Reveal: x => new { x.Name, x.Old });
 
-
-
                 //批量新增
                 //var res = con.AddRange(new List<SysUser>()
                 //{
@@ -189,12 +193,6 @@ namespace exmaple
                 //    }
                 //});
 
-                //更新
-                //IList<DbField> set = new List<DbField>();
-                //set.Push("Name", "邓超");
-                //IList<DbField> where = new List<DbField>();
-                //where.Push("Name", "邓超1");
-                //var res = con.Update<SysUser>(set, where);
 
                 //删除
                 //var res = con.Delete<SysUser>(5);

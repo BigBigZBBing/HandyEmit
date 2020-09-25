@@ -7,18 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ExternalSupport\DataReaderExtensions.cs" />
-    <Compile Remove="ExternalSupport\DbColumnAttribute.cs" />
-    <Compile Remove="ExternalSupport\DbResultAttribute.cs" />
-    <Compile Remove="ExternalSupport\DynamicEmulateBLL.cs" />
-    <Compile Remove="ExternalSupport\DynamicInitBLL.cs" />
-    <Compile Remove="ExternalSupport\EmitHelper.cs" />
-    <Compile Remove="ExternalSupport\M_Base.cs" />
-    <Compile Remove="ExternalSupport\TDynamicBuilder.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ExternalSupport\" />
     <Folder Include="Changeable\" />
   </ItemGroup>
 

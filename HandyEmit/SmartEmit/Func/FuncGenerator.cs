@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Diagnostics.SymbolStore;
 using System.Runtime.InteropServices;
 using System.Linq;
+using HandyEmit.SmartEmit.Func;
 
 namespace HandyEmit.SmartEmit
 {
@@ -36,24 +37,24 @@ namespace HandyEmit.SmartEmit
         /// <param name="builder"></param>
         public void For(Int32 init, LocalBuilder length, Action<LocalBuilder> builder)
         {
-            Label _for = il.DefineLabel();
-            Label _endfor = il.DefineLabel();
-            LocalBuilder index = il.DeclareLocal(typeof(Int32));
+            Label _for = DefineLabel();
+            Label _endfor = DefineLabel();
+            LocalBuilder index = DeclareLocal(typeof(Int32));
             il.Int32Map(init);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.Emit(OpCodes.Br, _endfor);
-            il.MarkLabel(_for);
+            Emit(OpCodes.Stloc_S, index);
+            Emit(OpCodes.Br, _endfor);
+            MarkLabel(_for);
             builder?.Invoke(index);
-            il.Emit(OpCodes.Ldloc_S, index);
-            il.Emit(OpCodes.Ldc_I4_1);
-            il.Emit(OpCodes.Add);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.MarkLabel(_endfor);
-            il.Emit(OpCodes.Ldloc_S, index);
-            il.Emit(OpCodes.Ldloc_S, length);
-            il.Emit(OpCodes.Ldlen);
-            il.Emit(OpCodes.Clt);
-            il.Emit(OpCodes.Brtrue_S, _for);
+            Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldc_I4_1);
+            Emit(OpCodes.Add);
+            Emit(OpCodes.Stloc_S, index);
+            MarkLabel(_endfor);
+            Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldloc_S, length);
+            Emit(OpCodes.Ldlen);
+            Emit(OpCodes.Clt);
+            Emit(OpCodes.Brtrue_S, _for);
         }
 
         /// <summary>
@@ -64,24 +65,24 @@ namespace HandyEmit.SmartEmit
         /// <param name="builder"></param>
         public void For(LocalBuilder init, LocalBuilder length, Action<LocalBuilder> build)
         {
-            Label _for = il.DefineLabel();
-            Label _endfor = il.DefineLabel();
-            LocalBuilder index = il.DeclareLocal(typeof(Int32));
-            il.Emit(OpCodes.Ldloc_S, init);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.Emit(OpCodes.Br, _endfor);
-            il.MarkLabel(_for);
+            Label _for = DefineLabel();
+            Label _endfor = DefineLabel();
+            LocalBuilder index = DeclareLocal(typeof(Int32));
+            Emit(OpCodes.Ldloc_S, init);
+            Emit(OpCodes.Stloc_S, index);
+            Emit(OpCodes.Br, _endfor);
+            MarkLabel(_for);
             build?.Invoke(index);
-            il.Emit(OpCodes.Ldloc_S, index);
-            il.Emit(OpCodes.Ldc_I4_1);
-            il.Emit(OpCodes.Add);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.MarkLabel(_endfor);
-            il.Emit(OpCodes.Ldloc_S, index);
-            il.Emit(OpCodes.Ldloc_S, length);
-            il.Emit(OpCodes.Ldlen);
-            il.Emit(OpCodes.Clt);
-            il.Emit(OpCodes.Brtrue_S, _for);
+            Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldc_I4_1);
+            Emit(OpCodes.Add);
+            Emit(OpCodes.Stloc_S, index);
+            MarkLabel(_endfor);
+            Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldloc_S, length);
+            Emit(OpCodes.Ldlen);
+            Emit(OpCodes.Clt);
+            Emit(OpCodes.Brtrue_S, _for);
         }
 
         /// <summary>
@@ -92,23 +93,23 @@ namespace HandyEmit.SmartEmit
         /// <param name="builder"></param>
         public void For(Int32 init, Int32 length, Action<LocalBuilder> build)
         {
-            Label _for = il.DefineLabel();
-            Label _endfor = il.DefineLabel();
-            LocalBuilder index = il.DeclareLocal(typeof(Int32));
+            Label _for = DefineLabel();
+            Label _endfor = DefineLabel();
+            LocalBuilder index = DeclareLocal(typeof(Int32));
             il.Int32Map(init);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.Emit(OpCodes.Br, _endfor);
-            il.MarkLabel(_for);
+            Emit(OpCodes.Stloc_S, index);
+            Emit(OpCodes.Br, _endfor);
+            MarkLabel(_for);
             build?.Invoke(index);
-            il.Emit(OpCodes.Ldloc_S, index);
-            il.Emit(OpCodes.Ldc_I4_1);
-            il.Emit(OpCodes.Add);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.MarkLabel(_endfor);
-            il.Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldc_I4_1);
+            Emit(OpCodes.Add);
+            Emit(OpCodes.Stloc_S, index);
+            MarkLabel(_endfor);
+            Emit(OpCodes.Ldloc_S, index);
             il.Int32Map(length);
-            il.Emit(OpCodes.Clt);
-            il.Emit(OpCodes.Brtrue_S, _for);
+            Emit(OpCodes.Clt);
+            Emit(OpCodes.Brtrue_S, _for);
         }
 
         #endregion
@@ -123,28 +124,28 @@ namespace HandyEmit.SmartEmit
         /// <param name="builder"></param>
         public void Forr(LocalBuilder init, Action<LocalBuilder> builder)
         {
-            Label _for = il.DefineLabel();
-            Label _endfor = il.DefineLabel();
-            LocalBuilder index = il.DeclareLocal(typeof(Int32));
-            il.Emit(OpCodes.Ldloc_S, init);
-            il.Emit(OpCodes.Ldlen);
-            il.Emit(OpCodes.Ldc_I4_1);
-            il.Emit(OpCodes.Sub);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.Emit(OpCodes.Br, _endfor);
-            il.MarkLabel(_for);
+            Label _for = DefineLabel();
+            Label _endfor = DefineLabel();
+            LocalBuilder index = DeclareLocal(typeof(Int32));
+            Emit(OpCodes.Ldloc_S, init);
+            Emit(OpCodes.Ldlen);
+            Emit(OpCodes.Ldc_I4_1);
+            Emit(OpCodes.Sub);
+            Emit(OpCodes.Stloc_S, index);
+            Emit(OpCodes.Br, _endfor);
+            MarkLabel(_for);
             builder?.Invoke(index);
-            il.Emit(OpCodes.Ldloc_S, index);
-            il.Emit(OpCodes.Ldc_I4_1);
-            il.Emit(OpCodes.Sub);
-            il.Emit(OpCodes.Stloc_S, index);
-            il.MarkLabel(_endfor);
-            il.Emit(OpCodes.Ldloc_S, index);
-            il.Emit(OpCodes.Ldc_I4_0);
-            il.Emit(OpCodes.Clt);
-            il.Emit(OpCodes.Ldc_I4_0);
-            il.Emit(OpCodes.Ceq);
-            il.Emit(OpCodes.Brtrue_S, _for);
+            Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldc_I4_1);
+            Emit(OpCodes.Sub);
+            Emit(OpCodes.Stloc_S, index);
+            MarkLabel(_endfor);
+            Emit(OpCodes.Ldloc_S, index);
+            Emit(OpCodes.Ldc_I4_0);
+            Emit(OpCodes.Clt);
+            Emit(OpCodes.Ldc_I4_0);
+            Emit(OpCodes.Ceq);
+            Emit(OpCodes.Brtrue_S, _for);
         }
 
         #endregion
@@ -172,6 +173,21 @@ namespace HandyEmit.SmartEmit
         public AssertManager IF<T>(FieldManager<T> assert, Action<ILGenerator> builder)
         {
             return new AssertManager(il, (assert, builder));
+        }
+
+        #endregion
+
+        #region Try
+
+        /// <summary>
+        /// Try捕获
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public TryCatchManager Try(Action<ILGenerator> builder)
+        {
+            BeginExceptionBlock();
+            return new TryCatchManager(il);
         }
 
         #endregion
