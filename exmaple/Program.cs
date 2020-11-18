@@ -211,7 +211,7 @@ namespace exmaple
         {
             SmartBuilder emit = new SmartBuilder("Core.Model");
             emit.Assembly();
-            emit.Class("Model", ClassType.公共);
+            emit.Class("Model", Qualifier.Public);
             for (int i = 0; i < 100; i++)
             {
                 emit.CreateProperty("Name" + i, typeof(String));

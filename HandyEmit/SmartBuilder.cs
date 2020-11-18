@@ -67,7 +67,7 @@ namespace HandyEmit
         /// 创建类库
         /// </summary>
         /// <param name="ClassName"></param>
-        public SmartBuilder Class(String ClassName, ClassType ClassType = ClassType.公共)
+        public SmartBuilder Class(String ClassName, Qualifier ClassType = Qualifier.Public)
         {
             typeBuilder = moduleBuilder.DefineType(ClassName, (TypeAttributes)ClassType);
             return this;
