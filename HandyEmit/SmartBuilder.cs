@@ -172,11 +172,11 @@ namespace HandyEmit
         }
 
         /// <summary>
-        /// 快速构建字段
+        /// 快速构建字段及属性
         /// </summary>
         /// <param name="FieldName"></param>
         /// <param name="FieldType"></param>
-        public void SmartProperty(String FieldName, Type FieldType)
+        public void CreateProperty(String FieldName, Type FieldType)
         {
             Field($"_{FieldName}", FieldType);
             Property(FieldName, FieldType);
@@ -194,6 +194,7 @@ namespace HandyEmit
         /// <returns></returns>
         public EmitDynamic InitEntity()
         {
+            SaveClass();
             var props = _dymaticType.GetProperties();
             Build();
             return new EmitDynamic()
@@ -213,7 +214,7 @@ namespace HandyEmit
         public static T DynamicMethod<T>(String MethodName, Action<FuncGenerator> builder) where T : class
         {
             var type = typeof(T);
-            if (type.Name.IndexOf("Func`") == -1) throw new Exception("please use Func or Action");
+            if (type.Name.StartsWith("Func`") || type.Name.StartsWith("Action`")) throw new Exception("please use Func or Action");
             var types = type.GenericTypeArguments.ToList();
             var retType = types.Last();
             types.RemoveAt(types.Count - 1);

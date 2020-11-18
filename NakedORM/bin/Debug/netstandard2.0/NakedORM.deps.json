@@ -7,9 +7,8 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "NakedORM/1.0.0": {
+      "NakedORM/1.0.1": {
         "dependencies": {
-          "DeepCloner": "0.10.2",
           "HandyEmit": "1.0.0",
           "MySql.Data": "8.0.21",
           "NETStandard.Library": "2.0.3",
@@ -34,17 +33,6 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
             "assemblyVersion": "1.8.2.0",
             "fileVersion": "1.8.18099.1"
-          }
-        }
-      },
-      "DeepCloner/0.10.2": {
-        "dependencies": {
-          "NETStandard.Library": "2.0.3"
-        },
-        "runtime": {
-          "lib/netstandard1.3/DeepCloner.dll": {
-            "assemblyVersion": "0.10.0.0",
-            "fileVersion": "0.10.2.0"
           }
         }
       },
@@ -963,7 +951,7 @@
     }
   },
   "libraries": {
-    "NakedORM/1.0.0": {
+    "NakedORM/1.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -974,13 +962,6 @@
       "sha512": "sha512-jAy3uHN1U9DpoT/TgLqDTEhlccn/4doOVxhSmmNsnoSsGfHT9Lwr634ac9D0YFujAhNw61nWF4UIpHyzv0aQww==",
       "path": "bouncycastle.netcore/1.8.3",
       "hashPath": "bouncycastle.netcore.1.8.3.nupkg.sha512"
-    },
-    "DeepCloner/0.10.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-QJTEz5Y9m74S0gzarkIdljlbyx3gNOKM/UT9WZR5bS/pYZb6UX59QQWzLnu8KZc5jajQXtr/rHJcAGB39Ne6CA==",
-      "path": "deepcloner/0.10.2",
-      "hashPath": "deepcloner.0.10.2.nupkg.sha512"
     },
     "Google.Protobuf/3.6.1": {
       "type": "package",

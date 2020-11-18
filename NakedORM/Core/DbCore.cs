@@ -151,7 +151,6 @@ namespace NakedORM.Core
                 //参数注入
                 for (int i = 0, t = 0; i < entities.Count; t++)
                 {
-                    if (((t + 1) * props.Count) >= 2100) break;
                     foreach (var prop in props)
                     {
                         parameter = command.CreateParameter();
@@ -159,7 +158,6 @@ namespace NakedORM.Core
                         parameter.Value = prop.Get(entities[t]);
                         command.Parameters.Add(parameter);
                     }
-                    entities.RemoveAt(i);
                 }
             }
 

@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>NakedORM</AssemblyName>
     <RootNamespace>NakedORM</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>一套高性能ORM(暂时只支持MSSQL)</Description>
+    <Version>1.0.1</Version>
+    <Authors>zhangbingbin</Authors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DeepCloner" Version="0.10.2" />
     <PackageReference Include="MySql.Data" Version="8.0.21" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.90" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />

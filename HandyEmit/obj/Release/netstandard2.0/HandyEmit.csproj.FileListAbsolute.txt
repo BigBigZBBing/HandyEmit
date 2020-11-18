@@ -1,0 +1,8 @@
+C:\Users\zbb58\source\repos\zbb5896\Bin\netstandard2.0\HandyEmit.deps.json
+C:\Users\zbb58\source\repos\zbb5896\Bin\netstandard2.0\HandyEmit.dll
+C:\Users\zbb58\source\repos\zbb5896\Bin\netstandard2.0\HandyEmit.pdb
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Release\netstandard2.0\HandyEmit.AssemblyInfoInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Release\netstandard2.0\HandyEmit.AssemblyInfo.cs
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Release\netstandard2.0\HandyEmit.csproj.CoreCompileInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Release\netstandard2.0\HandyEmit.dll
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Release\netstandard2.0\HandyEmit.pdb

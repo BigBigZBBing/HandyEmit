@@ -16,18 +16,6 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
-      "DeepCloner/0.10.2": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1"
-        },
-        "compile": {
-          "lib/netstandard1.3/DeepCloner.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/DeepCloner.dll": {}
-        }
-      },
       "Google.Protobuf/3.6.1": {
         "type": "package",
         "dependencies": {
@@ -1247,11 +1235,10 @@
           "bin/placeholder/HandyEmit.dll": {}
         }
       },
-      "NakedORM/1.0.0": {
+      "NakedORM/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "DeepCloner": "0.10.2",
           "HandyEmit": "1.0.0",
           "MySql.Data": "8.0.21",
           "Oracle.ManagedDataAccess.Core": "2.19.90",
@@ -1296,21 +1283,6 @@
         "lib/netstandard2.0/BouncyCastle.Crypto.xml",
         "lib/xamarinios/BouncyCastle.Crypto.dll",
         "lib/xamarinios/BouncyCastle.Crypto.xml"
-      ]
-    },
-    "DeepCloner/0.10.2": {
-      "sha512": "QJTEz5Y9m74S0gzarkIdljlbyx3gNOKM/UT9WZR5bS/pYZb6UX59QQWzLnu8KZc5jajQXtr/rHJcAGB39Ne6CA==",
-      "type": "package",
-      "path": "deepcloner/0.10.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "deepcloner.0.10.2.nupkg.sha512",
-        "deepcloner.nuspec",
-        "lib/net40/DeepCloner.dll",
-        "lib/net40/DeepCloner.xml",
-        "lib/netstandard1.3/DeepCloner.dll",
-        "lib/netstandard1.3/DeepCloner.xml"
       ]
     },
     "Google.Protobuf/3.6.1": {
@@ -5000,7 +4972,7 @@
       "path": "../HandyEmit/HandyEmit.csproj",
       "msbuildProject": "../HandyEmit/HandyEmit.csproj"
     },
-    "NakedORM/1.0.0": {
+    "NakedORM/1.0.1": {
       "type": "project",
       "path": "../NakedORM/NakedORM.csproj",
       "msbuildProject": "../NakedORM/NakedORM.csproj"
@@ -5009,7 +4981,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "HandyEmit >= 1.0.0",
-      "NakedORM >= 1.0.0"
+      "NakedORM >= 1.0.1"
     ]
   },
   "packageFolders": {
@@ -5043,6 +5015,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\HandyEmit.csproj": {
               "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\HandyEmit.csproj"
@@ -5061,6 +5034,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "imports": [
           "net461",
           "net462",
@@ -5076,7 +5050,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

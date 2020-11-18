@@ -24,9 +24,11 @@ namespace exmaple
     {
 
         static IRepository _Repository { get; set; }
+
         static void Main(string[] args)
         {
-            Func<Int64, Int32, Int64> func = SmartBuilder.DynamicMethod<Func<Int64, Int32, Int64>>(String.Empty, il =>
+
+            Action<Int64, Int32, Int64> func = SmartBuilder.DynamicMethod<Action<Int64, Int32, Int64>>(String.Empty, il =>
             {
                 var long1 = il.NewInt64();
                 var int1 = il.NewInt32();
@@ -38,17 +40,22 @@ namespace exmaple
 
                 var res = long1 - int1;
 
-                res.Ldloc();
+                //res.Ldloc();
                 il.Emit(OpCodes.Ret);
             });
 
-            Int64 test = func.Invoke(Int64.MaxValue, 10000);
+            //Int64 test = func.Invoke(Int64.MaxValue, 10000);
 
             //EmitModelTest();
 
             //DbOperation();
 
             Console.ReadKey();
+        }
+
+        public static void test(Delegate method)
+        {
+
         }
 
         public static string Create(int length)
@@ -207,10 +214,8 @@ namespace exmaple
             emit.Class("Model", ClassType.公共);
             for (int i = 0; i < 100; i++)
             {
-                emit.SmartProperty("Name" + i, typeof(String));
+                emit.CreateProperty("Name" + i, typeof(String));
             }
-            emit.SaveClass();
-
             EmitDynamic TEST = emit.InitEntity();
 
             String II = "";

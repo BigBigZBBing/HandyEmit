@@ -15,6 +15,12 @@ namespace HandyEmit.SmartEmit.Field
         {
         }
 
+        public static implicit operator FieldInt32(CanCompute<T> field) => new FieldInt32(field.stack, field.il);
+        public static implicit operator FieldInt64(CanCompute<T> field) => new FieldInt64(field.stack, field.il);
+        public static implicit operator FieldFloat(CanCompute<T> field) => new FieldFloat(field.stack, field.il);
+        public static implicit operator FieldDouble(CanCompute<T> field) => new FieldDouble(field.stack, field.il);
+        public static implicit operator FieldDecimal(CanCompute<T> field) => new FieldDecimal(field.stack, field.il);
+
         #region 大于
 
         /// <summary>

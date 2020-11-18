@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using Force.DeepCloner;
 using NakedORM.Core;
 
 namespace NakedORM.Simple
@@ -21,7 +20,7 @@ namespace NakedORM.Simple
         {
             if (typeof(T).IsGenericType) throw new Exception("批量新增请用AddRange函数");
             String sqlStr = SqlTemplet.InsertSql(DbCore.EntityTable<T>(), DbCore.EntityFieldNoKey<T>(), DbCore.InsertValues<T>(1));
-            return con.Execute<T>(sqlStr, entities: new List<T>() { entity }.DeepClone());
+            return con.Execute<T>(sqlStr, entities: new List<T>() { entity });
         }
 
         /// <summary>

@@ -16,18 +16,6 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
-      "DeepCloner/0.10.2": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1"
-        },
-        "compile": {
-          "lib/netstandard1.3/DeepCloner.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/DeepCloner.dll": {}
-        }
-      },
       "Google.Protobuf/3.6.1": {
         "type": "package",
         "dependencies": {
@@ -1263,21 +1251,6 @@
         "lib/netstandard2.0/BouncyCastle.Crypto.xml",
         "lib/xamarinios/BouncyCastle.Crypto.dll",
         "lib/xamarinios/BouncyCastle.Crypto.xml"
-      ]
-    },
-    "DeepCloner/0.10.2": {
-      "sha512": "QJTEz5Y9m74S0gzarkIdljlbyx3gNOKM/UT9WZR5bS/pYZb6UX59QQWzLnu8KZc5jajQXtr/rHJcAGB39Ne6CA==",
-      "type": "package",
-      "path": "deepcloner/0.10.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "deepcloner.0.10.2.nupkg.sha512",
-        "deepcloner.nuspec",
-        "lib/net40/DeepCloner.dll",
-        "lib/net40/DeepCloner.xml",
-        "lib/netstandard1.3/DeepCloner.dll",
-        "lib/netstandard1.3/DeepCloner.xml"
       ]
     },
     "Google.Protobuf/3.6.1": {
@@ -5071,7 +5044,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "DeepCloner >= 0.10.2",
       "HandyEmit >= 1.0.0",
       "MySql.Data >= 8.0.21",
       "NETStandard.Library >= 2.0.3",
@@ -5088,7 +5060,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "restore": {
       "projectUniqueName": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj",
       "projectName": "NakedORM",
@@ -5114,6 +5086,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
           "projectReferences": {
             "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\HandyEmit.csproj": {
               "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\HandyEmit.csproj"
@@ -5129,11 +5102,8 @@
     },
     "frameworks": {
       "netstandard2.0": {
+        "targetAlias": "netstandard2.0",
         "dependencies": {
-          "DeepCloner": {
-            "target": "Package",
-            "version": "[0.10.2, )"
-          },
           "MySql.Data": {
             "target": "Package",
             "version": "[8.0.21, )"
@@ -5179,7 +5149,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
