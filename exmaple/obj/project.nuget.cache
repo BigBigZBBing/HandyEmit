@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kXrGYB3FLdDTMnr6VJV0d1C97fNhftPrmpj+miW39v6XUpGhNYBmtenc9vra4m2vTytxXmM4EzO1aQsk4IV8vw==",
+  "dgSpecHash": "nYIFvPmvvZ4itb91ry221vlw//vgFdBqCRTYYuAqUX/oD4tbPVk0xLkD5fz2jW9xu9SCY2NnlC8TeWQDjeYdoQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj",
   "expectedPackageFiles": [
@@ -51,7 +51,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\zbb58\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\zbb58\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.7.0\\system.reflection.emit.ilgeneration.4.7.0.nupkg.sha512",
-    "C:\\Users\\zbb58\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.reflection.emit.lightweight\\4.0.1\\system.reflection.emit.lightweight.4.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.reflection.extensions\\4.0.1\\system.reflection.extensions.4.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.reflection.typeextensions\\4.1.0\\system.reflection.typeextensions.4.1.0.nupkg.sha512",

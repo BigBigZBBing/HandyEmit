@@ -10,6 +10,7 @@ using System.Diagnostics.SymbolStore;
 using System.Runtime.InteropServices;
 using System.Linq;
 using HandyEmit.SmartEmit.Func;
+using HandyEmit.SmartEmit.Field;
 
 namespace HandyEmit.SmartEmit
 {
@@ -18,7 +19,7 @@ namespace HandyEmit.SmartEmit
     /// </summary>
     public partial class FuncGenerator : EmitBasic
     {
-        private ILGenerator il;
+        public ILGenerator il;
 
         internal FuncGenerator(ILGenerator il) : base(il)
         {
@@ -35,7 +36,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="init"></param>
         /// <param name="length"></param>
         /// <param name="builder"></param>
-        public void For(Int32 init, LocalBuilder length, Action<LocalBuilder> builder)
+        public void For(Int32 init, LocalBuilder length, Action<FieldInt32> builder)
         {
             Label _for = DefineLabel();
             Label _endfor = DefineLabel();
@@ -44,7 +45,7 @@ namespace HandyEmit.SmartEmit
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
-            builder?.Invoke(index);
+            builder?.Invoke(new FieldInt32(index, il));
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldc_I4_1);
             Emit(OpCodes.Add);
@@ -63,7 +64,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="init"></param>
         /// <param name="length"></param>
         /// <param name="builder"></param>
-        public void For(LocalBuilder init, LocalBuilder length, Action<LocalBuilder> build)
+        public void For(LocalBuilder init, LocalBuilder length, Action<FieldInt32> build)
         {
             Label _for = DefineLabel();
             Label _endfor = DefineLabel();
@@ -72,7 +73,7 @@ namespace HandyEmit.SmartEmit
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
-            build?.Invoke(index);
+            build?.Invoke(new FieldInt32(index, il));
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldc_I4_1);
             Emit(OpCodes.Add);
@@ -91,7 +92,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="init"></param>
         /// <param name="length"></param>
         /// <param name="builder"></param>
-        public void For(Int32 init, Int32 length, Action<LocalBuilder> build)
+        public void For(Int32 init, Int32 length, Action<FieldInt32> build)
         {
             Label _for = DefineLabel();
             Label _endfor = DefineLabel();
@@ -100,7 +101,7 @@ namespace HandyEmit.SmartEmit
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
-            build?.Invoke(index);
+            build?.Invoke(new FieldInt32(index, il));
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldc_I4_1);
             Emit(OpCodes.Add);

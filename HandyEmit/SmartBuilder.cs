@@ -214,10 +214,14 @@ namespace HandyEmit
         public static T DynamicMethod<T>(String MethodName, Action<FuncGenerator> builder) where T : class
         {
             var type = typeof(T);
-            if (type.Name.StartsWith("Func`") || type.Name.StartsWith("Action`")) throw new Exception("please use Func or Action");
+            if (!type.Name.StartsWith("Func`") && !type.Name.StartsWith("Action")) throw new Exception("please use Func or Action");
             var types = type.GenericTypeArguments.ToList();
-            var retType = types.Last();
-            types.RemoveAt(types.Count - 1);
+            Type retType = null;
+            if (type.Name.StartsWith("Func`") && types != null && types.Count > 0)
+            {
+                retType = types.Last();
+                types.RemoveAt(types.Count - 1);
+            }
             DynamicMethod dynamicBuilder = new DynamicMethod(MethodName, retType, types.ToArray());
             builder?.Invoke(new FuncGenerator(dynamicBuilder.GetILGenerator()));
             return dynamicBuilder.CreateDelegate(typeof(T)) as T;

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Text;
+using System.Diagnostics;
 
 namespace exmaple
 {
@@ -28,87 +29,44 @@ namespace exmaple
         static void Main(string[] args)
         {
 
-            Action<Int64, Int32, Int64> func = SmartBuilder.DynamicMethod<Action<Int64, Int32, Int64>>(String.Empty, il =>
-            {
-                var long1 = il.NewInt64();
-                var int1 = il.NewInt32();
-                il.Emit(OpCodes.Ldarg_0);
-                long1.Stloc();
-
-                il.Emit(OpCodes.Ldarg_1);
-                int1.Stloc();
-
-                var res = long1 - int1;
-
-                //res.Ldloc();
-                il.Emit(OpCodes.Ret);
-            });
-
-            //Int64 test = func.Invoke(Int64.MaxValue, 10000);
-
-            //EmitModelTest();
+            //EmitDynamicExmaple();
 
             //DbOperation();
+
+
+            ILpkCSharpDom();
+
 
             Console.ReadKey();
         }
 
-        public static void test(Delegate method)
+        private static void ILpkCSharpDom()
         {
-
-        }
-
-        public static string Create(int length)
-        {
-            // 创建一个StringBuilder对象存储密码
-            StringBuilder sb = new StringBuilder();
-            //使用for循环把单个字符填充进StringBuilder对象里面变成14位密码字符串
-            for (int i = 0; i < length; i++)
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int temp = 0;
+            for (int i = 0; i < 500000000; i++)
             {
-                Random random = new Random(Guid.NewGuid().GetHashCode());
-                //随机选择里面其中的一种字符生成
-                switch (random.Next(3))
-                {
-                    case 0:
-                        //调用生成生成随机数字的方法
-                        sb.Append(createNum());
-                        break;
-                    case 1:
-                        //调用生成生成随机小写字母的方法
-                        sb.Append(createSmallAbc());
-                        break;
-                    case 2:
-                        //调用生成生成随机大写字母的方法
-                        sb.Append(createBigAbc());
-                        break;
-                }
+                temp += i;
             }
-            return sb.ToString();
-        }
+            stopwatch.Stop();
+            Console.WriteLine($"50W次增量 C# Dom运算 {stopwatch.ElapsedMilliseconds}");
 
-        private static string createSmallAbc()
-        {
-            //a-z的 ASCII值为97-122
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            int num = random.Next(97, 123);
-            string abc = Convert.ToChar(num).ToString();
-            return abc;
-        }
+            Action dele = SmartBuilder.DynamicMethod<Action>("", func =>
+            {
+                var temp = func.NewInt32();
 
-        private static string createBigAbc()
-        {
-            //A-Z的 ASCII值为65-90
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            int num = random.Next(65, 91);
-            string abc = Convert.ToChar(num).ToString();
-            return abc;
-        }
+                func.For(0, 500000000, build =>
+                {
+                    temp += (CanCompute<int>)build;
+                });
 
-        private static int createNum()
-        {
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            int num = random.Next(10);
-            return num;
+                func.Return();
+            });
+            stopwatch.Restart();
+            dele.Invoke();
+            stopwatch.Stop();
+            Console.WriteLine($"50W次增量 IL运算 {stopwatch.ElapsedMilliseconds}");
         }
 
         private static void DbOperation()
@@ -207,7 +165,7 @@ namespace exmaple
             }
         }
 
-        private static void EmitModelTest()
+        private static void EmitDynamicExmaple()
         {
             SmartBuilder emit = new SmartBuilder("Core.Model");
             emit.Assembly();

@@ -8,7 +8,7 @@ namespace HandyEmit.SmartEmit
 {
     public abstract class EmitBasic
     {
-        ILGenerator il;
+        internal ILGenerator il;
 
         public EmitBasic(ILGenerator il)
         {
