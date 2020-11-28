@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zonCdEOhz9lu9C+imRbFlZhqpzRnAi2A8zReeRurPWWmcLatlWjOP/uZ34lcBLGd57kER82pHuuuBpsVtwd9hw==",
+  "dgSpecHash": "KNhBSipeASlTAsBuIdXguDkNzikbImKmID3nbzDN19mk7U93N5YhYlOa7XrmM6oQIeXWqtAPj+azBYupxFsPbw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\HandyEmit.csproj",
+  "projectFilePath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\ILWheatBread.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",

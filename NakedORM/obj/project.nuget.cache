@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7HpUdnSZfphVnybEyHNJNPPrfqk8ODAbKyCUzr5ukKuPYubovpL2Nx+RUES/Kslmkt3Uj2VKTBwXSTkud5e9tQ==",
+  "dgSpecHash": "aMu1yjxC/XSkrYJrTdSFknTK0ExDfkfnnMDzltYm9mIkTYA4OS8eCAvGA77yQiXNQpCz/f2UKiNB3qQNIw453w==",
   "success": true,
   "projectFilePath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj",
   "expectedPackageFiles": [
@@ -83,8 +83,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.0.11\\system.xml.readerwriter.4.0.11.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\zbb58\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
-    "C:\\Users\\zbb58\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\zbb58\\.nuget\\packages\\handyemit\\1.0.0\\handyemit.1.0.0.nupkg.sha512"
+    "C:\\Users\\zbb58\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
   ],
   "logs": []
 }

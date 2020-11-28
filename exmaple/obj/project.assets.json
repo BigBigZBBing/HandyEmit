@@ -1224,24 +1224,24 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "HandyEmit/1.0.0": {
+      "ILWheatBread/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "Newtonsoft.Json": "12.0.3"
         },
         "compile": {
-          "bin/placeholder/HandyEmit.dll": {}
+          "bin/placeholder/ILWheatBread.dll": {}
         },
         "runtime": {
-          "bin/placeholder/HandyEmit.dll": {}
+          "bin/placeholder/ILWheatBread.dll": {}
         }
       },
       "NakedORM/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "HandyEmit": "1.0.0",
+          "ILWheatBread": "1.0.0",
           "MySql.Data": "8.0.21",
           "Oracle.ManagedDataAccess.Core": "2.19.90",
           "System.ComponentModel.Annotations": "4.7.0",
@@ -4943,10 +4943,10 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "HandyEmit/1.0.0": {
+    "ILWheatBread/1.0.0": {
       "type": "project",
-      "path": "../HandyEmit/HandyEmit.csproj",
-      "msbuildProject": "../HandyEmit/HandyEmit.csproj"
+      "path": "../ILWheatBread/ILWheatBread.csproj",
+      "msbuildProject": "../ILWheatBread/ILWheatBread.csproj"
     },
     "NakedORM/1.0.1": {
       "type": "project",
@@ -4956,7 +4956,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "HandyEmit >= 1.0.0",
+      "ILWheatBread >= 1.0.0",
       "NakedORM >= 1.0.1"
     ]
   },
@@ -4993,8 +4993,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\HandyEmit.csproj": {
-              "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\HandyEmit\\HandyEmit.csproj"
+            "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj": {
+              "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj"
             },
             "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj": {
               "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj"

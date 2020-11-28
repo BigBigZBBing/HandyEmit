@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "exmaple", "exmaple\exmaple.csproj", "{A2DDE36C-3427-45ED-BFED-66CB9E8AEBAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NakedORM", "NakedORM\NakedORM.csproj", "{4FAB79B4-8049-468D-98C1-EBE52E3F1D79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ILWheatBread", "ILWheatBread\ILWheatBread.csproj", "{85D0F250-907C-43F3-81E8-1D7389DDB5AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2DDE36C-3427-45ED-BFED-66CB9E8AEBAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DDE36C-3427-45ED-BFED-66CB9E8AEBAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DDE36C-3427-45ED-BFED-66CB9E8AEBAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DDE36C-3427-45ED-BFED-66CB9E8AEBAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FAB79B4-8049-468D-98C1-EBE52E3F1D79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FAB79B4-8049-468D-98C1-EBE52E3F1D79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FAB79B4-8049-468D-98C1-EBE52E3F1D79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FAB79B4-8049-468D-98C1-EBE52E3F1D79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85D0F250-907C-43F3-81E8-1D7389DDB5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85D0F250-907C-43F3-81E8-1D7389DDB5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85D0F250-907C-43F3-81E8-1D7389DDB5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85D0F250-907C-43F3-81E8-1D7389DDB5AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2026BEF9-BF12-409E-B38E-77BD9F305140}
+	EndGlobalSection
+EndGlobal

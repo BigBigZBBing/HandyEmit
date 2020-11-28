@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nYIFvPmvvZ4itb91ry221vlw//vgFdBqCRTYYuAqUX/oD4tbPVk0xLkD5fz2jW9xu9SCY2NnlC8TeWQDjeYdoQ==",
+  "dgSpecHash": "dzY389VcpSp+LiSv7zzBWAOX56VvCLeUcrhZSBBnMpuYUumb3DDUBQMbj890shmGSa1GklGFR5DVQva1pprPCg==",
   "success": true,
   "projectFilePath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj",
   "expectedPackageFiles": [
@@ -83,8 +83,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.0.11\\system.xml.readerwriter.4.0.11.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\zbb58\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
-    "C:\\Users\\zbb58\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\zbb58\\.nuget\\packages\\handyemit\\1.0.0\\handyemit.1.0.0.nupkg.sha512"
+    "C:\\Users\\zbb58\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
   ],
   "logs": []
 }

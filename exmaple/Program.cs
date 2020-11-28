@@ -1,6 +1,5 @@
-﻿using HandyEmit;
-using HandyEmit.SmartEmit;
-using HandyEmit.SmartEmit.Field;
+﻿using ILWheatBread.SmartEmit;
+using ILWheatBread.SmartEmit.Field;
 using Google.Protobuf.WellKnownTypes;
 using NakedORM;
 using NakedORM.Simple;
@@ -13,7 +12,8 @@ using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Text;
 using System.Diagnostics;
-using HandyEmit.Enums;
+using ILWheatBread.Enums;
+using ILWheatBread;
 
 namespace exmaple
 {
@@ -34,11 +34,16 @@ namespace exmaple
 
             //DbOperation();
 
-            //ILpkCSharpDom();
+            ILpkCSharpDom();
+
+            ExistsILpkCSharpDom();
 
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// 测试For 增量 5亿次性能测试
+        /// </summary>
         private static void ILpkCSharpDom()
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -49,21 +54,64 @@ namespace exmaple
                 temp += i;
             }
             stopwatch.Stop();
-            Console.WriteLine($"50W次增量 C# Dom运算 {stopwatch.ElapsedMilliseconds}");
+            Console.WriteLine($"5E次增量 C# 运算 {stopwatch.ElapsedMilliseconds}");
 
-            Action dele = SmartBuilder.DynamicMethod<Action>("", func =>
+            Action dele = SmartBuilder.DynamicMethod<Action>("test", func =>
             {
                 var temp = func.NewInt32();
-
                 func.For(0, 500000000, build =>
                 {
                     temp += (CanCompute<int>)build;
                 });
+                func.EmitReturn();
             });
             stopwatch.Restart();
             dele.Invoke();
             stopwatch.Stop();
-            Console.WriteLine($"50W次增量 IL运算 {stopwatch.ElapsedMilliseconds}");
+            Console.WriteLine($"5E次增量 IL 运算 {stopwatch.ElapsedMilliseconds}");
+        }
+
+        /// <summary>
+        /// 创建1000长度数组 Exists函数性能测试
+        /// </summary>
+        private static void ExistsILpkCSharpDom()
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int[] temp = new int[10000];
+            for (int i = 0; i < temp.Length; i++)
+            {
+                temp[i] = i;
+            }
+            for (int i = 0; i < temp.Length; i++)
+            {
+                Array.Exists(temp, e =>
+                {
+                    if (e == i) return true;
+                    return false;
+                });
+            }
+            stopwatch.Stop();
+            Console.WriteLine($"创建1000长度数组 C# Exists处理 {stopwatch.ElapsedMilliseconds}");
+
+
+            Action dele = SmartBuilder.DynamicMethod<Action>("test", func =>
+            {
+                var temp = func.NewArray<int>(10000);
+                func.For(0, temp.GetLength(), int1 =>
+                {
+                    temp.SetValue(int1, int1);
+                });
+                func.For(0, temp.GetLength(), build =>
+                {
+                    temp.Exists(build);
+                });
+                func.EmitReturn();
+            });
+            stopwatch.Restart();
+            dele();
+            stopwatch.Stop();
+            Console.WriteLine($"创建1000长度数组 IL Exists处理 {stopwatch.ElapsedMilliseconds}");
         }
 
         private static void DbOperation()

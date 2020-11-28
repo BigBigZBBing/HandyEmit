@@ -1,4 +1,0 @@
-C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.1\EmitPackage.csprojAssemblyReference.cache
-C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.1\EmitPackage.AssemblyInfoInputs.cache
-C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.1\EmitPackage.AssemblyInfo.cs
-C:\Users\zbb58\source\repos\primitiveDapper\EmitPackage\obj\Debug\netstandard2.1\EmitPackage.csproj.CoreCompileInputs.cache

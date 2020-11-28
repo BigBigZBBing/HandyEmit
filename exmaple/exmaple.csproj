@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HandyEmit\HandyEmit.csproj" />
+    <ProjectReference Include="..\ILWheatBread\ILWheatBread.csproj" />
     <ProjectReference Include="..\NakedORM\NakedORM.csproj" />
   </ItemGroup>
 
