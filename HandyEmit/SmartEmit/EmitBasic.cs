@@ -8,52 +8,53 @@ namespace HandyEmit.SmartEmit
 {
     public abstract class EmitBasic
     {
-        internal ILGenerator il;
-
-        public EmitBasic(ILGenerator il)
+        internal ILGenerator generator;
+        public EmitBasic(ILGenerator generator)
         {
-            this.il = il;
+            this.generator = generator;
         }
 
+        public static implicit operator ILGenerator(EmitBasic basic) => basic.generator;
+
         #region 代码层继承
-        public void BeginCatchBlock(Type exceptionType) => il.BeginCatchBlock(exceptionType);
-        public void BeginExceptFilterBlock() => il.BeginExceptFilterBlock();
-        public Label BeginExceptionBlock() => il.BeginExceptionBlock();
-        public void BeginFaultBlock() => il.BeginFaultBlock();
-        public void BeginFinallyBlock() => il.BeginFinallyBlock();
-        public void BeginScope() => il.BeginScope();
-        public void Emit(OpCode opcode, String str) => il.Emit(opcode, str);
-        public void Emit(OpCode opcode, FieldInfo field) => il.Emit(opcode, field);
-        public void Emit(OpCode opcode, Label[] labels) => il.Emit(opcode, labels);
-        public void Emit(OpCode opcode, Label label) => il.Emit(opcode, label);
-        public void Emit(OpCode opcode, LocalBuilder local) => il.Emit(opcode, local);
-        public void Emit(OpCode opcode, Single arg) => il.Emit(opcode, arg);
-        public void Emit(OpCode opcode, Byte arg) => il.Emit(opcode, arg);
-        public void Emit(OpCode opcode, SByte arg) => il.Emit(opcode, arg);
-        public void Emit(OpCode opcode, Int16 arg) => il.Emit(opcode, arg);
-        public void Emit(OpCode opcode, Double arg) => il.Emit(opcode, arg);
-        public void Emit(OpCode opcode, MethodInfo meth) => il.Emit(opcode, meth);
-        public void Emit(OpCode opcode, Int32 arg) => il.Emit(opcode, arg);
-        public void Emit(OpCode opcode, Int64 arg) => il.Emit(opcode, arg);
-        public void Emit(OpCode opcode, Type cls) => il.Emit(opcode, cls);
-        public void Emit(OpCode opcode, SignatureHelper signature) => il.Emit(opcode, signature);
-        public void Emit(OpCode opcode, ConstructorInfo con) => il.Emit(opcode, con);
-        public void Emit(OpCode opcode) => il.Emit(opcode);
-        public void MarkLabel(Label loc) => il.MarkLabel(loc);
-        public LocalBuilder DeclareLocal(Type localType, Boolean pinned) => il.DeclareLocal(localType, pinned);
-        public LocalBuilder DeclareLocal(Type localType) => il.DeclareLocal(localType);
-        public Label DefineLabel() => il.DefineLabel();
+        public void BeginCatchBlock(Type exceptionType) => generator.BeginCatchBlock(exceptionType);
+        public void BeginExceptFilterBlock() => generator.BeginExceptFilterBlock();
+        public Label BeginExceptionBlock() => generator.BeginExceptionBlock();
+        public void BeginFaultBlock() => generator.BeginFaultBlock();
+        public void BeginFinallyBlock() => generator.BeginFinallyBlock();
+        public void BeginScope() => generator.BeginScope();
+        public void Emit(OpCode opcode, String str) => generator.Emit(opcode, str);
+        public void Emit(OpCode opcode, FieldInfo field) => generator.Emit(opcode, field);
+        public void Emit(OpCode opcode, Label[] labels) => generator.Emit(opcode, labels);
+        public void Emit(OpCode opcode, Label label) => generator.Emit(opcode, label);
+        public void Emit(OpCode opcode, LocalBuilder local) => generator.Emit(opcode, local);
+        public void Emit(OpCode opcode, Single arg) => generator.Emit(opcode, arg);
+        public void Emit(OpCode opcode, Byte arg) => generator.Emit(opcode, arg);
+        public void Emit(OpCode opcode, SByte arg) => generator.Emit(opcode, arg);
+        public void Emit(OpCode opcode, Int16 arg) => generator.Emit(opcode, arg);
+        public void Emit(OpCode opcode, Double arg) => generator.Emit(opcode, arg);
+        public void Emit(OpCode opcode, MethodInfo meth) => generator.Emit(opcode, meth);
+        public void Emit(OpCode opcode, Int32 arg) => generator.Emit(opcode, arg);
+        public void Emit(OpCode opcode, Int64 arg) => generator.Emit(opcode, arg);
+        public void Emit(OpCode opcode, Type cls) => generator.Emit(opcode, cls);
+        public void Emit(OpCode opcode, SignatureHelper signature) => generator.Emit(opcode, signature);
+        public void Emit(OpCode opcode, ConstructorInfo con) => generator.Emit(opcode, con);
+        public void Emit(OpCode opcode) => generator.Emit(opcode);
+        public void MarkLabel(Label loc) => generator.MarkLabel(loc);
+        public LocalBuilder DeclareLocal(Type localType, Boolean pinned) => generator.DeclareLocal(localType, pinned);
+        public LocalBuilder DeclareLocal(Type localType) => generator.DeclareLocal(localType);
+        public Label DefineLabel() => generator.DefineLabel();
         public void EmitCall(OpCode opcode, MethodInfo methodInfo, Type[] optionalParameterTypes) =>
-            il.EmitCall(opcode, methodInfo, optionalParameterTypes);
+            generator.EmitCall(opcode, methodInfo, optionalParameterTypes);
         public void EmitCalli(OpCode opcode, CallingConventions callingConvention, Type returnType, Type[] parameterTypes, Type[] optionalParameterTypes) =>
-            il.EmitCalli(opcode, callingConvention, returnType, parameterTypes, optionalParameterTypes);
-        public void EmitWriteLine(string value) => il.EmitWriteLine(value);
-        public void EmitWriteLine(FieldInfo fld) => il.EmitWriteLine(fld);
-        public void EmitWriteLine(LocalBuilder localBuilder) => il.EmitWriteLine(localBuilder);
-        public void EndExceptionBlock() => il.EndExceptionBlock();
-        public void EndScope() => il.EndScope();
-        public void ThrowException(Type excType) => il.ThrowException(excType);
-        public void UsingNamespace(string usingNamespace) => il.UsingNamespace(usingNamespace);
+            generator.EmitCalli(opcode, callingConvention, returnType, parameterTypes, optionalParameterTypes);
+        public void EmitWriteLine(string value) => generator.EmitWriteLine(value);
+        public void EmitWriteLine(FieldInfo fld) => generator.EmitWriteLine(fld);
+        public void EmitWriteLine(LocalBuilder localBuilder) => generator.EmitWriteLine(localBuilder);
+        public void EndExceptionBlock() => generator.EndExceptionBlock();
+        public void EndScope() => generator.EndScope();
+        public void ThrowException(Type excType) => generator.ThrowException(excType);
+        public void UsingNamespace(string usingNamespace) => generator.UsingNamespace(usingNamespace);
 
         #endregion
     }

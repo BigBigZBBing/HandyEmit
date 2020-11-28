@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace HandyEmit.SmartEmit
+namespace HandyEmit.Enums
 {
     /// <summary>
     /// 常用修饰符(便捷)

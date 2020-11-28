@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Concurrent;
-using System.IO;
-using Newtonsoft.Json;
 using System.Xml.Linq;
-using System.Xml;
-using System.Text;
-using System.Linq;
 
 namespace HandyEmit
 {

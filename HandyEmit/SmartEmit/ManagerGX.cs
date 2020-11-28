@@ -9,81 +9,88 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using HandyEmit.Attributes;
 
 namespace HandyEmit.SmartEmit
 {
     /// <summary>
     /// 代码层优化方案
     /// </summary>
-    public static class ManagerGX
+    internal static class ManagerGX
     {
-
-        /// <summary>
-        /// 异常缓存
-        /// </summary>
-        internal static Exception ex = new Exception();
-
         /// <summary>
         /// 根据泛型去自动适配推入计算堆的方式
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
-        internal static void EmitValue<T>(this ILGenerator il, T value)
+        internal static void EmitValue<T>(this EmitBasic basic, T value)
         {
             if (typeof(T) == typeof(String))
             {
-                il.Emit(OpCodes.Ldstr, Convert.ToString(value));
+                basic.Emit(OpCodes.Ldstr, Convert.ToString(value));
             }
             else if (typeof(T) == typeof(Boolean))
             {
                 switch (Convert.ToBoolean(value))
                 {
-                    case true: il.Emit(OpCodes.Ldc_I4_1); break;
-                    case false: il.Emit(OpCodes.Ldc_I4_0); break;
+                    case true: basic.Emit(OpCodes.Ldc_I4_1); break;
+                    case false: basic.Emit(OpCodes.Ldc_I4_0); break;
                     default: throw new Exception("boolean to error!");
                 }
             }
             else if (typeof(T) == typeof(SByte))
             {
-                il.Int32Map(Convert.ToSByte(value));
+                basic.Int32Map(Convert.ToSByte(value));
             }
             else if (typeof(T) == typeof(Byte))
             {
-                il.Int32Map(Convert.ToByte(value));
+                basic.Int32Map(Convert.ToByte(value));
             }
             else if (typeof(T) == typeof(Int16))
             {
-                il.Int32Map(Convert.ToInt16(value));
+                basic.Int32Map(Convert.ToInt16(value));
+            }
+            else if (typeof(T) == typeof(UInt16))
+            {
+                basic.Int32Map(Convert.ToUInt16(value));
             }
             else if (typeof(T) == typeof(Int32))
             {
-                il.Int32Map(Convert.ToInt32(value));
+                basic.Int32Map(Convert.ToInt32(value));
+            }
+            else if (typeof(T) == typeof(UInt32))
+            {
+                basic.Int32Map((int)Convert.ToUInt32(value));
             }
             else if (typeof(T) == typeof(Int64))
             {
-                il.Emit(OpCodes.Ldc_I8, Convert.ToInt64(value));
+                basic.Emit(OpCodes.Ldc_I8, Convert.ToInt64(value));
+            }
+            else if (typeof(T) == typeof(UInt64))
+            {
+                basic.Emit(OpCodes.Ldc_I8, Convert.ToUInt64(value));
             }
             else if (typeof(T) == typeof(Single))
             {
-                il.Emit(OpCodes.Ldc_R4, Convert.ToSingle(value));
+                basic.Emit(OpCodes.Ldc_R4, Convert.ToSingle(value));
             }
             else if (typeof(T) == typeof(Double))
             {
-                il.Emit(OpCodes.Ldc_R8, Convert.ToDouble(value));
+                basic.Emit(OpCodes.Ldc_R8, Convert.ToDouble(value));
             }
             else if (typeof(T) == typeof(Decimal))
             {
                 Int32[] bits = Decimal.GetBits(Convert.ToDecimal(value));
-                il.Emit(OpCodes.Ldc_I4, bits[0]);
-                il.Emit(OpCodes.Ldc_I4, bits[1]);
-                il.Emit(OpCodes.Ldc_I4, bits[2]);
-                il.Emit((bits[3] & 0x80000000) != 0 ? OpCodes.Ldc_I4_1 : OpCodes.Ldc_I4_0);
-                il.Emit(OpCodes.Ldc_I4, (Byte)((bits[3] >> 16) & 0x7f));
+                basic.Emit(OpCodes.Ldc_I4, bits[0]);
+                basic.Emit(OpCodes.Ldc_I4, bits[1]);
+                basic.Emit(OpCodes.Ldc_I4, bits[2]);
+                basic.Emit((bits[3] & 0x80000000) != 0 ? OpCodes.Ldc_I4_1 : OpCodes.Ldc_I4_0);
+                basic.Emit(OpCodes.Ldc_I4, (Byte)((bits[3] >> 16) & 0x7f));
             }
             else if (typeof(T).CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(EmitSerialization)) != null)
             {
-                il.Emit(OpCodes.Ldloc, il.MapToEntity(value));
+                basic.Emit(OpCodes.Ldloc, basic.MapToEntity(value));
             }
             else
             {
@@ -95,63 +102,75 @@ namespace HandyEmit.SmartEmit
         /// 根据类型去拆箱推入计算堆的方式
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
-        internal static void EmitValue(this ILGenerator il, Object value, Type type)
+        internal static void EmitValue(this EmitBasic basic, Object value, Type type)
         {
             if (type == typeof(String))
             {
-                il.Emit(OpCodes.Ldstr, Convert.ToString(value));
+                basic.Emit(OpCodes.Ldstr, Convert.ToString(value));
             }
             else if (type == typeof(Boolean))
             {
                 switch (Convert.ToBoolean(value))
                 {
-                    case true: il.Emit(OpCodes.Ldc_I4_1); break;
-                    case false: il.Emit(OpCodes.Ldc_I4_0); break;
+                    case true: basic.Emit(OpCodes.Ldc_I4_1); break;
+                    case false: basic.Emit(OpCodes.Ldc_I4_0); break;
                     default: throw new Exception("boolean to error!");
                 }
             }
             else if (type == typeof(SByte))
             {
-                il.Int32Map(Convert.ToSByte(value));
+                basic.Int32Map(Convert.ToSByte(value));
             }
             else if (type == typeof(Byte))
             {
-                il.Int32Map(Convert.ToByte(value));
+                basic.Int32Map(Convert.ToByte(value));
             }
             else if (type == typeof(Int16))
             {
-                il.Int32Map(Convert.ToInt16(value));
+                basic.Int32Map(Convert.ToInt16(value));
+            }
+            else if (type == typeof(UInt16))
+            {
+                basic.Int32Map(Convert.ToUInt16(value));
             }
             else if (type == typeof(Int32))
             {
-                il.Int32Map(Convert.ToInt32(value));
+                basic.Int32Map(Convert.ToInt32(value));
+            }
+            else if (type == typeof(UInt32))
+            {
+                basic.Int32Map((int)Convert.ToUInt32(value));
             }
             else if (type == typeof(Int64))
             {
-                il.Emit(OpCodes.Ldc_I8, Convert.ToInt64(value));
+                basic.Emit(OpCodes.Ldc_I8, Convert.ToInt64(value));
+            }
+            else if (type == typeof(UInt64))
+            {
+                basic.Emit(OpCodes.Ldc_I8, Convert.ToUInt64(value));
             }
             else if (type == typeof(Single))
             {
-                il.Emit(OpCodes.Ldc_R4, Convert.ToSingle(value));
+                basic.Emit(OpCodes.Ldc_R4, Convert.ToSingle(value));
             }
             else if (type == typeof(Double))
             {
-                il.Emit(OpCodes.Ldc_R8, Convert.ToDouble(value));
+                basic.Emit(OpCodes.Ldc_R8, Convert.ToDouble(value));
             }
             else if (type == typeof(Decimal))
             {
                 Int32[] bits = Decimal.GetBits(Convert.ToDecimal(value));
-                il.Emit(OpCodes.Ldc_I4, bits[0]);
-                il.Emit(OpCodes.Ldc_I4, bits[1]);
-                il.Emit(OpCodes.Ldc_I4, bits[2]);
-                il.Emit((bits[3] & 0x80000000) != 0 ? OpCodes.Ldc_I4_1 : OpCodes.Ldc_I4_0);
-                il.Emit(OpCodes.Ldc_I4, (Byte)((bits[3] >> 16) & 0x7f));
+                basic.Emit(OpCodes.Ldc_I4, bits[0]);
+                basic.Emit(OpCodes.Ldc_I4, bits[1]);
+                basic.Emit(OpCodes.Ldc_I4, bits[2]);
+                basic.Emit((bits[3] & 0x80000000) != 0 ? OpCodes.Ldc_I4_1 : OpCodes.Ldc_I4_0);
+                basic.Emit(OpCodes.Ldc_I4, (Byte)((bits[3] >> 16) & 0x7f));
             }
             else if (type.CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(EmitSerialization)) != null)
             {
-                il.Emit(OpCodes.Ldloc, il.MapToEntity(value, type));
+                basic.Emit(OpCodes.Ldloc, basic.MapToEntity(value, type));
             }
             else
             {
@@ -166,16 +185,16 @@ namespace HandyEmit.SmartEmit
         /// <param name="il"></param>
         /// <param name="Entity"></param>
         /// <returns></returns>
-        internal static LocalBuilder MapToEntity<T>(this ILGenerator il, T Entity)
+        internal static LocalBuilder MapToEntity<T>(this EmitBasic basic, T Entity)
         {
             if (Entity == null) ManagerGX.GxException("entity is not null!");
             var type = typeof(T);
             var ctor = type.GetConstructor(Type.EmptyTypes);
             if (!ctor.IsPublic) ManagerGX.GxException("type need ctor public!");
             var name = type.FullName;
-            LocalBuilder model = il.DeclareLocal(type);
-            il.Emit(OpCodes.Newobj, ctor);
-            il.Emit(OpCodes.Stloc, model);
+            LocalBuilder model = basic.DeclareLocal(type);
+            basic.Emit(OpCodes.Newobj, ctor);
+            basic.Emit(OpCodes.Stloc, model);
 
             EmitProperty[] emits = type.CachePropsManager();
 
@@ -183,9 +202,9 @@ namespace HandyEmit.SmartEmit
             {
                 var propValue = emits[i].Get(Entity);
                 if (propValue == null) continue;
-                il.Emit(OpCodes.Ldloc, model);
-                il.EmitValue(propValue, emits[i].PropertyType);
-                il.Emit(OpCodes.Callvirt, emits[i].SetMethod);
+                basic.Emit(OpCodes.Ldloc, model);
+                basic.EmitValue(propValue, emits[i].PropertyType);
+                basic.Emit(OpCodes.Callvirt, emits[i].SetMethod);
             }
             return model;
         }
@@ -197,15 +216,15 @@ namespace HandyEmit.SmartEmit
         /// <param name="il"></param>
         /// <param name="Entity"></param>
         /// <returns></returns>
-        internal static LocalBuilder MapToEntity(this ILGenerator il, Object instance, Type type)
+        internal static LocalBuilder MapToEntity(this EmitBasic basic, Object instance, Type type)
         {
             if (instance == null) ManagerGX.GxException("entity is not null!");
             var ctor = type.GetConstructor(Type.EmptyTypes);
             if (!ctor.IsPublic) ManagerGX.GxException("type need ctor public!");
             var name = type.FullName;
-            LocalBuilder model = il.DeclareLocal(type);
-            il.Emit(OpCodes.Newobj, type);
-            il.Emit(OpCodes.Stloc, model);
+            LocalBuilder model = basic.DeclareLocal(type);
+            basic.Emit(OpCodes.Newobj, type);
+            basic.Emit(OpCodes.Stloc, model);
 
             EmitProperty[] emits = type.CachePropsManager();
 
@@ -213,9 +232,9 @@ namespace HandyEmit.SmartEmit
             {
                 var propValue = emits[i].Get(instance);
                 if (propValue == null) continue;
-                il.Emit(OpCodes.Ldloc, model);
-                il.EmitValue(propValue, emits[i].PropertyType);
-                il.Emit(OpCodes.Callvirt, emits[i].SetMethod);
+                basic.Emit(OpCodes.Ldloc, model);
+                basic.EmitValue(propValue, emits[i].PropertyType);
+                basic.Emit(OpCodes.Callvirt, emits[i].SetMethod);
             }
             return model;
         }
@@ -225,21 +244,30 @@ namespace HandyEmit.SmartEmit
         /// </summary>
         /// <param name="il"></param>
         /// <param name="value"></param>
-        internal static void Int32Map(this ILGenerator il, Int32 value)
+        internal static void Int32Map(this EmitBasic basic, Int32 value)
         {
             switch (value)
             {
-                case -1: il.Emit(OpCodes.Ldc_I4_M1); break;
-                case 0: il.Emit(OpCodes.Ldc_I4_0); break;
-                case 1: il.Emit(OpCodes.Ldc_I4_1); break;
-                case 2: il.Emit(OpCodes.Ldc_I4_2); break;
-                case 3: il.Emit(OpCodes.Ldc_I4_3); break;
-                case 4: il.Emit(OpCodes.Ldc_I4_4); break;
-                case 5: il.Emit(OpCodes.Ldc_I4_5); break;
-                case 6: il.Emit(OpCodes.Ldc_I4_6); break;
-                case 7: il.Emit(OpCodes.Ldc_I4_7); break;
-                case 8: il.Emit(OpCodes.Ldc_I4_8); break;
-                default: il.Emit(OpCodes.Ldc_I4, value); break;
+                case -1: basic.Emit(OpCodes.Ldc_I4_M1); break;
+                case 0: basic.Emit(OpCodes.Ldc_I4_0); break;
+                case 1: basic.Emit(OpCodes.Ldc_I4_1); break;
+                case 2: basic.Emit(OpCodes.Ldc_I4_2); break;
+                case 3: basic.Emit(OpCodes.Ldc_I4_3); break;
+                case 4: basic.Emit(OpCodes.Ldc_I4_4); break;
+                case 5: basic.Emit(OpCodes.Ldc_I4_5); break;
+                case 6: basic.Emit(OpCodes.Ldc_I4_6); break;
+                case 7: basic.Emit(OpCodes.Ldc_I4_7); break;
+                case 8: basic.Emit(OpCodes.Ldc_I4_8); break;
+                default:
+                    if (value < SByte.MinValue || value > SByte.MaxValue)
+                    {
+                        basic.Emit(OpCodes.Ldc_I4_S, value);
+                    }
+                    else
+                    {
+                        basic.Emit(OpCodes.Ldc_I4, value);
+                    }
+                    break;
             }
         }
 
@@ -253,14 +281,14 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldBoolean Comparer<T>(FieldManager<T> field, T value, params OpCode[] codes)
         {
-            var res = field.il.NewBoolean();
-            field.Ldloc();
+            var res = field.NewBoolean();
+            field.PushIn();
             foreach (var code in codes)
             {
-                field.il.EmitValue(value);
-                field.il.Emit(code);
+                field.EmitValue(value);
+                field.Emit(code);
             }
-            field.il.Emit(OpCodes.Stloc_S, res);
+            field.Emit(OpCodes.Stloc_S, res);
             return res;
         }
 
@@ -274,14 +302,14 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldBoolean Comparer<T, T1>(CanCompute<T> field, T1 value, params OpCode[] codes)
         {
-            var res = field.il.NewBoolean();
-            field.Ldloc();
+            var res = field.NewBoolean();
+            field.PushIn();
             foreach (var code in codes)
             {
-                field.il.EmitValue(value);
-                field.il.Emit(code);
+                field.EmitValue(value);
+                field.Emit(code);
             }
-            field.il.Emit(OpCodes.Stloc_S, res);
+            field.Emit(OpCodes.Stloc_S, res);
             return res;
         }
 
@@ -295,14 +323,14 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldBoolean Comparer<T>(FieldManager<T> field, LocalBuilder value, params OpCode[] codes)
         {
-            var res = field.il.NewBoolean();
-            field.Ldloc();
+            var res = field.NewBoolean();
+            field.PushIn();
             foreach (var code in codes)
             {
-                field.il.Emit(OpCodes.Ldloc_S, value);
-                field.il.Emit(code);
+                field.Emit(OpCodes.Ldloc_S, value);
+                field.Emit(code);
             }
-            field.il.Emit(OpCodes.Stloc_S, res);
+            field.Emit(OpCodes.Stloc_S, res);
             return res;
         }
 
@@ -316,14 +344,14 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldBoolean Comparer<T, T1>(FieldManager<T> field, FieldManager<T1> value, params OpCode[] codes)
         {
-            var res = field.il.NewBoolean();
-            field.Ldloc();
+            var res = field.NewBoolean();
+            field.PushIn();
             foreach (var code in codes)
             {
-                value.Ldloc();
-                field.il.Emit(code);
+                value.PushIn();
+                field.Emit(code);
             }
-            field.il.Emit(OpCodes.Stloc_S, res);
+            field.Emit(OpCodes.Stloc_S, res);
             return res;
         }
 
@@ -337,10 +365,10 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T> Compute<T, T1>(FieldManager<T> field, T1 value, OpCode code)
         {
-            field.Ldloc();
-            field.il.EmitValue(value);
-            field.il.Emit(code);
-            field.Stloc();
+            field.PushIn();
+            field.EmitValue(value);
+            field.Emit(code);
+            field.PushOn();
             return field;
         }
 
@@ -354,10 +382,10 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T1> Compute<T, T1>(FieldManager<T> field, LocalBuilder value, OpCode code)
         {
-            field.Ldloc();
-            field.il.Emit(OpCodes.Ldloc_S, value);
-            field.il.Emit(code);
-            field.Stloc();
+            field.PushIn();
+            field.Emit(OpCodes.Ldloc_S, value);
+            field.Emit(code);
+            field.PushOn();
             return field as FieldManager<T1>;
         }
 
@@ -371,10 +399,10 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T> Compute<T, T1>(FieldManager<T> field, FieldManager<T1> value, OpCode code)
         {
-            field.Ldloc();
-            value.Ldloc();
-            field.il.Emit(code);
-            field.Stloc();
+            field.PushIn();
+            value.PushIn();
+            field.Emit(code);
+            field.PushOn();
             return field;
         }
 
@@ -384,141 +412,156 @@ namespace HandyEmit.SmartEmit
         /// <param name="il"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldString NewString(this ILGenerator il, String value = default(String))
+        internal static FieldString NewString(this EmitBasic basic, String value = default(String))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(String));
-            il.Emit(value == null ? OpCodes.Ldnull : OpCodes.Ldstr, value);
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldString(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(String));
+            basic.Emit(value == null ? OpCodes.Ldnull : OpCodes.Ldstr, value);
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldString(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Boolean)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldBoolean NewBoolean(this ILGenerator il, Boolean value = default(Boolean))
+        internal static FieldBoolean NewBoolean(this EmitBasic basic, Boolean value = default(Boolean))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(Boolean));
-            il.EmitValue(value);
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldBoolean(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(Boolean));
+            basic.EmitValue(value);
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldBoolean(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Int32)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldInt32 NewInt32(this ILGenerator il, Int32 value = default(Int32))
+        internal static FieldInt32 NewInt32(this EmitBasic basic, Int32 value = default(Int32))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(Int32));
-            il.EmitValue(value);
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldInt32(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(Int32));
+            basic.EmitValue(value);
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldInt32(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Int64)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldInt64 NewInt64(this ILGenerator il, Int64 value = default(Int64))
+        internal static FieldInt64 NewInt64(this EmitBasic basic, Int64 value = default(Int64))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(Int64));
-            il.Emit(OpCodes.Ldc_I8, value);
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldInt64(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(Int64));
+            basic.Emit(OpCodes.Ldc_I8, value);
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldInt64(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Float)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldFloat NewFloat(this ILGenerator il, Single value = default(Single))
+        internal static FieldFloat NewFloat(this EmitBasic basic, Single value = default(Single))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(Single));
-            il.Emit(OpCodes.Ldc_R4, value);
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldFloat(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(Single));
+            basic.Emit(OpCodes.Ldc_R4, value);
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldFloat(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Double)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldDouble NewDouble(this ILGenerator il, Double value = default(Double))
+        internal static FieldDouble NewDouble(this EmitBasic basic, Double value = default(Double))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(Double));
-            il.Emit(OpCodes.Ldc_R8, value);
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldDouble(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(Double));
+            basic.Emit(OpCodes.Ldc_R8, value);
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldDouble(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Decimal)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldDecimal NewDecimal(this ILGenerator il, Double value = default(Double))
+        internal static FieldDecimal NewDecimal(this EmitBasic basic, Double value = default(Double))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(Decimal));
-            il.Emit(OpCodes.Ldc_R8, value);
-            il.Emit(OpCodes.Newobj, typeof(Decimal).GetConstructor(new Type[] { typeof(Double) }));
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldDecimal(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(Decimal));
+            basic.Emit(OpCodes.Ldc_R8, value);
+            basic.Emit(OpCodes.Newobj, typeof(Decimal).GetConstructor(new Type[] { typeof(Double) }));
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldDecimal(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(DateTime)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldDateTime NewDateTime(this ILGenerator il, DateTime datatime = default(DateTime))
+        internal static FieldDateTime NewDateTime(this EmitBasic basic, DateTime datatime = default(DateTime))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(DateTime));
-            il.Emit(OpCodes.Ldc_I8, datatime.Ticks);
-            il.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldDateTime(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(DateTime));
+            basic.Emit(OpCodes.Ldc_I8, datatime.Ticks);
+            basic.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldDateTime(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Entity)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static FieldEntity<T> NewEntity<T>(this ILGenerator il) where T : class
+        internal static FieldEntity<T> NewEntity<T>(this EmitBasic basic) where T : class
         {
-            LocalBuilder item = il.DeclareLocal(typeof(T));
-            il.Emit(OpCodes.Newobj, typeof(T).GetConstructor(Type.EmptyTypes));
-            il.Emit(OpCodes.Stloc_S, item);
-            return new FieldEntity<T>(item, il);
+            LocalBuilder item = basic.DeclareLocal(typeof(T));
+            basic.Emit(OpCodes.Newobj, typeof(T).GetConstructor(Type.EmptyTypes));
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldEntity<T>(item, basic);
         }
 
         /// <summary>
         /// 内部渗透方案(Array)
         /// </summary>
-        /// <param name="il"></param>
+        /// <param name="basic"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static ArrayManager<T> NewArray<T>(this ILGenerator il, Int32 length = default(Int32))
+        internal static FieldArray<T> NewArray<T>(this EmitBasic basic, Int32 length = default(Int32))
         {
-            LocalBuilder item = il.DeclareLocal(typeof(T[]));
-            il.Emit(OpCodes.Ldc_I4, length);
-            il.Emit(OpCodes.Newarr, typeof(T));
-            il.Emit(OpCodes.Stloc_S, item);
-            return new ArrayManager<T>(item, il, length);
+            LocalBuilder item = basic.DeclareLocal(typeof(T[]));
+            basic.Int32Map(length);
+            basic.Emit(OpCodes.Newarr, typeof(T));
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldArray<T>(item, basic, length);
+        }
+
+        /// <summary>
+        /// 内部渗透方案(Array)
+        /// </summary>
+        /// <param name="basic"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        internal static FieldArray<T> NewArray<T>(this EmitBasic basic, LocalBuilder length)
+        {
+            LocalBuilder item = basic.DeclareLocal(typeof(T[]));
+            basic.Emit(OpCodes.Ldloc_S, length);
+            basic.Emit(OpCodes.Newarr, typeof(T));
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldArray<T>(item, basic, ILInt32ToDomInt32(length));
         }
 
         /// <summary>
@@ -527,13 +570,13 @@ namespace HandyEmit.SmartEmit
         /// <param name="il"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        internal static ListManager<T> NewList<T>(this ILGenerator il)
-        {
-            LocalBuilder item = il.DeclareLocal(typeof(List<T>));
-            il.Emit(OpCodes.Newobj, typeof(List<T>));
-            il.Emit(OpCodes.Stloc_S, item);
-            return new ListManager<T>(item, il);
-        }
+        //internal static ListManager<T> NewList<T>(this EmitBasic basic)
+        //{
+        //    LocalBuilder item = basic.DeclareLocal(typeof(List<T>));
+        //    basic.Emit(OpCodes.Newobj, typeof(List<T>));
+        //    basic.Emit(OpCodes.Stloc_S, item);
+        //    return new ListManager<T>(item, basic);
+        //}
 
         /// <summary>
         /// 获取属性结构
@@ -547,6 +590,24 @@ namespace HandyEmit.SmartEmit
             {
                 yield return new KeyValuePair<String, EmitProperty>(Prop.Name, new EmitProperty(Prop, Instance));
             }
+        }
+
+        /// <summary>
+        /// IL模式的Int32转成CodeDom模式的Int32值体现
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        internal static Int32 ILInt32ToDomInt32(LocalBuilder item)
+        {
+            if (!CacheManager.DelegatePool.ContainsKey("ILInt32ToDomInt32"))
+            {
+                CacheManager.DelegatePool.Add("ILInt32ToDomInt32",
+                   SmartBuilder.DynamicMethod<Func<LocalBuilder, Int32>>("ILInt32ToDomInt32", Func =>
+                {
+                    Func.Emit(OpCodes.Ldarg_0);
+                }));
+            }
+            return ((Func<LocalBuilder, Int32>)CacheManager.DelegatePool["ILInt32ToDomInt32"])(item);
         }
 
         /// <summary>

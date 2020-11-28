@@ -14,14 +14,16 @@ namespace HandyEmit.SmartEmit.Field
         /// <summary>
         /// 实体结构
         /// </summary>
-        private Dictionary<String, PropertyInfo> EntityStruct = new Dictionary<String, PropertyInfo>();
+        private Dictionary<String, EntityProperty> EntityBody => new Dictionary<String, EntityProperty>();
 
-        internal FieldEntity(LocalBuilder stack, ILGenerator il) : base(stack, il)
+        public List<String> Fields => EntityBody.Keys.ToList();
+
+        internal FieldEntity(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
             Type type = typeof(T);
-            foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public))
+            foreach (PropertyInfo prop in type.GetProperties())
             {
-                this.EntityStruct.Add(prop.Name, prop);
+                this.EntityBody.Add(prop.Name, new EntityProperty(prop));
             }
         }
 
@@ -35,18 +37,18 @@ namespace HandyEmit.SmartEmit.Field
             get
             {
                 if (!ContanisKey(Name)) ManagerGX.GxException("Entity prop is null;");
-                LocalBuilder item = il.DeclareLocal(EntityStruct[Name].PropertyType);
-                base.Ldloc();
-                base.Emit(OpCodes.Callvirt, EntityStruct[Name].GetGetMethod());
+                LocalBuilder item = generator.DeclareLocal(EntityBody[Name].type);
+                base.PushIn();
+                base.Emit(OpCodes.Callvirt, EntityBody[Name].get);
                 base.Emit(OpCodes.Stloc_S, item);
                 return item;
             }
             set
             {
                 if (!ContanisKey(Name)) ManagerGX.GxException("Entity prop is null;");
-                base.Ldloc();
+                base.PushIn();
                 base.Emit(OpCodes.Ldloc, value);
-                base.Emit(OpCodes.Callvirt, EntityStruct[Name].GetSetMethod());
+                base.Emit(OpCodes.Callvirt, EntityBody[Name].set);
             }
         }
 
@@ -57,7 +59,20 @@ namespace HandyEmit.SmartEmit.Field
         /// <returns></returns>
         private Boolean ContanisKey(String Name)
         {
-            return EntityStruct.ContainsKey(Name);
+            return EntityBody.ContainsKey(Name);
+        }
+
+        private struct EntityProperty
+        {
+            public EntityProperty(PropertyInfo property)
+            {
+                this.property = property;
+            }
+
+            public PropertyInfo property { get; set; }
+            public Type type => property.PropertyType;
+            public MethodInfo get => property.GetGetMethod();
+            public MethodInfo set => property.GetSetMethod();
         }
     }
 }

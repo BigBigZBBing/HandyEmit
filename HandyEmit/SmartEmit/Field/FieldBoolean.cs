@@ -59,8 +59,8 @@ namespace HandyEmit.SmartEmit.Field
         public static FieldBoolean operator !=(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(
-                ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                ManagerGX.Comparer(field, value, OpCodes.Ceq), 
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         #endregion
@@ -99,17 +99,17 @@ namespace HandyEmit.SmartEmit.Field
         /// <returns></returns>
         public static FieldBoolean operator |(FieldBoolean field, FieldBoolean value)
         {
-            var assert = field.il.NewBoolean();
-            var _true = field.il.DefineLabel();
-            field.Ldloc();
-            field.il.Emit(OpCodes.Ldc_I4_1);
-            field.il.Emit(OpCodes.Beq_S, _true);
-            field.il.Emit(OpCodes.Ldc_I4_0);
-            assert.Stloc();
-            value.Ldloc();
-            field.il.Emit(OpCodes.Ldc_I4_1);
-            field.il.Emit(OpCodes.Beq_S, _true);
-            field.il.MarkLabel(_true);
+            var assert = field.NewBoolean();
+            var _true = field.DefineLabel();
+            field.PushIn();
+            field.Emit(OpCodes.Ldc_I4_1);
+            field.Emit(OpCodes.Beq_S, _true);
+            field.Emit(OpCodes.Ldc_I4_0);
+            assert.PushOn();
+            value.PushIn();
+            field.Emit(OpCodes.Ldc_I4_1);
+            field.Emit(OpCodes.Beq_S, _true);
+            field.MarkLabel(_true);
             return assert;
         }
 
@@ -121,17 +121,17 @@ namespace HandyEmit.SmartEmit.Field
         /// <returns></returns>
         public static FieldBoolean operator &(FieldBoolean field, FieldBoolean value)
         {
-            var assert = field.il.NewBoolean();
-            var _false = field.il.DefineLabel();
-            field.Ldloc();
-            field.il.Emit(OpCodes.Ldc_I4_0);
-            field.il.Emit(OpCodes.Beq_S, _false);
-            value.Ldloc();
-            field.il.Emit(OpCodes.Ldc_I4_0);
-            field.il.Emit(OpCodes.Beq_S, _false);
-            field.il.Emit(OpCodes.Ldc_I4_1);
-            assert.Stloc();
-            field.il.MarkLabel(_false);
+            var assert = field.NewBoolean();
+            var _false = field.DefineLabel();
+            field.PushIn();
+            field.Emit(OpCodes.Ldc_I4_0);
+            field.Emit(OpCodes.Beq_S, _false);
+            value.PushIn();
+            field.Emit(OpCodes.Ldc_I4_0);
+            field.Emit(OpCodes.Beq_S, _false);
+            field.Emit(OpCodes.Ldc_I4_1);
+            assert.PushOn();
+            field.MarkLabel(_false);
             return assert;
         }
     }

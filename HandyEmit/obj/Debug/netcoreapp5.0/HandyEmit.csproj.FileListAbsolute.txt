@@ -2,7 +2,6 @@ C:\Users\zbb58\source\repos\zbb5896\Bin\netcoreapp5.0\HandyEmit.deps.json
 C:\Users\zbb58\source\repos\zbb5896\Bin\netcoreapp5.0\HandyEmit.dll
 C:\Users\zbb58\source\repos\zbb5896\Bin\netcoreapp5.0\ref\HandyEmit.dll
 C:\Users\zbb58\source\repos\zbb5896\Bin\netcoreapp5.0\HandyEmit.pdb
-C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\netcoreapp5.0\HandyEmit.csprojAssemblyReference.cache
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\netcoreapp5.0\HandyEmit.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\netcoreapp5.0\HandyEmit.AssemblyInfoInputs.cache
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\netcoreapp5.0\HandyEmit.AssemblyInfo.cs

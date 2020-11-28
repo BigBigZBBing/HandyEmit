@@ -7,7 +7,7 @@ namespace HandyEmit.SmartEmit.Field
 {
     public class FieldDouble : CanCompute<Double>
     {
-        internal FieldDouble(LocalBuilder stack, ILGenerator il) : base(stack, il)
+        internal FieldDouble(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
     }

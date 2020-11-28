@@ -9,30 +9,30 @@ namespace HandyEmit.SmartEmit.Func
 {
     public class TryCatchManager
     {
-        private ILGenerator il;
+        private ILGenerator generator;
 
-        internal TryCatchManager(ILGenerator il)
+        internal TryCatchManager(ILGenerator generator)
         {
-            this.il = il;
+            this.generator = generator;
         }
 
         public TryCatchManager Catch(Action<ILGenerator> builder)
         {
-            il.BeginCatchBlock(typeof(Exception));
-            builder(il);
+            generator.BeginCatchBlock(typeof(Exception));
+            builder(generator);
             return this;
         }
 
         public TryCatchManager Finally(Action<ILGenerator> builder)
         {
-            il.BeginFinallyBlock();
-            builder(il);
+            generator.BeginFinallyBlock();
+            builder(generator);
             return this;
         }
 
         public void TryEnd()
         {
-            il.EndExceptionBlock();
+            generator.EndExceptionBlock();
         }
     }
 }

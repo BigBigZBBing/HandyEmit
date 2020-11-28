@@ -7,7 +7,7 @@ namespace HandyEmit.SmartEmit.Field
 {
     public class FieldDateTime : FieldManager<DateTime>
     {
-        internal FieldDateTime(LocalBuilder stack, ILGenerator il) : base(stack, il)
+        internal FieldDateTime(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
 
@@ -60,7 +60,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                ManagerGX.Comparer(field, value, OpCodes.Ceq),
-               field.il.NewInt32(), OpCodes.Ceq);
+               field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                ManagerGX.Comparer(field, value, OpCodes.Ceq),
-               field.il.NewInt32(), OpCodes.Ceq);
+               field.NewInt32(), OpCodes.Ceq);
         }
 
         #endregion

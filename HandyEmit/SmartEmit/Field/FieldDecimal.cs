@@ -7,7 +7,7 @@ namespace HandyEmit.SmartEmit.Field
 {
     public class FieldDecimal : CanCompute<Decimal>
     {
-        internal FieldDecimal(LocalBuilder stack, ILGenerator il) : base(stack, il)
+        internal FieldDecimal(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
     }

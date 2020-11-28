@@ -35,8 +35,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SmartEmit\Array\ArrayManager1.cs" />
     <Compile Remove="SmartEmit\Field\比较符.cs" />
     <Compile Remove="SmartEmit\Field\运算符.cs" />
+    <Compile Remove="SmartEmit\List\ListManager.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
@@ -50,7 +52,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="SmartEmit\Array\" />
     <Folder Include="SmartEmit\Dictionary\" />
+    <Folder Include="SmartEmit\List\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,13 +8,18 @@ using HandyEmit.SmartEmit;
 
 namespace HandyEmit
 {
-    public static class CacheManager
+    internal static class CacheManager
     {
         /// <summary>
         /// 实体Map缓存方案
         /// 解决：多次序列化实体结构
         /// </summary>
-        internal static ConcurrentDictionary<String, EmitProperty[]> EntityCache = new ConcurrentDictionary<String, EmitProperty[]>();
+        internal static ConcurrentDictionary<String, EmitProperty[]> EntityCache => new ConcurrentDictionary<String, EmitProperty[]>();
+
+        /// <summary>
+        /// 公共使用的函数池
+        /// </summary>
+        internal static Dictionary<String, Delegate> DelegatePool => new Dictionary<String, Delegate>();
 
         /// <summary>
         /// 缓存存取器
@@ -39,6 +44,5 @@ namespace HandyEmit
             }
             return props;
         }
-
     }
 }

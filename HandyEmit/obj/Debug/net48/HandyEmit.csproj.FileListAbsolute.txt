@@ -21,4 +21,3 @@ C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmi
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.csproj.CopyComplete
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.dll
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.pdb
-C:\Users\zbb58\source\repos\zbb5896\HandyEmit\HandyEmit\obj\Debug\net48\HandyEmit.csprojAssemblyReference.cache

@@ -11,16 +11,21 @@ namespace HandyEmit.SmartEmit
     /// 链表管理方案
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ListManager<T>
+    public class ListManager<T> : EmitBasic
     {
         Int32 maxlen;
         LocalBuilder stack;
         ILGenerator il;
 
-        internal ListManager(LocalBuilder stack, ILGenerator il, Int32 maxlen = 0)
+        internal ListManager(LocalBuilder stack, ILGenerator generator, Int32 maxlen = 0)
+        {
+
+        }
+
+        public ListManager(ILGenerator generator) : base(generator)
         {
             this.stack = stack;
-            this.il = il;
+            this.il = generator;
             this.maxlen = 0;
         }
 
@@ -56,7 +61,7 @@ namespace HandyEmit.SmartEmit
             var res = this.il.NewBoolean();
             this.PushIn();
             this.il.Emit(OpCodes.Callvirt, BaseConst<T>._ListRemove);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 
@@ -87,7 +92,7 @@ namespace HandyEmit.SmartEmit
             var res = this.il.NewBoolean();
             this.PushIn();
             this.il.Emit(OpCodes.Callvirt, BaseConst<T>._ListContains);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 

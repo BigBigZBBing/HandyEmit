@@ -19,11 +19,9 @@ namespace HandyEmit.SmartEmit
     /// </summary>
     public partial class FuncGenerator : EmitBasic
     {
-        public ILGenerator il;
-
-        internal FuncGenerator(ILGenerator il) : base(il)
+        internal FuncGenerator(ILGenerator generator) : base(generator)
         {
-            this.il = il;
+            this.generator = generator;
         }
 
         #region 功能型语法
@@ -41,11 +39,11 @@ namespace HandyEmit.SmartEmit
             Label _for = DefineLabel();
             Label _endfor = DefineLabel();
             LocalBuilder index = DeclareLocal(typeof(Int32));
-            il.Int32Map(init);
+            this.Int32Map(init);
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
-            builder?.Invoke(new FieldInt32(index, il));
+            builder?.Invoke(new FieldInt32(index, generator));
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldc_I4_1);
             Emit(OpCodes.Add);
@@ -73,7 +71,7 @@ namespace HandyEmit.SmartEmit
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
-            build?.Invoke(new FieldInt32(index, il));
+            build?.Invoke(new FieldInt32(index, generator));
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldc_I4_1);
             Emit(OpCodes.Add);
@@ -97,18 +95,18 @@ namespace HandyEmit.SmartEmit
             Label _for = DefineLabel();
             Label _endfor = DefineLabel();
             LocalBuilder index = DeclareLocal(typeof(Int32));
-            il.Int32Map(init);
+            this.Int32Map(init);
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
-            build?.Invoke(new FieldInt32(index, il));
+            build?.Invoke(new FieldInt32(index, generator));
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldc_I4_1);
             Emit(OpCodes.Add);
             Emit(OpCodes.Stloc_S, index);
             MarkLabel(_endfor);
             Emit(OpCodes.Ldloc_S, index);
-            il.Int32Map(length);
+            this.Int32Map(length);
             Emit(OpCodes.Clt);
             Emit(OpCodes.Brtrue_S, _for);
         }
@@ -123,7 +121,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="init"></param>
         /// <param name="length"></param>
         /// <param name="builder"></param>
-        public void Forr(LocalBuilder init, Action<LocalBuilder> builder)
+        public void Forr(LocalBuilder init, Action<FieldInt32> builder)
         {
             Label _for = DefineLabel();
             Label _endfor = DefineLabel();
@@ -135,7 +133,7 @@ namespace HandyEmit.SmartEmit
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
-            builder?.Invoke(index);
+            builder?.Invoke(new FieldInt32(index, generator));
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldc_I4_1);
             Emit(OpCodes.Sub);
@@ -161,7 +159,7 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         public AssertManager IF(LocalBuilder assert, Action<ILGenerator> builder)
         {
-            return new AssertManager(il, (assert, builder));
+            return new AssertManager(generator, (assert, builder));
         }
 
         /// <summary>
@@ -173,7 +171,7 @@ namespace HandyEmit.SmartEmit
         /// <returns></returns>
         public AssertManager IF<T>(FieldManager<T> assert, Action<ILGenerator> builder)
         {
-            return new AssertManager(il, (assert, builder));
+            return new AssertManager(generator, (assert, builder));
         }
 
         #endregion
@@ -188,7 +186,7 @@ namespace HandyEmit.SmartEmit
         public TryCatchManager Try(Action<ILGenerator> builder)
         {
             BeginExceptionBlock();
-            return new TryCatchManager(il);
+            return new TryCatchManager(generator);
         }
 
         #endregion

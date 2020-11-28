@@ -10,12 +10,12 @@ namespace HandyEmit.SmartEmit
     /// </summary>
     public class AssertManager
     {
-        private ILGenerator il;
+        private ILGenerator generator;
         private List<(LocalBuilder, Action<ILGenerator>)> context = new List<(LocalBuilder, Action<ILGenerator>)>();
 
-        internal AssertManager(ILGenerator il, (LocalBuilder, Action<ILGenerator>) context)
+        internal AssertManager(ILGenerator generator, (LocalBuilder, Action<ILGenerator>) context)
         {
-            this.il = il;
+            this.generator = generator;
             this.context.Add(context);
         }
 
@@ -50,23 +50,23 @@ namespace HandyEmit.SmartEmit
         /// <param name="builder"></param>
         public void Else(Action<ILGenerator> builder)
         {
-            Label end = il.DefineLabel();
-            Label lab = il.DefineLabel();
+            Label end = generator.DefineLabel();
+            Label lab = generator.DefineLabel();
             Boolean first = true;
             foreach (var item in context)
             {
-                if (!first) il.MarkLabel(lab);
-                lab = il.DefineLabel();
-                il.Emit(OpCodes.Ldloc_S, item.Item1);
-                il.Emit(OpCodes.Brfalse_S, lab);
-                item.Item2?.Invoke(il);
-                il.Emit(OpCodes.Br_S, end);
+                if (!first) generator.MarkLabel(lab);
+                lab = generator.DefineLabel();
+                generator.Emit(OpCodes.Ldloc_S, item.Item1);
+                generator.Emit(OpCodes.Brfalse_S, lab);
+                item.Item2?.Invoke(generator);
+                generator.Emit(OpCodes.Br_S, end);
                 first = false;
             }
-            il.MarkLabel(lab);
-            builder?.Invoke(il);
-            il.Emit(OpCodes.Br_S, end);
-            il.MarkLabel(end);
+            generator.MarkLabel(lab);
+            builder?.Invoke(generator);
+            generator.Emit(OpCodes.Br_S, end);
+            generator.MarkLabel(end);
         }
 
         /// <summary>
@@ -74,21 +74,21 @@ namespace HandyEmit.SmartEmit
         /// </summary>
         public void IFEnd()
         {
-            Label end = il.DefineLabel();
-            Label lab = il.DefineLabel();
+            Label end = generator.DefineLabel();
+            Label lab = generator.DefineLabel();
             Boolean first = true;
             foreach (var item in context)
             {
-                if (!first) il.MarkLabel(lab);
-                lab = il.DefineLabel();
-                il.Emit(OpCodes.Ldloc_S, item.Item1);
-                il.Emit(OpCodes.Brfalse_S, lab);
-                item.Item2?.Invoke(il);
-                il.Emit(OpCodes.Br_S, end);
+                if (!first) generator.MarkLabel(lab);
+                lab = generator.DefineLabel();
+                generator.Emit(OpCodes.Ldloc_S, item.Item1);
+                generator.Emit(OpCodes.Brfalse_S, lab);
+                item.Item2?.Invoke(generator);
+                generator.Emit(OpCodes.Br_S, end);
                 first = false;
             }
-            il.MarkLabel(lab);
-            il.MarkLabel(end);
+            generator.MarkLabel(lab);
+            generator.MarkLabel(end);
         }
     }
 }

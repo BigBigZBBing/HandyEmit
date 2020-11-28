@@ -16,7 +16,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public FieldString NewString(String value = default(String))
         {
-            return this.il.NewString(value);
+            return ManagerGX.NewString(this, value);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public FieldBoolean NewBoolean(Boolean value = default(Boolean))
         {
-            return this.il.NewBoolean(value);
+            return ManagerGX.NewBoolean(this, value);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Int32> NewInt32(Int32 value = default(Int32))
         {
-            return this.il.NewInt32(value);
+            return ManagerGX.NewInt32(this, value);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Int64> NewInt64(Int64 value = default(Int64))
         {
-            return this.il.NewInt64(value);
+            return ManagerGX.NewInt64(this, value);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Single> NewFloat(Single value = default(Single))
         {
-            return this.il.NewFloat(value);
+            return ManagerGX.NewFloat(this, value);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Double> NewDouble(Double value = default(Double))
         {
-            return this.il.NewDouble(value);
+            return ManagerGX.NewDouble(this, value);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Decimal> NewDecimal(Double value = default(Double))
         {
-            return this.il.NewDecimal(value);
+            return ManagerGX.NewDecimal(this, value);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace HandyEmit.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Decimal> NewDateTime(DateTime value = default(DateTime))
         {
-            return this.il.NewDateTime(value);
+            return ManagerGX.NewDateTime(this, value);
         }
 
         /// <summary>
@@ -87,19 +87,19 @@ namespace HandyEmit.SmartEmit
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="length"></param>
-        public ArrayManager<T> NewArray<T>(Int32 length = default(Int32))
+        public FieldArray<T> NewArray<T>(Int32 length = default(Int32))
         {
-            return this.il.NewArray<T>(length);
+            return ManagerGX.NewArray<T>(this, length);
         }
 
         /// <summary>
         /// 初始化链表
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public ListManager<T> NewList<T>()
-        {
-            return this.il.NewList<T>();
-        }
+        //public ListManager<T> NewList<T>()
+        //{
+        //    return NewList<T>();
+        //}
 
         #endregion
     }

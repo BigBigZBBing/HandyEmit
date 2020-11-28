@@ -7,7 +7,7 @@ namespace HandyEmit.SmartEmit.Field
 {
     public class FieldInt64 : CanCompute<Int64>
     {
-        internal FieldInt64(LocalBuilder stack, ILGenerator il) : base(stack, il)
+        internal FieldInt64(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
     }

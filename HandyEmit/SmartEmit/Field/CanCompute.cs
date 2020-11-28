@@ -11,15 +11,15 @@ namespace HandyEmit.SmartEmit.Field
     /// <typeparam name="T"></typeparam>
     public class CanCompute<T> : FieldManager<T>
     {
-        internal CanCompute(LocalBuilder stack, ILGenerator il) : base(stack, il)
+        internal CanCompute(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
 
-        public static implicit operator FieldInt32(CanCompute<T> field) => new FieldInt32(field.stack, field.il);
-        public static implicit operator FieldInt64(CanCompute<T> field) => new FieldInt64(field.stack, field.il);
-        public static implicit operator FieldFloat(CanCompute<T> field) => new FieldFloat(field.stack, field.il);
-        public static implicit operator FieldDouble(CanCompute<T> field) => new FieldDouble(field.stack, field.il);
-        public static implicit operator FieldDecimal(CanCompute<T> field) => new FieldDecimal(field.stack, field.il);
+        public static implicit operator FieldInt32(CanCompute<T> field) => new FieldInt32(field.stack, field.generator);
+        public static implicit operator FieldInt64(CanCompute<T> field) => new FieldInt64(field.stack, field.generator);
+        public static implicit operator FieldFloat(CanCompute<T> field) => new FieldFloat(field.stack, field.generator);
+        public static implicit operator FieldDouble(CanCompute<T> field) => new FieldDouble(field.stack, field.generator);
+        public static implicit operator FieldDecimal(CanCompute<T> field) => new FieldDecimal(field.stack, field.generator);
 
         #region 大于
 
@@ -658,7 +658,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -671,7 +671,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -684,7 +684,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -697,7 +697,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -710,7 +710,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -736,7 +736,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -749,7 +749,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -762,7 +762,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -775,7 +775,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -788,7 +788,7 @@ namespace HandyEmit.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         #endregion

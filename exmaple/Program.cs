@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using System.Reflection.Emit;
 using System.Text;
 using System.Diagnostics;
+using HandyEmit.Enums;
 
 namespace exmaple
 {
@@ -33,9 +34,7 @@ namespace exmaple
 
             //DbOperation();
 
-
-            ILpkCSharpDom();
-
+            //ILpkCSharpDom();
 
             Console.ReadKey();
         }
@@ -60,8 +59,6 @@ namespace exmaple
                 {
                     temp += (CanCompute<int>)build;
                 });
-
-                func.Return();
             });
             stopwatch.Restart();
             dele.Invoke();

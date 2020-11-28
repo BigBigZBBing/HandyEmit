@@ -1,4 +1,5 @@
-﻿using HandyEmit.SmartEmit;
+﻿using HandyEmit.Enums;
+using HandyEmit.SmartEmit;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -223,7 +224,9 @@ namespace HandyEmit
                 types.RemoveAt(types.Count - 1);
             }
             DynamicMethod dynamicBuilder = new DynamicMethod(MethodName, retType, types.ToArray());
-            builder?.Invoke(new FuncGenerator(dynamicBuilder.GetILGenerator()));
+            var func = new FuncGenerator(dynamicBuilder.GetILGenerator());
+            builder?.Invoke(func);
+            func.Return();
             return dynamicBuilder.CreateDelegate(typeof(T)) as T;
         }
 

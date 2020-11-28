@@ -12,13 +12,13 @@ namespace HandyEmit.SmartEmit
     /// <summary>
     /// 数组管理方案
     /// </summary>
-    public class ArrayManager<T> : EmitBasic
+    public class ArrayManager1<T> : EmitBasic
     {
         private LocalBuilder stack;
         private ILGenerator il;
         private Int32 maxlen;
 
-        internal ArrayManager(LocalBuilder stack, ILGenerator il, Int32 maxlen) : base(il)
+        internal ArrayManager1(LocalBuilder stack, ILGenerator il, Int32 maxlen) : base(il)
         {
             this.stack = stack;
             this.il = il;
@@ -158,7 +158,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.EmitValue(value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._EnumerableContains);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 
@@ -172,7 +172,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.Emit(OpCodes.Ldloc_S, value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._EnumerableContains);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 
@@ -186,7 +186,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.EmitValue(value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayIndexOf);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 
@@ -200,7 +200,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.Emit(OpCodes.Ldloc_S, value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayIndexOf);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 
@@ -214,7 +214,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.EmitValue(value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayLastIndexOf);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 
@@ -228,7 +228,7 @@ namespace HandyEmit.SmartEmit
             this.PushIn();
             this.il.Emit(OpCodes.Ldloc_S, value);
             this.il.Emit(OpCodes.Call, BaseConst<T>._ArrayLastIndexOf);
-            res.Stloc();
+            res.PushOn();
             return res;
         }
 
@@ -275,6 +275,6 @@ namespace HandyEmit.SmartEmit
         /// 类型转换
         /// </summary>
         /// <param name="field"></param>
-        public static implicit operator LocalBuilder(ArrayManager<T> field) => field.stack;
+        //public static implicit operator LocalBuilder(ArrayManager<T> field) => field.stack;
     }
 }
