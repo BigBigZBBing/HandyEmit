@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ILWheatBread.SmartEmit.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -12,7 +13,7 @@ namespace ILWheatBread.SmartEmit.Field
     /// </summary>
     public class FieldArray<T> : ArrayManager
     {
-        public FieldArray(LocalBuilder stack, ILGenerator generator, Int32 Length) : base(stack, generator, typeof(T), Length)
+        internal FieldArray(LocalBuilder stack, ILGenerator generator, Int32 Length) : base(stack, generator, typeof(T), Length)
         {
 
         }
@@ -20,7 +21,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <summary>
         /// 判断元素是否存在数组中
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">判断的元素的指针</param>
         /// <returns></returns>
         public FieldBoolean Exists(LocalBuilder value)
         {
@@ -34,12 +35,53 @@ namespace ILWheatBread.SmartEmit.Field
                 Emit(OpCodes.Ceq);
                 Emit(OpCodes.Brfalse, falseTo);
                 Emit(OpCodes.Ldc_I4_1);
-                result.PushOn();
+                result.Push();
                 Emit(OpCodes.Br_S, trueTo);
                 MarkLabel(falseTo);
             });
             MarkLabel(trueTo);
             return result;
+        }
+
+        /// <summary>
+        /// 寻找元素在数组中的位置
+        /// </summary>
+        /// <param name="value">判断的元素的指针</param>
+        /// <returns></returns>
+        public FieldInt32 FindIndex(LocalBuilder value)
+        {
+            var result = this.NewInt32(-1);
+            Label trueTo = DefineLabel();
+            Label falseTo = DefineLabel();
+            this.For(0, GetLength(), build =>
+            {
+                GetValue(build);
+                Emit(OpCodes.Ldloc_S, value);
+                Emit(OpCodes.Ceq);
+                Emit(OpCodes.Brfalse, falseTo);
+                build.Pop();
+                result.Push();
+                Emit(OpCodes.Br_S, trueTo);
+                MarkLabel(falseTo);
+            });
+            MarkLabel(trueTo);
+            return result;
+        }
+
+        /// <summary>
+        /// 复制数组(浅克隆)
+        /// </summary>
+        /// <param name="target">目标数组指针</param>
+        /// <param name="length">复制的长度</param>
+        public void Copy(ArrayManager target, FieldInt32 length)
+        {
+            this.For(0, length, int1 =>
+            {
+                var local = DeclareLocal(target.OriginType);
+                GetValue(int1);
+                Emit(OpCodes.Stloc_S, local);
+                target.SetValue(int1, local);
+            });
         }
 
         public static implicit operator LocalBuilder(FieldArray<T> field) => field.stack;
@@ -108,6 +150,22 @@ namespace ILWheatBread.SmartEmit.Field
             Emit(OpCodes.Ldloc_S, index);
             Emit(OpCodes.Ldloc_S, value);
             this.PushArray(OriginType);
+        }
+
+        /// <summary>
+        /// 从内存中推入计算堆
+        /// </summary>
+        public void Pop()
+        {
+            base.Emit(OpCodes.Ldloc_S, this.stack);
+        }
+
+        /// <summary>
+        /// 推出计算堆到内存
+        /// </summary>
+        public void Push()
+        {
+            base.Emit(OpCodes.Stloc_S, this.stack);
         }
 
         /// <summary>

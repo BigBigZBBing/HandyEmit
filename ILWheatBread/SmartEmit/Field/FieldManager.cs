@@ -46,7 +46,7 @@ namespace ILWheatBread.SmartEmit
         /// <summary>
         /// 从内存中推入计算堆
         /// </summary>
-        public void PushIn()
+        public void Pop()
         {
             base.Emit(OpCodes.Ldloc_S, this.stack);
         }
@@ -54,7 +54,7 @@ namespace ILWheatBread.SmartEmit
         /// <summary>
         /// 推出计算堆到内存
         /// </summary>
-        public void PushOn()
+        public void Push()
         {
             base.Emit(OpCodes.Stloc_S, this.stack);
         }

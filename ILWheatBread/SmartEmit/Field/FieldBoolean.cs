@@ -101,12 +101,12 @@ namespace ILWheatBread.SmartEmit.Field
         {
             var assert = field.NewBoolean();
             var _true = field.DefineLabel();
-            field.PushIn();
+            field.Pop();
             field.Emit(OpCodes.Ldc_I4_1);
             field.Emit(OpCodes.Beq_S, _true);
             field.Emit(OpCodes.Ldc_I4_0);
-            assert.PushOn();
-            value.PushIn();
+            assert.Push();
+            value.Pop();
             field.Emit(OpCodes.Ldc_I4_1);
             field.Emit(OpCodes.Beq_S, _true);
             field.MarkLabel(_true);
@@ -123,14 +123,14 @@ namespace ILWheatBread.SmartEmit.Field
         {
             var assert = field.NewBoolean();
             var _false = field.DefineLabel();
-            field.PushIn();
+            field.Pop();
             field.Emit(OpCodes.Ldc_I4_0);
             field.Emit(OpCodes.Beq_S, _false);
-            value.PushIn();
+            value.Pop();
             field.Emit(OpCodes.Ldc_I4_0);
             field.Emit(OpCodes.Beq_S, _false);
             field.Emit(OpCodes.Ldc_I4_1);
-            assert.PushOn();
+            assert.Push();
             field.MarkLabel(_false);
             return assert;
         }

@@ -8,7 +8,7 @@
     <description>一套高性能ORM(暂时只支持MSSQL)</description>
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="HandyEmit" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="ILWheatBread" version="1.0.0" exclude="Build,Analyzers" />
         <dependency id="MySql.Data" version="8.0.21" exclude="Build,Analyzers" />
         <dependency id="Oracle.ManagedDataAccess.Core" version="2.19.90" exclude="Build,Analyzers" />
         <dependency id="System.ComponentModel.Annotations" version="4.7.0" exclude="Build,Analyzers" />

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ILWheatBread.SmartEmit.Func
 {
+    /// <summary>
+    /// Try延续语法方案
+    /// </summary>
     public class TryCatchManager
     {
         private ILGenerator generator;
@@ -16,6 +19,11 @@ namespace ILWheatBread.SmartEmit.Func
             this.generator = generator;
         }
 
+        /// <summary>
+        /// 捕获
+        /// </summary>
+        /// <param name="builder">回调包裹逻辑</param>
+        /// <returns></returns>
         public TryCatchManager Catch(Action<LocalBuilder> builder)
         {
             generator.BeginCatchBlock(typeof(Exception));
@@ -25,6 +33,11 @@ namespace ILWheatBread.SmartEmit.Func
             return this;
         }
 
+        /// <summary>
+        /// 最终调用
+        /// </summary>
+        /// <param name="builder">回调包裹逻辑</param>
+        /// <returns></returns>
         public TryCatchManager Finally(Action builder)
         {
             generator.BeginFinallyBlock();
@@ -32,6 +45,9 @@ namespace ILWheatBread.SmartEmit.Func
             return this;
         }
 
+        /// <summary>
+        /// 结束Try(必须调用)
+        /// </summary>
         public void TryEnd()
         {
             generator.EndExceptionBlock();

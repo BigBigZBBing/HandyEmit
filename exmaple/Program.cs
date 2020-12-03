@@ -1,6 +1,5 @@
 ﻿using ILWheatBread.SmartEmit;
 using ILWheatBread.SmartEmit.Field;
-using Google.Protobuf.WellKnownTypes;
 using NakedORM;
 using NakedORM.Simple;
 using exmaple.Model;
@@ -29,14 +28,15 @@ namespace exmaple
 
         static void Main(string[] args)
         {
-
             //EmitDynamicExmaple();
 
             //DbOperation();
 
-            ILpkCSharpDom();
+            //ILpkCSharpDom();
 
-            ExistsILpkCSharpDom();
+            //ExistsILpkCSharpDom();
+
+            CopyILpkCSharpDom();
 
             Console.ReadKey();
         }
@@ -66,7 +66,7 @@ namespace exmaple
                 func.EmitReturn();
             });
             stopwatch.Restart();
-            dele.Invoke();
+            dele();
             stopwatch.Stop();
             Console.WriteLine($"5E次增量 IL 运算 {stopwatch.ElapsedMilliseconds}");
         }
@@ -92,10 +92,9 @@ namespace exmaple
                 });
             }
             stopwatch.Stop();
-            Console.WriteLine($"创建1000长度数组 C# Exists处理 {stopwatch.ElapsedMilliseconds}");
+            Console.WriteLine($"创建10000长度数组 C# Exists处理 {stopwatch.ElapsedMilliseconds}");
 
-
-            Action dele = SmartBuilder.DynamicMethod<Action>("test", func =>
+            Action dele = SmartBuilder.DynamicMethod<Action>("test1", func =>
             {
                 var temp = func.NewArray<int>(10000);
                 func.For(0, temp.GetLength(), int1 =>
@@ -111,7 +110,42 @@ namespace exmaple
             stopwatch.Restart();
             dele();
             stopwatch.Stop();
-            Console.WriteLine($"创建1000长度数组 IL Exists处理 {stopwatch.ElapsedMilliseconds}");
+            Console.WriteLine($"创建10000长度数组 IL Exists处理 {stopwatch.ElapsedMilliseconds}");
+        }
+
+        /// <summary>
+        /// 数组Copy函数性能测试
+        /// </summary>
+        private static void CopyILpkCSharpDom()
+        {
+            int index = 1000000000;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            int[] temp = new int[index];
+            int[] temp1 = new int[index];
+            for (int i = 0; i < temp.Length; i++)
+            {
+                temp[i] = i;
+            }
+            Array.Copy(temp, 0, temp1, 0, temp.Length);
+            stopwatch.Stop();
+            Console.WriteLine($"创建100000000长度数组 C# Copy处理 {stopwatch.ElapsedMilliseconds}");
+
+            Action dele = SmartBuilder.DynamicMethod<Action>("test2", func =>
+            {
+                var temp = func.NewArray<int>(index);
+                var temp1 = func.NewArray<int>(index);
+                func.For(0, temp.GetLength(), int1 =>
+                {
+                    temp.SetValue(int1, int1);
+                });
+                temp.Copy(temp1, temp1.GetLength());
+                func.EmitReturn();
+            });
+            stopwatch.Restart();
+            dele();
+            stopwatch.Stop();
+            Console.WriteLine($"创建100000000长度数组 IL Copy处理处理 {stopwatch.ElapsedMilliseconds}");
         }
 
         private static void DbOperation()
@@ -252,5 +286,10 @@ namespace exmaple
                 }
             }
         }
+    }
+
+    public class Test
+    {
+        public int test1 { get; set; }
     }
 }

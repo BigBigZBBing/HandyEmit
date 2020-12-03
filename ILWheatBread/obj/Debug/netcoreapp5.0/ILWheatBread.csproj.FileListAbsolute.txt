@@ -21,3 +21,4 @@ C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netcoreapp5
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netcoreapp5.0\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netcoreapp5.0\ref\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netcoreapp5.0\ILWheatBread.pdb
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netcoreapp5.0\ILWheatBread.csprojAssemblyReference.cache

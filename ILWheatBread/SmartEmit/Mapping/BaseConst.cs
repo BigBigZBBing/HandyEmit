@@ -27,5 +27,6 @@ namespace ILWheatBread.SmartEmit.Mapping
     internal static class BaseConst
     {
         internal static readonly ConstructorInfo _DecimalCtor = typeof(Decimal).GetConstructor(new Type[] { typeof(Int32), typeof(Int32), typeof(Int32), typeof(Boolean), typeof(Byte) });
+        internal static readonly MethodInfo _ArrayCopy = typeof(Array).GetMethod("Copy", new Type[] { typeof(Array), typeof(Array), typeof(Int32) });
     }
 }

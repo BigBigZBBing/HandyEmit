@@ -17,7 +17,7 @@ namespace ILWheatBread.SmartEmit
     /// <summary>
     /// 代码层优化方案
     /// </summary>
-    internal static class ManagerGX
+    public static class ManagerGX
     {
         /// <summary>
         /// 根据泛型去自动适配推入计算堆的方式
@@ -435,7 +435,7 @@ namespace ILWheatBread.SmartEmit
         internal static FieldBoolean Comparer<T>(FieldManager<T> field, T value, params OpCode[] codes)
         {
             var res = field.NewBoolean();
-            field.PushIn();
+            field.Pop();
             foreach (var code in codes)
             {
                 field.EmitValue(value);
@@ -456,7 +456,7 @@ namespace ILWheatBread.SmartEmit
         internal static FieldBoolean Comparer<T, T1>(CanCompute<T> field, T1 value, params OpCode[] codes)
         {
             var res = field.NewBoolean();
-            field.PushIn();
+            field.Pop();
             foreach (var code in codes)
             {
                 field.EmitValue(value);
@@ -477,7 +477,7 @@ namespace ILWheatBread.SmartEmit
         internal static FieldBoolean Comparer<T>(FieldManager<T> field, LocalBuilder value, params OpCode[] codes)
         {
             var res = field.NewBoolean();
-            field.PushIn();
+            field.Pop();
             foreach (var code in codes)
             {
                 field.Emit(OpCodes.Ldloc_S, value);
@@ -498,10 +498,10 @@ namespace ILWheatBread.SmartEmit
         internal static FieldBoolean Comparer<T, T1>(FieldManager<T> field, FieldManager<T1> value, params OpCode[] codes)
         {
             var res = field.NewBoolean();
-            field.PushIn();
+            field.Pop();
             foreach (var code in codes)
             {
-                value.PushIn();
+                value.Pop();
                 field.Emit(code);
             }
             field.Emit(OpCodes.Stloc_S, res);
@@ -518,10 +518,10 @@ namespace ILWheatBread.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T> Compute<T, T1>(FieldManager<T> field, T1 value, OpCode code)
         {
-            field.PushIn();
+            field.Pop();
             field.EmitValue(value);
             field.Emit(code);
-            field.PushOn();
+            field.Push();
             return field;
         }
 
@@ -535,10 +535,10 @@ namespace ILWheatBread.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T1> Compute<T, T1>(FieldManager<T> field, LocalBuilder value, OpCode code)
         {
-            field.PushIn();
+            field.Pop();
             field.Emit(OpCodes.Ldloc_S, value);
             field.Emit(code);
-            field.PushOn();
+            field.Push();
             return field as FieldManager<T1>;
         }
 
@@ -552,10 +552,10 @@ namespace ILWheatBread.SmartEmit
         /// <returns></returns>
         internal static FieldManager<T> Compute<T, T1>(FieldManager<T> field, FieldManager<T1> value, OpCode code)
         {
-            field.PushIn();
-            value.PushIn();
+            field.Pop();
+            value.Pop();
             field.Emit(code);
-            field.PushOn();
+            field.Push();
             return field;
         }
 

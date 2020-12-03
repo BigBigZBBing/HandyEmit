@@ -1,12 +1,17 @@
-﻿using System;
+﻿using ILWheatBread.SmartEmit.Func;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ILWheatBread.SmartEmit
 {
+    /// <summary>
+    /// 未进入包装的基础码扩展
+    /// </summary>
     public static class EmitBasicExtension
     {
         /// <summary>
@@ -19,7 +24,7 @@ namespace ILWheatBread.SmartEmit
         }
 
         /// <summary>
-        /// 函数参数指令
+        /// 函数参数加载入堆
         /// </summary>
         /// <param name="basic"></param>
         /// <param name="index"></param>
@@ -36,6 +41,24 @@ namespace ILWheatBread.SmartEmit
         }
 
         /// <summary>
+        /// 函数参数转成指针对象
+        /// </summary>
+        /// <param name="basic"></param>
+        /// <param name="index">传递的参数索引</param>
+        /// <param name="type">参数类型</param>
+        /// <returns></returns>
+        public static LocalBuilder EmitParamRef(this EmitBasic basic, Int32 index, Type type)
+        {
+            LocalBuilder local = basic.DeclareLocal(typeof(LocalBuilder));
+            LocalBuilder param = basic.DeclareLocal(type);
+            basic.EmitParam(index);
+            basic.Emit(OpCodes.Stloc_S, local);
+            basic.Emit(OpCodes.Ldloc_S, local);
+            basic.Emit(OpCodes.Stloc_S, param);
+            return param;
+        }
+
+        /// <summary>
         /// 抛出异常
         /// </summary>
         /// <param name="basic"></param>
@@ -49,6 +72,66 @@ namespace ILWheatBread.SmartEmit
             }
             basic.Emit(OpCodes.Ldloc_S, ex);
             basic.Emit(OpCodes.Throw);
+        }
+
+        /// <summary>
+        /// 调用无参非静态函数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="basic"></param>
+        /// <param name="MethodName"></param>
+        public static MethodManager CallvirtMethod<T>(this EmitBasic basic, String MethodName)
+        {
+            Type type = typeof(T);
+            MethodInfo method = type.GetMethod(MethodName, Type.EmptyTypes);
+            basic.Emit(OpCodes.Callvirt, method);
+            return new MethodManager(basic, method.ReturnType);
+        }
+
+        /// <summary>
+        /// 调用有参非静态函数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="basic"></param>
+        /// <param name="MethodName"></param>
+        /// <param name="parameters"></param>
+        public static MethodManager CallvirtMethod<T>(this EmitBasic basic, String MethodName, params LocalBuilder[] parameters)
+        {
+            Type type = typeof(T);
+            MethodInfo method = type.GetMethod(MethodName, parameters.Select(x => x.LocalType).ToArray());
+            basic.Emit(OpCodes.Callvirt, method);
+            return new MethodManager(basic, method.ReturnType);
+        }
+
+        /// <summary>
+        /// 调用无参静态函数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="basic"></param>
+        /// <param name="MethodName"></param>
+        /// <returns></returns>
+        public static MethodManager CallMethod<T>(this EmitBasic basic, String MethodName)
+        {
+            Type type = typeof(T);
+            MethodInfo method = type.GetMethod(MethodName, Type.EmptyTypes);
+            basic.Emit(OpCodes.Call, method);
+            return new MethodManager(basic, method.ReturnType);
+        }
+
+        /// <summary>
+        /// 调用有参静态函数
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="basic"></param>
+        /// <param name="MethodName"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public static MethodManager CallMethod<T>(this EmitBasic basic, String MethodName, params LocalBuilder[] parameters)
+        {
+            Type type = typeof(T);
+            MethodInfo method = type.GetMethod(MethodName, parameters.Select(x => x.LocalType).ToArray());
+            basic.Emit(OpCodes.Call, method);
+            return new MethodManager(basic, method.ReturnType);
         }
     }
 }

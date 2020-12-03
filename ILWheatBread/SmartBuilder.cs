@@ -107,7 +107,7 @@ namespace ILWheatBread
         /// <param name="RetType"></param>
         /// <param name="Attr"></param>
         /// <param name="ParamTypes"></param>
-        public void Method(String MethodName, Action<FuncGenerator> builder, Type RetType = null, MethodAttributes Attr = MethodAttributes.Public, Type[] ParamTypes = null)
+        public void Method(String MethodName, Action<FuncGenerator> builder, Type RetType = null, Type[] ParamTypes = null, MethodAttributes Attr = MethodAttributes.Public)
         {
             methodBuilder = typeBuilder.DefineMethod(MethodName, Attr, RetType, ParamTypes);
 
@@ -120,7 +120,7 @@ namespace ILWheatBread
         /// <param name="Type"></param>
         public void _get(Type Type)
         {
-            Method("get_Item", null, Type, MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig, Type.EmptyTypes);
+            Method("get_Item", null, Type, Type.EmptyTypes, MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig);
 
             MainIL = methodBuilder.GetILGenerator();
             MainIL.Emit(OpCodes.Ldarg_0);
@@ -135,7 +135,7 @@ namespace ILWheatBread
         /// <param name="Type"></param>
         public void _set(Type Type)
         {
-            Method("set_Item", null, null, MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig, new Type[] { Type });
+            Method("set_Item", null, null, new Type[] { Type }, MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig);
 
             MainIL = methodBuilder.GetILGenerator();
             MainIL.Emit(OpCodes.Ldarg_0);
