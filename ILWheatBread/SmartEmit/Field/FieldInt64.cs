@@ -10,5 +10,16 @@ namespace ILWheatBread.SmartEmit.Field
         internal FieldInt64(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
+
+        //internal Func<LocalBuilder, Int64> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, Int64>>();
+
+        /// <summary>
+        /// 返回一个原始值
+        /// </summary>
+        /// <returns></returns>
+        //public Int64 ToInt64()
+        //{
+        //    return ToCodeDomLevel(this);
+        //}
     }
 }

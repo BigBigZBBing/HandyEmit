@@ -15,6 +15,17 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
+        //internal Func<EmitBasic, LocalBuilder, T> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<EmitBasic, LocalBuilder, T>>();
+
+        /// <summary>
+        /// 返回一个原始值
+        /// </summary>
+        /// <returns></returns>
+        //public T ToValueType()
+        //{
+        //    return ToCodeDomLevel(this, this);
+        //}
+
         public static implicit operator FieldInt32(CanCompute<T> field) => new FieldInt32(field.stack, field.generator);
         public static implicit operator FieldInt64(CanCompute<T> field) => new FieldInt64(field.stack, field.generator);
         public static implicit operator FieldFloat(CanCompute<T> field) => new FieldFloat(field.stack, field.generator);

@@ -11,6 +11,17 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
+        //internal Func<LocalBuilder, String> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, String>>();
+
+        /// <summary>
+        /// 返回一个原始值
+        /// </summary>
+        /// <returns></returns>
+        //public new String ToString()
+        //{
+        //    return ToCodeDomLevel(this);
+        //}
+
         #region 相等
 
         /// <summary>

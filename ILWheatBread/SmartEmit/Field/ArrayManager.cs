@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ILWheatBread.SmartEmit.Field
 {
     /// <summary>
-    /// 数组内存管理方案
+    /// 数组变量管理方案
     /// </summary>
     public class FieldArray<T> : ArrayManager
     {
@@ -91,9 +91,15 @@ namespace ILWheatBread.SmartEmit.Field
     {
         internal LocalBuilder stack { get; set; }
 
+        /// <summary>
+        /// 数组初始类型
+        /// </summary>
         public Type OriginType { get; set; }
 
-        public Int32 Length { get; set; }
+        /// <summary>
+        /// 数组长度
+        /// </summary>
+        internal Int32 Length { get; set; }
 
         internal FieldInt32 ILLength { get; set; }
 
@@ -116,7 +122,7 @@ namespace ILWheatBread.SmartEmit.Field
             {
                 Emit(OpCodes.Ldloc_S, stack);
                 this.Int32Map(index);
-                Emit(OpCodes.Ldelem_Ref, stack);
+                this.PopArray(OriginType);
                 return null;
             }
             set
@@ -124,7 +130,7 @@ namespace ILWheatBread.SmartEmit.Field
                 Emit(OpCodes.Ldloc_S, stack);
                 this.Int32Map(index);
                 Emit(OpCodes.Ldloc_S, value);
-                Emit(OpCodes.Stelem_Ref);
+                this.PushArray(OriginType);
             }
         }
 
@@ -176,7 +182,17 @@ namespace ILWheatBread.SmartEmit.Field
         {
             if ((object)ILLength == null)
             {
-                ILLength = this.NewInt32(Length);
+                //一般来说长度是有个缓存的  但是创建数组使用的是IL类型的长度 长度会被设定为-1
+                if (Length == -1)
+                {
+                    LocalBuilder temp = DeclareLocal(typeof(Int32));
+                    Pop();
+                    Emit(OpCodes.Ldlen);
+                    Emit(OpCodes.Stloc_S, temp);
+                    ILLength = new FieldInt32(temp, generator);
+                }
+                else
+                    ILLength = this.NewInt32(Length);
             }
             return ILLength;
         }

@@ -32,7 +32,7 @@ namespace exmaple
 
             //DbOperation();
 
-            //ILpkCSharpDom();
+            ILpkCSharpDom();
 
             //ExistsILpkCSharpDom();
 
@@ -118,7 +118,7 @@ namespace exmaple
         /// </summary>
         private static void CopyILpkCSharpDom()
         {
-            int index = 1000000000;
+            int index = 10000000;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             int[] temp = new int[index];

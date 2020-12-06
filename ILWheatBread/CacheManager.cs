@@ -12,6 +12,7 @@ namespace ILWheatBread
     {
         /// <summary>
         /// 实体Map缓存方案
+        /// <para/>
         /// 解决：多次序列化实体结构
         /// </summary>
         internal static ConcurrentDictionary<String, EmitProperty[]> EntityCache => new ConcurrentDictionary<String, EmitProperty[]>();

@@ -11,6 +11,17 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
+        //internal Func<LocalBuilder, Boolean> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, Boolean>>();
+
+        /// <summary>
+        /// 返回一个原始值
+        /// </summary>
+        /// <returns></returns>
+        //public Boolean ToBoolean()
+        //{
+        //    return ToCodeDomLevel(this);
+        //}
+
         #region 相等
 
         /// <summary>
@@ -59,7 +70,7 @@ namespace ILWheatBread.SmartEmit.Field
         public static FieldBoolean operator !=(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(
-                ManagerGX.Comparer(field, value, OpCodes.Ceq), 
+                ManagerGX.Comparer(field, value, OpCodes.Ceq),
                 field.NewInt32(), OpCodes.Ceq);
         }
 

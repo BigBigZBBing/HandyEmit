@@ -11,6 +11,17 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
+        //internal Func<LocalBuilder, DateTime> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, DateTime>>();
+
+        /// <summary>
+        /// 返回一个原始值
+        /// </summary>
+        /// <returns></returns>
+        //public DateTime ToDateTime()
+        //{
+        //    return ToCodeDomLevel(this);
+        //}
+
         #region 相等
 
         /// <summary>

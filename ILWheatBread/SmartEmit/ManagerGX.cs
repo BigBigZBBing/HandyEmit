@@ -779,7 +779,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Ldloc_S, length);
             basic.Emit(OpCodes.Newarr, typeof(T));
             basic.Emit(OpCodes.Stloc_S, item);
-            return new FieldArray<T>(item, basic, ILInt32ToDomInt32(length));
+            return new FieldArray<T>(item, basic, -1);
         }
 
         /// <summary>
@@ -815,18 +815,38 @@ namespace ILWheatBread.SmartEmit
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        internal static Int32 ILInt32ToDomInt32(LocalBuilder item)
-        {
-            if (!CacheManager.DelegatePool.ContainsKey("ILInt32ToDomInt32"))
-            {
-                CacheManager.DelegatePool.Add("ILInt32ToDomInt32",
-                   SmartBuilder.DynamicMethod<Func<LocalBuilder, Int32>>("ILInt32ToDomInt32", Func =>
-                {
-                    Func.Emit(OpCodes.Ldarg_0);
-                }));
-            }
-            return ((Func<LocalBuilder, Int32>)CacheManager.DelegatePool["ILInt32ToDomInt32"])(item);
-        }
+        //internal static Int32 ILInt32ToDomInt32(EmitBasic basic, LocalBuilder item)
+        //{
+        //    if (!CacheManager.DelegatePool.ContainsKey("ILInt32ToDomInt32"))
+        //    {
+        //        CacheManager.DelegatePool.Add("ILInt32ToDomInt32",
+        //           SmartBuilder.DynamicMethod<Func<EmitBasic, LocalBuilder, Int32>>("ILInt32ToDomInt32", func =>
+        //           {
+        //               func.Emit(OpCodes.Ldarg_0);
+        //           }));
+        //    }
+        //    return ((Func<EmitBasic, LocalBuilder, Int32>)CacheManager.DelegatePool["ILInt32ToDomInt32"])(basic, item);
+        //}
+
+        /// <summary>
+        /// 转换成CodeDom级别的实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        //internal static T ToCodeDomeLevel<T>() where T : class, Delegate
+        //{
+        //    Type type = typeof(T);
+        //    if (!CacheManager.DelegatePool.ContainsKey(type.FullName))
+        //    {
+        //        var tt = SmartBuilder.DynamicMethod<T>("testt", func =>
+        //        {
+        //            func.EmitParam(0);
+        //            func.EmitReturn();
+        //        });
+        //        CacheManager.DelegatePool.Add(type.FullName, tt);
+        //    }
+        //    return CacheManager.DelegatePool[type.FullName] as T;
+        //}
 
         /// <summary>
         /// 抛异常方案
