@@ -25,6 +25,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public FieldString NewString(LocalBuilder value)
         {
+            if (value.LocalType != typeof(String)) ManagerGX.GxException("Type not is [String]");
             return new FieldString(value, this);
         }
 
@@ -43,6 +44,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public FieldBoolean NewBoolean(LocalBuilder value)
         {
+            if (value.LocalType != typeof(Boolean)) ManagerGX.GxException("Type not is [Boolean]");
             return new FieldBoolean(value, this);
         }
 
@@ -61,6 +63,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Int32> NewInt32(LocalBuilder value)
         {
+            if (value.LocalType != typeof(Int32)) ManagerGX.GxException("Type not is [Int32]");
             return new FieldInt32(value, this);
         }
 
@@ -79,6 +82,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Int64> NewInt64(LocalBuilder value)
         {
+            if (value.LocalType != typeof(Int64)) ManagerGX.GxException("Type not is [Int64]");
             return new FieldInt64(value, this);
         }
 
@@ -97,6 +101,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Single> NewFloat(LocalBuilder value)
         {
+            if (value.LocalType != typeof(Single)) ManagerGX.GxException("Type not is [Single]");
             return new FieldFloat(value, this);
         }
 
@@ -115,6 +120,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Double> NewDouble(LocalBuilder value)
         {
+            if (value.LocalType != typeof(Double)) ManagerGX.GxException("Type not is [Double]");
             return new FieldDouble(value, this);
         }
 
@@ -133,6 +139,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Decimal> NewDecimal(LocalBuilder value)
         {
+            if (value.LocalType != typeof(Decimal)) ManagerGX.GxException("Type not is [Decimal]");
             return new FieldDecimal(value, this);
         }
 
@@ -140,7 +147,7 @@ namespace ILWheatBread.SmartEmit
         /// 初始化DateTime
         /// </summary>
         /// <param name="value"></param>
-        public CanCompute<Decimal> NewDateTime(DateTime value = default(DateTime))
+        public FieldDateTime NewDateTime(DateTime value = default(DateTime))
         {
             return ManagerGX.NewDateTime(this, value);
         }
@@ -149,9 +156,10 @@ namespace ILWheatBread.SmartEmit
         /// 初始化DateTime
         /// </summary>
         /// <param name="value"></param>
-        public CanCompute<Decimal> NewDateTime(LocalBuilder value)
+        public FieldDateTime NewDateTime(LocalBuilder value)
         {
-            return new FieldDecimal(value, this);
+            if (value.LocalType != typeof(DateTime)) ManagerGX.GxException("Type not is [DateTime]");
+            return new FieldDateTime(value, this);
         }
 
         /// <summary>
@@ -182,6 +190,7 @@ namespace ILWheatBread.SmartEmit
         /// <returns></returns>
         public FieldArray<T> NewArray<T>(LocalBuilder value)
         {
+            if (value.LocalType != typeof(T)) ManagerGX.GxException($"Type not is [{typeof(T)?.BaseType?.Name}]");
             return new FieldArray<T>(value, this, -1);
         }
 
@@ -193,6 +202,17 @@ namespace ILWheatBread.SmartEmit
         public FieldEntity<T> NewEntity<T>() where T : class, new()
         {
             return ManagerGX.NewEntity<T>(this);
+        }
+
+        /// <summary>
+        /// 初始化实体类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public FieldEntity<T> NewEntity<T>(LocalBuilder value) where T : class, new()
+        {
+            return new FieldEntity<T>(value, this);
         }
 
         /// <summary>

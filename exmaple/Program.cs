@@ -28,15 +28,17 @@ namespace exmaple
 
         static void Main(string[] args)
         {
+            var tt = typeof(string[]).BaseType;
+
             //EmitDynamicExmaple();
 
             //DbOperation();
 
-            ILpkCSharpDom();
+            //ILpkCSharpDom();
 
             //ExistsILpkCSharpDom();
 
-            CopyILpkCSharpDom();
+            //CopyILpkCSharpDom();
 
             Console.ReadKey();
         }
