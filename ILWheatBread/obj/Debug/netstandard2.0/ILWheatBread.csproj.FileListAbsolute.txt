@@ -15,3 +15,9 @@ C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netstandard
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.pdb
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.csprojAssemblyReference.cache
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.csprojAssemblyReference.cache
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.AssemblyInfoInputs.cache
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.AssemblyInfo.cs
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.csproj.CoreCompileInputs.cache
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.dll
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\netstandard2.0\ILWheatBread.pdb

@@ -41,7 +41,7 @@ namespace ILWheatBread
                     }
                     return tempemits;
                 });
-                if (props == null) ManagerGX.GxException("cache get is null");
+                if (props == null) ManagerGX.ShowEx("cache get is null");
             }
             return props;
         }
