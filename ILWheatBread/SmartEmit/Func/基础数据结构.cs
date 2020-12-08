@@ -25,7 +25,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public FieldString NewString(LocalBuilder value)
         {
-            if (value.LocalType != typeof(String)) ManagerGX.GxException("Type not is [String]");
+            if (value.LocalType != typeof(String)) ManagerGX.ShowEx("Type not is [String]");
             return new FieldString(value, this);
         }
 
@@ -44,7 +44,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public FieldBoolean NewBoolean(LocalBuilder value)
         {
-            if (value.LocalType != typeof(Boolean)) ManagerGX.GxException("Type not is [Boolean]");
+            if (value.LocalType != typeof(Boolean)) ManagerGX.ShowEx("Type not is [Boolean]");
             return new FieldBoolean(value, this);
         }
 
@@ -63,7 +63,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Int32> NewInt32(LocalBuilder value)
         {
-            if (value.LocalType != typeof(Int32)) ManagerGX.GxException("Type not is [Int32]");
+            if (value.LocalType != typeof(Int32)) ManagerGX.ShowEx("Type not is [Int32]");
             return new FieldInt32(value, this);
         }
 
@@ -82,7 +82,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Int64> NewInt64(LocalBuilder value)
         {
-            if (value.LocalType != typeof(Int64)) ManagerGX.GxException("Type not is [Int64]");
+            if (value.LocalType != typeof(Int64)) ManagerGX.ShowEx("Type not is [Int64]");
             return new FieldInt64(value, this);
         }
 
@@ -101,7 +101,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Single> NewFloat(LocalBuilder value)
         {
-            if (value.LocalType != typeof(Single)) ManagerGX.GxException("Type not is [Single]");
+            if (value.LocalType != typeof(Single)) ManagerGX.ShowEx("Type not is [Single]");
             return new FieldFloat(value, this);
         }
 
@@ -120,7 +120,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Double> NewDouble(LocalBuilder value)
         {
-            if (value.LocalType != typeof(Double)) ManagerGX.GxException("Type not is [Double]");
+            if (value.LocalType != typeof(Double)) ManagerGX.ShowEx("Type not is [Double]");
             return new FieldDouble(value, this);
         }
 
@@ -139,7 +139,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public CanCompute<Decimal> NewDecimal(LocalBuilder value)
         {
-            if (value.LocalType != typeof(Decimal)) ManagerGX.GxException("Type not is [Decimal]");
+            if (value.LocalType != typeof(Decimal)) ManagerGX.ShowEx("Type not is [Decimal]");
             return new FieldDecimal(value, this);
         }
 
@@ -158,7 +158,7 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         public FieldDateTime NewDateTime(LocalBuilder value)
         {
-            if (value.LocalType != typeof(DateTime)) ManagerGX.GxException("Type not is [DateTime]");
+            if (value.LocalType != typeof(DateTime)) ManagerGX.ShowEx("Type not is [DateTime]");
             return new FieldDateTime(value, this);
         }
 
@@ -190,7 +190,7 @@ namespace ILWheatBread.SmartEmit
         /// <returns></returns>
         public FieldArray<T> NewArray<T>(LocalBuilder value)
         {
-            if (value.LocalType != typeof(T)) ManagerGX.GxException($"Type not is [{typeof(T)?.BaseType?.Name}]");
+            if (value.LocalType != typeof(T)) ManagerGX.ShowEx($"Type not is [{typeof(T)?.BaseType?.Name}]");
             return new FieldArray<T>(value, this, -1);
         }
 

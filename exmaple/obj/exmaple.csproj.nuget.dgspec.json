@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj": {}
+    "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\exmaple\\exmaple.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj": {
+    "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\exmaple\\exmaple.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj",
+        "projectUniqueName": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\exmaple\\exmaple.csproj",
         "projectName": "exmaple",
-        "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj",
-        "packagesPath": "C:\\Users\\zbb58\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\obj\\",
+        "projectPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\exmaple\\exmaple.csproj",
+        "packagesPath": "C:\\Users\\bingbin.zhang\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\exmaple\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\zbb58\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bingbin.zhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,19 +25,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\zbb58\\source\\repos\\zbb5896\\Local.Nuget": {},
-          "http://www.wanshiwanli.top:3211/nuget": {},
+          "http://192.168.7.201:9999/nuget/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj": {
-                "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj"
+              "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj": {
+                "projectPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj"
               },
-              "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj": {
-                "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj"
+              "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\NakedORM\\NakedORM.csproj": {
+                "projectPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\NakedORM\\NakedORM.csproj"
               }
             }
           }
@@ -70,21 +69,21 @@
         }
       }
     },
-    "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj": {
+    "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj",
+        "projectUniqueName": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj",
         "projectName": "ILWheatBread",
-        "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj",
-        "packagesPath": "C:\\Users\\zbb58\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\obj\\",
+        "projectPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj",
+        "packagesPath": "C:\\Users\\bingbin.zhang\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\zbb58\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bingbin.zhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,8 +93,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\zbb58\\source\\repos\\zbb5896\\Local.Nuget": {},
-          "http://www.wanshiwanli.top:3211/nuget": {},
+          "http://192.168.7.201:9999/nuget/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -198,20 +196,20 @@
         }
       }
     },
-    "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj": {
+    "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\NakedORM\\NakedORM.csproj": {
       "version": "1.0.1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj",
+        "projectUniqueName": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\NakedORM\\NakedORM.csproj",
         "projectName": "NakedORM",
-        "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj",
-        "packagesPath": "C:\\Users\\zbb58\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\obj\\",
+        "projectPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\NakedORM\\NakedORM.csproj",
+        "packagesPath": "C:\\Users\\bingbin.zhang\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\NakedORM\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\zbb58\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bingbin.zhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -219,16 +217,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\zbb58\\source\\repos\\zbb5896\\Local.Nuget": {},
-          "http://www.wanshiwanli.top:3211/nuget": {},
+          "http://192.168.7.201:9999/nuget/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj": {
-                "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj"
+              "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj": {
+                "projectPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj"
               }
             }
           }
