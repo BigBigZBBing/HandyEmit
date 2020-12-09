@@ -76,11 +76,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj",
+      "projectUniqueName": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\ILWheatBread\\exmaple\\exmaple.csproj",
       "projectName": "exmaple",
-      "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\exmaple.csproj",
+      "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\ILWheatBread\\exmaple\\exmaple.csproj",
       "packagesPath": "C:\\Users\\zbb58\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\exmaple\\obj\\",
+      "outputPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\ILWheatBread\\exmaple\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -102,8 +102,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj": {
-              "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj"
+            "C:\\Users\\zbb58\\source\\repos\\zbb5896\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj": {
+              "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj"
             }
           }
         }

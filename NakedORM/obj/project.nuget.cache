@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jIsovEYsffbY3s37otFkcBVfbs7yvt9vFBfgykHhwuC5iAcfvOyC6rQJ4A7l5+YJCGvpXZ3hW2PtaQTMWljoDw==",
+  "dgSpecHash": "pSUXaUGmKV7bkwtmMxR/GfYi3+JN5+PAzyRITQ11tmYqAYCuuLMYuUxo9DJTPvZY1b+oaqKjQku0n+TM9hKpug==",
   "success": true,
-  "projectFilePath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\NakedORM\\NakedORM.csproj",
+  "projectFilePath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\ILWheatBread\\NakedORM\\NakedORM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zbb58\\.nuget\\packages\\bouncycastle\\1.8.3.1\\bouncycastle.1.8.3.1.nupkg.sha512",
     "C:\\Users\\zbb58\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
