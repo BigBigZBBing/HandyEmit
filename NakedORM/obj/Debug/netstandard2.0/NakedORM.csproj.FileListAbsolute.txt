@@ -46,3 +46,15 @@ C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\netstandard2.0\
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\netstandard2.0\NakedORM.pdb
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\netstandard2.0\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\netstandard2.0\ILWheatBread.pdb
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\bin\Debug\netstandard2.0\NakedORM.deps.json
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\bin\Debug\netstandard2.0\NakedORM.dll
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\bin\Debug\netstandard2.0\NakedORM.pdb
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\bin\Debug\netstandard2.0\ILWheatBread.dll
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\bin\Debug\netstandard2.0\ILWheatBread.pdb
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\obj\Debug\netstandard2.0\NakedORM.csprojAssemblyReference.cache
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\obj\Debug\netstandard2.0\NakedORM.AssemblyInfoInputs.cache
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\obj\Debug\netstandard2.0\NakedORM.AssemblyInfo.cs
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\obj\Debug\netstandard2.0\NakedORM.csproj.CoreCompileInputs.cache
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\obj\Debug\netstandard2.0\NakedORM.csproj.CopyComplete
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\obj\Debug\netstandard2.0\NakedORM.dll
+C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\obj\Debug\netstandard2.0\NakedORM.pdb
