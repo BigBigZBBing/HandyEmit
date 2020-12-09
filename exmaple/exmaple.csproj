@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ILWheatBread\ILWheatBread.csproj" />
-    <ProjectReference Include="..\NakedORM\NakedORM.csproj" />
   </ItemGroup>
 
 </Project>

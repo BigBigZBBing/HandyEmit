@@ -11,7 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Changeable\" />
+    <Compile Remove="Changeable\**" />
+    <EmbeddedResource Remove="Changeable\**" />
+    <None Remove="Changeable\**" />
   </ItemGroup>
 
   <ItemGroup>

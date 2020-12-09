@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj": {}
+    "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj": {
+    "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj",
+        "projectUniqueName": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj",
         "projectName": "ILWheatBread",
-        "projectPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\ILWheatBread.csproj",
-        "packagesPath": "C:\\Users\\bingbin.zhang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bingbin.zhang\\Desktop\\ILWheatBread\\ILWheatBread\\obj\\",
+        "projectPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\ILWheatBread.csproj",
+        "packagesPath": "C:\\Users\\zbb58\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\zbb58\\source\\repos\\zbb5896\\HandyEmit\\ILWheatBread\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\bingbin.zhang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zbb58\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,7 +28,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://192.168.7.201:9999/nuget/": {},
+          "C:\\Users\\zbb58\\source\\repos\\zbb5896\\Local.Nuget": {},
+          "http://www.wanshiwanli.top:3211/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

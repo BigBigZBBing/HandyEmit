@@ -1,7 +1,5 @@
 ﻿using ILWheatBread.SmartEmit;
 using ILWheatBread.SmartEmit.Field;
-using NakedORM;
-using NakedORM.Simple;
 using exmaple.Model;
 using System;
 using System.Collections.Generic;
@@ -24,7 +22,7 @@ namespace exmaple
     class Program
     {
 
-        static IRepository _Repository { get; set; }
+        //static IRepository _Repository { get; set; }
 
         static void Main(string[] args)
         {
@@ -150,101 +148,101 @@ namespace exmaple
             Console.WriteLine($"创建100000000长度数组 IL Copy处理处理 {stopwatch.ElapsedMilliseconds}");
         }
 
-        private static void DbOperation()
-        {
-            _Repository = new Repository("Data Source=localhost;Initial Catalog=dapperDb; User Id=sa;Password=111111");
+        //private static void DbOperation()
+        //{
+        //    _Repository = new Repository("Data Source=localhost;Initial Catalog=dapperDb; User Id=sa;Password=111111");
 
-            using (var con = _Repository.ConnectMSSQL())
-            {
-                using (var tran = con.BeginTranScoape())
-                {
-                    ////主键查询
-                    //var list1 = con.GetKey<SysUser>(1);
+        //    using (var con = _Repository.ConnectMSSQL())
+        //    {
+        //        using (var tran = con.BeginTranScoape())
+        //        {
+        //            ////主键查询
+        //            //var list1 = con.GetKey<SysUser>(1);
 
-                    ////条件查询
-                    //var list = con.GetList<SysUser>(where =>
-                    //{
-                    //    where
-                    //    ._("Name", "戴志伟");
-                    //});
+        //            ////条件查询
+        //            //var list = con.GetList<SysUser>(where =>
+        //            //{
+        //            //    where
+        //            //    ._("Name", "戴志伟");
+        //            //});
 
-                    try
-                    {
-                        //for (int i = 0; i < 10000; i++)
-                        //{
-                        //    //单量新增
-                        //    var res = con.Add(new TestModel()
-                        //    {
-                        //        test2 = new Random().Next(0, 10000),
-                        //        test3 = Create(100),
-                        //        test4 = Convert.ToDecimal(new Random().Next(0, 10000) + new Random().NextDouble()),
-                        //        test5 = DateTime.Now.AddSeconds(new Random().Next(-1000, 1000)),
-                        //        test6 = Convert.ToSingle(new Random().Next(0, 10000) + new Random().NextDouble())
-                        //    });
-                        //}
+        //            try
+        //            {
+        //                //for (int i = 0; i < 10000; i++)
+        //                //{
+        //                //    //单量新增
+        //                //    var res = con.Add(new TestModel()
+        //                //    {
+        //                //        test2 = new Random().Next(0, 10000),
+        //                //        test3 = Create(100),
+        //                //        test4 = Convert.ToDecimal(new Random().Next(0, 10000) + new Random().NextDouble()),
+        //                //        test5 = DateTime.Now.AddSeconds(new Random().Next(-1000, 1000)),
+        //                //        test6 = Convert.ToSingle(new Random().Next(0, 10000) + new Random().NextDouble())
+        //                //    });
+        //                //}
 
-                        //List<TestModel> model = new List<TestModel>();
-                        //for (int i = 0; i < 100000; i++)
-                        //{
-                        //    model.Add(new TestModel()
-                        //    {
-                        //        test2 = new Random().Next(0, 10000),
-                        //        test3 = Create(100),
-                        //        test4 = Convert.ToDecimal(new Random().Next(0, 10000) + new Random().NextDouble()),
-                        //        test5 = DateTime.Now.AddSeconds(new Random().Next(-1000, 1000)),
-                        //        test6 = Convert.ToSingle(new Random().Next(0, 10000) + new Random().NextDouble())
-                        //    });
-                        //}
-                        //var res = con.AddRange(model);
+        //                //List<TestModel> model = new List<TestModel>();
+        //                //for (int i = 0; i < 100000; i++)
+        //                //{
+        //                //    model.Add(new TestModel()
+        //                //    {
+        //                //        test2 = new Random().Next(0, 10000),
+        //                //        test3 = Create(100),
+        //                //        test4 = Convert.ToDecimal(new Random().Next(0, 10000) + new Random().NextDouble()),
+        //                //        test5 = DateTime.Now.AddSeconds(new Random().Next(-1000, 1000)),
+        //                //        test6 = Convert.ToSingle(new Random().Next(0, 10000) + new Random().NextDouble())
+        //                //    });
+        //                //}
+        //                //var res = con.AddRange(model);
 
-                        //更新
-                        var res1 = con.Update<SysUser>(set =>
-                            set._("Name", "邓超"),
-                        where =>
-                            where._("Name", "邓超1")
-                        );
+        //                //更新
+        //                var res1 = con.Update<SysUser>(set =>
+        //                    set._("Name", "邓超"),
+        //                where =>
+        //                    where._("Name", "邓超1")
+        //                );
 
-                        tran.Commit();
-                    }
-                    catch (System.Exception ex)
-                    {
-                        tran.Rollback();
-                    }
+        //                tran.Commit();
+        //            }
+        //            catch (System.Exception ex)
+        //            {
+        //                tran.Rollback();
+        //            }
 
-                }
-
-
-                //分页查询
-                //DbPager pager = new DbPager(2, 2);
-                //var list = con.GetListPager<SysUser>(pager);
-                //Int32 count = Convert.ToInt32(pager.TotalCount);
-
-                //个别字段查询
-                //var list2 = con.GetList<SysUser>(Reveal: x => new { x.Name, x.Old });
-
-                //批量新增
-                //var res = con.AddRange(new List<SysUser>()
-                //{
-                //    new SysUser(){
-                //        Name = "胡友洋",
-                //        Old = 32
-                //    },
-                //    new SysUser(){
-                //        Name = "邓超",
-                //        Old = 23
-                //    },
-                //    new SysUser(){
-                //        Name = "孙博强",
-                //        Old = 26
-                //    }
-                //});
+        //        }
 
 
-                //删除
-                //var res = con.Delete<SysUser>(5);
+        //        //分页查询
+        //        //DbPager pager = new DbPager(2, 2);
+        //        //var list = con.GetListPager<SysUser>(pager);
+        //        //Int32 count = Convert.ToInt32(pager.TotalCount);
 
-            }
-        }
+        //        //个别字段查询
+        //        //var list2 = con.GetList<SysUser>(Reveal: x => new { x.Name, x.Old });
+
+        //        //批量新增
+        //        //var res = con.AddRange(new List<SysUser>()
+        //        //{
+        //        //    new SysUser(){
+        //        //        Name = "胡友洋",
+        //        //        Old = 32
+        //        //    },
+        //        //    new SysUser(){
+        //        //        Name = "邓超",
+        //        //        Old = 23
+        //        //    },
+        //        //    new SysUser(){
+        //        //        Name = "孙博强",
+        //        //        Old = 26
+        //        //    }
+        //        //});
+
+
+        //        //删除
+        //        //var res = con.Delete<SysUser>(5);
+
+        //    }
+        //}
 
         private static void EmitDynamicExmaple()
         {
