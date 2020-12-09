@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net48;netstandard2.0;netcoreapp5.0</TargetFrameworks>
+    <TargetFrameworks>net48;netstandard2.0;net5.0</TargetFrameworks>
     <Authors>zhangbingbin</Authors>
     <Description>比表达式树性能更方便的反射框架</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -27,11 +27,11 @@
     <DefineConstants>NETSTAN2.0</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Debug|AnyCPU|netcoreapp5.0'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Debug|AnyCPU|net5.0'">
     <OutputPath>.\bin\Debug\</OutputPath>
     <DefineConstants>NETCORE5.0</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Release|AnyCPU|netcoreapp5.0'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Release|AnyCPU|net5.0'">
     <OutputPath>.\bin\Release\</OutputPath>
     <DefineConstants>NETCORE5.0</DefineConstants>
   </PropertyGroup>

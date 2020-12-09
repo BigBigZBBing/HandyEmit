@@ -193,14 +193,14 @@ namespace ILWheatBread
         /// 生成特定对象
         /// </summary>
         /// <returns></returns>
-        public EmitDynamic InitEntity()
+        public FastDynamic InitEntity()
         {
             SaveClass();
             var props = _dymaticType.GetProperties();
             Build();
-            return new EmitDynamic()
+            return new FastDynamic()
             {
-                Properties = new ConcurrentDictionary<String, EmitProperty>(ManagerGX.GetProps(props, Instance)),
+                Properties = new ConcurrentDictionary<String, FastProperty>(ManagerGX.GetProps(props, Instance)),
                 Instance = Instance
             };
         }

@@ -15,7 +15,7 @@ namespace ILWheatBread
         /// <para/>
         /// 解决：多次序列化实体结构
         /// </summary>
-        internal static ConcurrentDictionary<String, EmitProperty[]> EntityCache => new ConcurrentDictionary<String, EmitProperty[]>();
+        internal static ConcurrentDictionary<String, FastProperty[]> EntityCache => new ConcurrentDictionary<String, FastProperty[]>();
 
         /// <summary>
         /// 公共使用的函数池
@@ -27,17 +27,17 @@ namespace ILWheatBread
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        internal static EmitProperty[] CachePropsManager(this Type type)
+        internal static FastProperty[] CachePropsManager(this Type type)
         {
-            if (!EntityCache.TryGetValue(type.FullName, out EmitProperty[] props))
+            if (!EntityCache.TryGetValue(type.FullName, out FastProperty[] props))
             {
                 props = EntityCache.GetOrAdd(type.FullName, x =>
                 {
                     var nprops = type.GetProperties();
-                    EmitProperty[] tempemits = new EmitProperty[nprops.Length];
+                    FastProperty[] tempemits = new FastProperty[nprops.Length];
                     for (int i = 0; i < nprops.Length; i++)
                     {
-                        tempemits[i] = new EmitProperty(nprops[i]);
+                        tempemits[i] = new FastProperty(nprops[i]);
                     }
                     return tempemits;
                 });

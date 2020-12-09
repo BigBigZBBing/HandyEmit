@@ -1,13 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net48;netstandard2.0;net5.0</TargetFrameworks>
     <AssemblyName>NakedORM</AssemblyName>
     <RootNamespace>NakedORM</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>一套高性能ORM(暂时只支持MSSQL)</Description>
     <Version>1.0.1</Version>
     <Authors>zhangbingbin</Authors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)' == 'Debug|AnyCPU|net48'">
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>NET48</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)' == 'Release|AnyCPU|net48'">
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>NET48</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Debug|AnyCPU|netstandard2.0'">
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>NETSTAN2.0</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Release|AnyCPU|netstandard2.0'">
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>NETSTAN2.0</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Debug|AnyCPU|net5.0'">
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>NETCORE5.0</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Release|AnyCPU|net5.0'">
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>NETCORE5.0</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

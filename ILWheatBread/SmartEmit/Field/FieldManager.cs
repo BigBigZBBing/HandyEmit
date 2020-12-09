@@ -13,13 +13,22 @@ namespace ILWheatBread.SmartEmit
         {
         }
 
-        //public FieldObject AsObject()
-        //{
-        //    var temp = 
-        //    Pop();
-        //    Emit(OpCodes.Unbox_Any, typeof(Object));
-        //    return 
-        //}
+        public FieldObject AsObject()
+        {
+
+            var temp = this.NewObject();
+            Pop();
+            if (OriginType.IsValueType)
+            {
+                Emit(OpCodes.Box, typeof(Object));
+            }
+            else
+            {
+                Emit(OpCodes.Castclass, typeof(Object));
+            }
+            temp.Push();
+            return temp;
+        }
 
         public static implicit operator LocalBuilder(FieldManager<T> field) => field.stack;
         public static implicit operator FieldString(FieldManager<T> field) => new FieldString(field.stack, field.generator);

@@ -10,7 +10,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using ILWheatBread.Attributes;
-using ILWheatBread.SmartEmit.Mapping;
 
 namespace ILWheatBread.SmartEmit
 {
@@ -106,11 +105,18 @@ namespace ILWheatBread.SmartEmit
         /// <returns></returns>
         internal static FieldDateTime NewDateTime(this EmitBasic basic, DateTime value = default(DateTime))
         {
-            //LocalBuilder item = basic.DeclareLocal(typeof(DateTime));
-            //basic.Emit(OpCodes.Ldc_I8, datatime.Ticks);
-            //basic.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
-            //basic.Emit(OpCodes.Stloc_S, item);
             return new FieldDateTime(NewField(basic, value), basic);
+        }
+
+        /// <summary>
+        /// 核心实现方案(Object)
+        /// </summary>
+        /// <param name="basic"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        internal static FieldObject NewObject(this EmitBasic basic, Object value = default(Object))
+        {
+            return new FieldObject(NewField(basic, value), basic);
         }
 
         #endregion
@@ -241,11 +247,11 @@ namespace ILWheatBread.SmartEmit
         /// <param name="Props"></param>
         /// <param name="Instance"></param>
         /// <returns></returns>
-        internal static IEnumerable<KeyValuePair<String, EmitProperty>> GetProps(PropertyInfo[] Props, Object Instance)
+        internal static IEnumerable<KeyValuePair<String, FastProperty>> GetProps(PropertyInfo[] Props, Object Instance)
         {
             foreach (var Prop in Props)
             {
-                yield return new KeyValuePair<String, EmitProperty>(Prop.Name, new EmitProperty(Prop, Instance));
+                yield return new KeyValuePair<String, FastProperty>(Prop.Name, new FastProperty(Prop, Instance));
             }
         }
 
@@ -335,7 +341,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Newobj, ctor);
             basic.Emit(OpCodes.Stloc, model);
 
-            EmitProperty[] emits = type.CachePropsManager();
+            FastProperty[] emits = type.CachePropsManager();
 
             for (int i = 0; i < emits.Length; i++)
             {
@@ -365,7 +371,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Newobj, type);
             basic.Emit(OpCodes.Stloc, model);
 
-            EmitProperty[] emits = type.CachePropsManager();
+            FastProperty[] emits = type.CachePropsManager();
 
             for (int i = 0; i < emits.Length; i++)
             {

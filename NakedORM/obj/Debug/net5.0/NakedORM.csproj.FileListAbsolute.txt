@@ -1,0 +1,15 @@
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\net5.0\NakedORM.deps.json
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\net5.0\NakedORM.dll
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\net5.0\ref\NakedORM.dll
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\net5.0\NakedORM.pdb
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\net5.0\ILWheatBread.dll
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\net5.0\ILWheatBread.pdb
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.csprojAssemblyReference.cache
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.AssemblyInfoInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.AssemblyInfo.cs
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.csproj.CoreCompileInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.csproj.CopyComplete
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.dll
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\ref\NakedORM.dll
+C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\obj\Debug\net5.0\NakedORM.pdb

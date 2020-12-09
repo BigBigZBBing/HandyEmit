@@ -20,13 +20,6 @@ namespace ILWheatBread.SmartEmit.Field
             AsSourceType = assource;
         }
 
-        public LocalBuilder As<T>()
-        {
-            Pop();
-            Emit(OpCodes.Unbox_Any, typeof(T));
-            return this;
-        }
-
         #region 相等
 
         /// <summary>

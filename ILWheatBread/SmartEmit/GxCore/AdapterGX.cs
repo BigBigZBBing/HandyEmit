@@ -18,7 +18,11 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         internal static void EmitValue<T>(this EmitBasic basic, T value)
         {
-            if (typeof(T) == typeof(String))
+            if (value == null)
+            {
+                basic.Emit(OpCodes.Ldnull);
+            }
+            else if (typeof(T) == typeof(String))
             {
                 basic.Emit(OpCodes.Ldstr, Convert.ToString(value));
             }

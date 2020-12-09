@@ -575,7 +575,7 @@
       ],
       "originalTargetFrameworks": [
         "net48",
-        "netcoreapp5.0",
+        "net5.0",
         "netstandard2.0"
       ],
       "sources": {
@@ -586,7 +586,7 @@
       },
       "frameworks": {
         "net5.0": {
-          "targetAlias": "netcoreapp5.0",
+          "targetAlias": "net5.0",
           "projectReferences": {}
         },
         "net48": {
@@ -606,7 +606,7 @@
     },
     "frameworks": {
       "net5.0": {
-        "targetAlias": "netcoreapp5.0",
+        "targetAlias": "net5.0",
         "dependencies": {
           "Newtonsoft.Json": {
             "target": "Package",
@@ -628,7 +628,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       },
       "net48": {
         "targetAlias": "net48",
@@ -638,7 +638,7 @@
             "version": "[12.0.3, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       },
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
@@ -680,7 +680,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

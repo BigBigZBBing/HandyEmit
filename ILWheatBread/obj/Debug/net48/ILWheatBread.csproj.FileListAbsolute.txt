@@ -15,7 +15,6 @@ C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\net48\ILWhe
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\net48\ILWheatBread.csproj.CopyComplete
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\net48\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\net48\ILWheatBread.pdb
-C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\obj\Debug\net48\ILWheatBread.csprojAssemblyReference.cache
 C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.csprojAssemblyReference.cache
 C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.AssemblyInfoInputs.cache
 C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.AssemblyInfo.cs

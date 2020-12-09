@@ -11,6 +11,25 @@ namespace ILWheatBread.SmartEmit
         #region 基础数据结构
 
         /// <summary>
+        /// 初始化Object
+        /// </summary>
+        /// <param name="value"></param>
+        public FieldObject NewObject(Object value = default(Object))
+        {
+            return ManagerGX.NewObject(this, value);
+        }
+
+        /// <summary>
+        /// 初始化Object
+        /// </summary>
+        /// <param name="value"></param>
+        public FieldObject NewObject(LocalBuilder value)
+        {
+            if (value.LocalType != typeof(Object)) ManagerGX.ShowEx("Type not is [Object]");
+            return new FieldObject(value, this);
+        }
+
+        /// <summary>
         /// 初始化String
         /// </summary>
         /// <param name="value"></param>

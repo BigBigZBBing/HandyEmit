@@ -253,7 +253,7 @@ namespace exmaple
             {
                 emit.CreateProperty("Name" + i, typeof(String));
             }
-            EmitDynamic TEST = emit.InitEntity();
+            FastDynamic TEST = emit.InitEntity();
 
             String II = "";
 
