@@ -20,6 +20,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\zbb58\source\repos\zbb5896\HandyEmit\NakedORM\bin\Debug\netstandard2.0\NakedORM.dll" target="lib\netstandard2.0\NakedORM.dll" />
+    <file src="C:\Users\bingbin.zhang\Desktop\ILWheatBread\NakedORM\bin\Debug\netstandard2.0\NakedORM.dll" target="lib\netstandard2.0\NakedORM.dll" />
   </files>
 </package>
