@@ -21,3 +21,13 @@ C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheat
 C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.csproj.CoreCompileInputs.cache
 C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.dll
 C:\Users\bingbin.zhang\Desktop\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.pdb
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Debug\net48\ILWheatBread.dll
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Debug\net48\ILWheatBread.pdb
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Debug\net48\Newtonsoft.Json.dll
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.csprojAssemblyReference.cache
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.AssemblyInfoInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.AssemblyInfo.cs
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.csproj.CoreCompileInputs.cache
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.csproj.CopyComplete
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.dll
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net48\ILWheatBread.pdb

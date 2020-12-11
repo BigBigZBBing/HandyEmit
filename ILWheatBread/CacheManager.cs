@@ -21,6 +21,11 @@ namespace ILWheatBread
         /// 公共使用的函数池
         /// </summary>
         internal static Dictionary<String, Delegate> DelegatePool => new Dictionary<String, Delegate>();
+        
+        /// <summary>
+        /// 移除无用函数返回值触发点
+        /// </summary>
+        internal static Boolean retValue { get; set; }
 
         /// <summary>
         /// 缓存存取器

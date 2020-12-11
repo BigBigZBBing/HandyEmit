@@ -1,6 +1,5 @@
 ﻿using ILWheatBread.SmartEmit;
 using ILWheatBread.SmartEmit.Field;
-using exmaple.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,11 +13,6 @@ using ILWheatBread;
 
 namespace exmaple
 {
-    public static class test
-    {
-        public static string name { get; set; }
-    }
-
     class Program
     {
 
@@ -26,13 +20,11 @@ namespace exmaple
 
         static void Main(string[] args)
         {
-            var tt = typeof(string[]).BaseType;
-
             //EmitDynamicExmaple();
 
             //DbOperation();
 
-            //ILpkCSharpDom();
+            ILpkCSharpDom();
 
             //ExistsILpkCSharpDom();
 
@@ -286,10 +278,5 @@ namespace exmaple
                 }
             }
         }
-    }
-
-    public class Test
-    {
-        public int test1 { get; set; }
     }
 }

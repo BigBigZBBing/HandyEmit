@@ -23,19 +23,12 @@ namespace ILWheatBread.SmartEmit.Func
         }
 
         /// <summary>
-        /// 调用函数后返回参数不需要就直接释放
-        /// </summary>
-        public void EmptyEnd()
-        {
-            Emit(OpCodes.Pop);
-        }
-
-        /// <summary>
         /// 调用函数后参数指针
         /// </summary>
         /// <returns></returns>
         public LocalBuilder ReturnRef()
         {
+            CacheManager.retValue = false;
             LocalBuilder ret = DeclareLocal(ReturnType);
             Emit(OpCodes.Stloc_S, ret);
             return ret;

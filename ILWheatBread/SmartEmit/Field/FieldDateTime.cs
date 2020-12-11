@@ -11,17 +11,6 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
-        //internal Func<LocalBuilder, DateTime> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, DateTime>>();
-
-        /// <summary>
-        /// 返回一个原始值
-        /// </summary>
-        /// <returns></returns>
-        //public DateTime ToDateTime()
-        //{
-        //    return ToCodeDomLevel(this);
-        //}
-
         #region 相等
 
         /// <summary>
@@ -41,10 +30,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator ==(FieldString field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator ==(FieldDateTime field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 相等
@@ -80,12 +69,12 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator !=(FieldString field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(
-        //        ManagerGX.Comparer(field, value, OpCodes.Ceq),
-        //        field.il.NewInt32(), OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator !=(FieldDateTime field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(
+                ManagerGX.Comparer(field, value, OpCodes.Ceq),
+                field.NewInt32(), OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 不相等

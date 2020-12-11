@@ -41,10 +41,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator ==(FieldBoolean field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator ==(FieldBoolean field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 相等
@@ -80,12 +80,12 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator !=(FieldBoolean field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(
-        //        ManagerGX.Comparer(field, value, OpCodes.Ceq),
-        //        field.il.NewInt32(), OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator !=(FieldBoolean field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(
+                ManagerGX.Comparer(field, value, OpCodes.Ceq),
+                field.il.NewInt32(), OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 不相等

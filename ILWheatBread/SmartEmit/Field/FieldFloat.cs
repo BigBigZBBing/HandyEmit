@@ -10,16 +10,5 @@ namespace ILWheatBread.SmartEmit.Field
         internal FieldFloat(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
-
-        //internal Func<LocalBuilder, Single> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, Single>>();
-
-        /// <summary>
-        /// 返回一个原始值
-        /// </summary>
-        /// <returns></returns>
-        //public Single ToSingle()
-        //{
-        //    return ToCodeDomLevel(this);
-        //}
     }
 }

@@ -15,7 +15,6 @@ namespace ILWheatBread.SmartEmit
 
         public FieldObject AsObject()
         {
-
             var temp = this.NewObject();
             Pop();
             if (OriginType.IsValueType)

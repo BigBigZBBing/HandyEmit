@@ -23,8 +23,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\bin\Release\net48\ILWheatBread.dll" target="lib\net48\ILWheatBread.dll" />
-    <file src="C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\bin\Release\netcoreapp5.0\ILWheatBread.dll" target="lib\net5.0\ILWheatBread.dll" />
-    <file src="C:\Users\zbb58\source\repos\zbb5896\HandyEmit\ILWheatBread\bin\Release\netstandard2.0\ILWheatBread.dll" target="lib\netstandard2.0\ILWheatBread.dll" />
+    <file src="C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Release\net48\ILWheatBread.dll" target="lib\net48\ILWheatBread.dll" />
+    <file src="C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Release\net5.0\ILWheatBread.dll" target="lib\net5.0\ILWheatBread.dll" />
+    <file src="C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Release\netstandard2.0\ILWheatBread.dll" target="lib\netstandard2.0\ILWheatBread.dll" />
   </files>
 </package>

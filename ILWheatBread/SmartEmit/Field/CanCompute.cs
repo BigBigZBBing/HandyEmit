@@ -95,10 +95,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator >(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Cgt);
-        //}
+        public static FieldBoolean operator >(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Cgt);
+        }
 
         /// <summary>
         /// 大于
@@ -220,10 +220,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator <(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Clt);
-        //}
+        public static FieldBoolean operator <(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Clt);
+        }
 
         /// <summary>
         /// 小于
@@ -345,10 +345,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator >=(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Cgt, OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator >=(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Cgt, OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 大于等于
@@ -470,10 +470,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator <=(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Clt, OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator <=(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Clt, OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 小于等于
@@ -595,10 +595,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator ==(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator ==(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 相等
@@ -730,12 +730,12 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator !=(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(
-        //        ManagerGX.Comparer(field, value, OpCodes.Ceq),
-        //        field.il.NewInt32(), OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator !=(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(
+                ManagerGX.Comparer(field, value, OpCodes.Ceq),
+                field.NewInt32(), OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 不相等
@@ -867,10 +867,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static Field<T> operator +(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Compute(field, value, OpCodes.Add);
-        //}
+        public static FieldManager operator +(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Compute<T>(field, value, OpCodes.Add);
+        }
 
         /// <summary>
         /// 相加
@@ -992,10 +992,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static Field<T> operator -(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Compute(field, value, OpCodes.Sub);
-        //}
+        public static FieldManager operator -(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Compute(field, value, OpCodes.Sub);
+        }
 
         /// <summary>
         /// 相减
@@ -1117,10 +1117,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static Field<T> operator *(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Compute(field, value, OpCodes.Mul);
-        //}
+        public static FieldManager operator *(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Compute(field, value, OpCodes.Mul);
+        }
 
         /// <summary>
         /// 相乘
@@ -1242,10 +1242,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static Field<T> operator /(Field<T> field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Compute(field, value, OpCodes.Rem);
-        //}
+        public static FieldManager operator /(CanCompute<T> field, LocalBuilder value)
+        {
+            return ManagerGX.Compute(field, value, OpCodes.Rem);
+        }
 
         /// <summary>
         /// 相除

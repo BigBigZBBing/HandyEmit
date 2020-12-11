@@ -11,17 +11,6 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
-        //internal Func<LocalBuilder, String> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, String>>();
-
-        /// <summary>
-        /// 返回一个原始值
-        /// </summary>
-        /// <returns></returns>
-        //public new String ToString()
-        //{
-        //    return ToCodeDomLevel(this);
-        //}
-
         #region 相等
 
         /// <summary>
@@ -41,10 +30,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator ==(FieldString field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(field, value, OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator ==(FieldString field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(field, value, OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 相等
@@ -80,12 +69,12 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldBoolean operator !=(FieldString field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Comparer(
-        //        ManagerGX.Comparer(field, value, OpCodes.Ceq),
-        //        field.il.NewInt32(), OpCodes.Ceq);
-        //}
+        public static FieldBoolean operator !=(FieldString field, LocalBuilder value)
+        {
+            return ManagerGX.Comparer(
+                ManagerGX.Comparer(field, value, OpCodes.Ceq),
+                field.NewInt32(), OpCodes.Ceq);
+        }
 
         /// <summary>
         /// 不相等
@@ -121,10 +110,10 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        //public static FieldString operator +(FieldString field, LocalBuilder value)
-        //{
-        //    return ManagerGX.Compute(field, value, OpCodes.Add);
-        //}
+        public static FieldString operator +(FieldString field, LocalBuilder value)
+        {
+            return ManagerGX.Compute(field, value, OpCodes.Add);
+        }
 
         /// <summary>
         /// 相加

@@ -61,18 +61,18 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        //internal static FieldBoolean Comparer<T>(FieldManager<T> field, LocalBuilder value, params OpCode[] codes)
-        //{
-        //    var res = field.NewBoolean();
-        //    field.Pop();
-        //    foreach (var code in codes)
-        //    {
-        //        field.Emit(OpCodes.Ldloc_S, value);
-        //        field.Emit(code);
-        //    }
-        //    field.Emit(OpCodes.Stloc_S, res);
-        //    return res;
-        //}
+        internal static FieldBoolean Comparer<T>(FieldManager<T> field, LocalBuilder value, params OpCode[] codes)
+        {
+            var res = field.NewBoolean();
+            field.Pop();
+            foreach (var code in codes)
+            {
+                field.Emit(OpCodes.Ldloc_S, value);
+                field.Emit(code);
+            }
+            field.Emit(OpCodes.Stloc_S, res);
+            return res;
+        }
 
         /// <summary>
         /// 比较器
@@ -120,14 +120,14 @@ namespace ILWheatBread.SmartEmit
         /// <param name="value"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        //internal static FieldManager<T1> Compute<T, T1>(FieldManager<T> field, LocalBuilder value, OpCode code)
-        //{
-        //    field.Pop();
-        //    field.Emit(OpCodes.Ldloc_S, value);
-        //    field.Emit(code);
-        //    field.Push();
-        //    return field as FieldManager<T1>;
-        //}
+        internal static FieldManager Compute<T>(FieldManager<T> field, LocalBuilder value, OpCode code)
+        {
+            field.Pop();
+            field.Emit(OpCodes.Ldloc_S, value);
+            field.Emit(code);
+            field.Push();
+            return field;
+        }
 
         /// <summary>
         /// 计算器
