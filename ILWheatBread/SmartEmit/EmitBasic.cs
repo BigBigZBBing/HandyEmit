@@ -6,6 +6,9 @@ using System.Text;
 
 namespace ILWheatBread.SmartEmit
 {
+    /// <summary>
+    /// 基础Emit管理方案
+    /// </summary>
     public abstract class EmitBasic
     {
         internal ILGenerator generator;

@@ -1,4 +1,5 @@
 ﻿using ILWheatBread.SmartEmit.Field;
+using ILWheatBread.SmartEmit.Func;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -7,17 +8,31 @@ using System.Text;
 
 namespace ILWheatBread.SmartEmit
 {
-    public partial class FieldManager<T> : FieldManager
+    /// <summary>
+    /// 字段管理方案(具有身份的变量)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public partial class FieldManager<T> : VariableManager
     {
-        internal FieldManager(LocalBuilder stack, ILGenerator generator) : base(stack, generator, typeof(T))
+        /// <summary>
+        /// 变量身份类型
+        /// </summary>
+        internal Type identity;
+
+        internal FieldManager(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
+            identity = typeof(T);
         }
 
+        /// <summary>
+        /// 内存值装箱
+        /// </summary>
+        /// <returns></returns>
         public FieldObject AsObject()
         {
             var temp = this.NewObject();
-            Pop();
-            if (OriginType.IsValueType)
+            Output();
+            if (identity.IsValueType)
             {
                 Emit(OpCodes.Box, typeof(Object));
             }
@@ -25,54 +40,34 @@ namespace ILWheatBread.SmartEmit
             {
                 Emit(OpCodes.Castclass, typeof(Object));
             }
-            temp.Push();
+            temp.Input();
             return temp;
         }
 
-        public static implicit operator LocalBuilder(FieldManager<T> field) => field.stack;
-        public static implicit operator FieldString(FieldManager<T> field) => new FieldString(field.stack, field.generator);
-        public static implicit operator FieldBoolean(FieldManager<T> field) => new FieldBoolean(field.stack, field.generator);
-        public static implicit operator FieldDateTime(FieldManager<T> field) => new FieldDateTime(field.stack, field.generator);
-        public static implicit operator FieldInt32(FieldManager<T> field) => new FieldInt32(field.stack, field.generator);
-        public static implicit operator FieldInt64(FieldManager<T> field) => new FieldInt64(field.stack, field.generator);
-        public static implicit operator FieldFloat(FieldManager<T> field) => new FieldFloat(field.stack, field.generator);
-        public static implicit operator FieldDouble(FieldManager<T> field) => new FieldDouble(field.stack, field.generator);
-        public static implicit operator FieldDecimal(FieldManager<T> field) => new FieldDecimal(field.stack, field.generator);
-        public static implicit operator CanCompute<Int32>(FieldManager<T> field) => new CanCompute<Int32>(field.stack, field.generator);
-        public static implicit operator CanCompute<Int64>(FieldManager<T> field) => new CanCompute<Int64>(field.stack, field.generator);
-        public static implicit operator CanCompute<Single>(FieldManager<T> field) => new CanCompute<Single>(field.stack, field.generator);
-        public static implicit operator CanCompute<Double>(FieldManager<T> field) => new CanCompute<Double>(field.stack, field.generator);
-        public static implicit operator CanCompute<Decimal>(FieldManager<T> field) => new CanCompute<Decimal>(field.stack, field.generator);
-    }
-
-    /// <summary>
-    /// 自变量管理方案
-    /// </summary>
-    public class FieldManager : EmitBasic
-    {
-        internal LocalBuilder stack;
-        internal Type OriginType;
-
-        internal FieldManager(LocalBuilder stack, ILGenerator generator, Type type) : base(generator)
-        {
-            this.stack = stack;
-            this.OriginType = type;
-        }
-
         /// <summary>
-        /// 从内存中推入计算堆
+        /// 调用该类型的函数
         /// </summary>
-        public void Pop()
+        /// <param name="methodName"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public MethodManager Invoke(String methodName, params LocalBuilder[] parameters)
         {
-            base.Emit(OpCodes.Ldloc_S, this.stack);
+            return this.CallvirtMethod(methodName, identity, parameters);
         }
 
-        /// <summary>
-        /// 推出计算堆到内存
-        /// </summary>
-        public void Push()
-        {
-            base.Emit(OpCodes.Stloc_S, this.stack);
-        }
+        public static implicit operator LocalBuilder(FieldManager<T> field) => field.instance;
+        public static implicit operator FieldString(FieldManager<T> field) => new FieldString(field.instance, field.generator);
+        public static implicit operator FieldBoolean(FieldManager<T> field) => new FieldBoolean(field.instance, field.generator);
+        public static implicit operator FieldDateTime(FieldManager<T> field) => new FieldDateTime(field.instance, field.generator);
+        public static implicit operator FieldInt32(FieldManager<T> field) => new FieldInt32(field.instance, field.generator);
+        public static implicit operator FieldInt64(FieldManager<T> field) => new FieldInt64(field.instance, field.generator);
+        public static implicit operator FieldFloat(FieldManager<T> field) => new FieldFloat(field.instance, field.generator);
+        public static implicit operator FieldDouble(FieldManager<T> field) => new FieldDouble(field.instance, field.generator);
+        public static implicit operator FieldDecimal(FieldManager<T> field) => new FieldDecimal(field.instance, field.generator);
+        public static implicit operator CanCompute<Int32>(FieldManager<T> field) => new CanCompute<Int32>(field.instance, field.generator);
+        public static implicit operator CanCompute<Int64>(FieldManager<T> field) => new CanCompute<Int64>(field.instance, field.generator);
+        public static implicit operator CanCompute<Single>(FieldManager<T> field) => new CanCompute<Single>(field.instance, field.generator);
+        public static implicit operator CanCompute<Double>(FieldManager<T> field) => new CanCompute<Double>(field.instance, field.generator);
+        public static implicit operator CanCompute<Decimal>(FieldManager<T> field) => new CanCompute<Decimal>(field.instance, field.generator);
     }
 }

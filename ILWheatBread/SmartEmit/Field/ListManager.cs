@@ -7,69 +7,34 @@ using System.Threading.Tasks;
 
 namespace ILWheatBread.SmartEmit.Field
 {
-    public class FieldList<T> : ListManager
+    public class FieldList<T> : FieldManager<List<T>>
     {
-        public FieldList(LocalBuilder stack, ILGenerator generator) : base(stack, generator, typeof(T))
+        public FieldList(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
         }
 
-        public void Add(FieldEntity<T> value)
+        public void Add(LocalBuilder value)
         {
-            this.CallvirtMethod<List<T>>("Add", value);
+            Invoke("Add", value);
         }
 
-        public void Contains(FieldEntity<T> value)
+        public void Contains(LocalBuilder value)
         {
-            this.CallvirtMethod<List<T>>("Contains", value);
+            Invoke("Contains", value);
         }
 
         public void RemoveAt(LocalBuilder value)
         {
-            this.CallvirtMethod<List<T>>("RemoveAt", value);
-        }
-    }
-
-    public class ListManager : EmitBasic
-    {
-
-        internal LocalBuilder stack { get; set; }
-
-        /// <summary>
-        /// 数组初始类型
-        /// </summary>
-        public Type OriginType { get; set; }
-
-        internal FieldInt32 ILLength { get; set; }
-
-        public ListManager(LocalBuilder stack, ILGenerator generator, Type type) : base(generator)
-        {
-            this.stack = stack;
-            OriginType = type;
+            Invoke("RemoveAt", value);
         }
 
         /// <summary>
-        /// 从内存中推入计算堆
-        /// </summary>
-        public void Pop()
-        {
-            base.Emit(OpCodes.Ldloc_S, this.stack);
-        }
-
-        /// <summary>
-        /// 推出计算堆到内存
-        /// </summary>
-        public void Push()
-        {
-            base.Emit(OpCodes.Stloc_S, this.stack);
-        }
-
-        /// <summary>
-        /// 获取数组长度
+        /// 获取链表长度
         /// </summary>
         /// <returns></returns>
-        public FieldInt32 GetLength()
+        public FieldInt32 GetCount()
         {
-            return new FieldInt32(this.CallvirtMethod("get_Item", OriginType.GetProperty("Count").PropertyType).ReturnRef(), generator);
+            return new FieldInt32(Invoke("get_Count").ReturnRef(), generator);
         }
     }
 }

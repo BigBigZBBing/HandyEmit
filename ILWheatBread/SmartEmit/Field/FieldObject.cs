@@ -50,7 +50,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FieldBoolean operator ==(FieldObject field, FieldManager value)
+        public static FieldBoolean operator ==(FieldObject field, SmartEmit.VariableManager value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
@@ -91,7 +91,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FieldBoolean operator !=(FieldObject field, FieldManager value)
+        public static FieldBoolean operator !=(FieldObject field, SmartEmit.VariableManager value)
         {
             return ManagerGX.Comparer(
                ManagerGX.Comparer(field, value, OpCodes.Ceq),

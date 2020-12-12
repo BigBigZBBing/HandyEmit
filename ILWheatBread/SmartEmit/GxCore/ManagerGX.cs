@@ -167,6 +167,20 @@ namespace ILWheatBread.SmartEmit
             return new FieldArray<T>(item, basic, -1);
         }
 
+        /// <summary>
+        /// 核心实现方案(List)
+        /// </summary>
+        /// <param name="basic"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        internal static FieldList<T> NewList<T>(this EmitBasic basic)
+        {
+            LocalBuilder item = basic.DeclareLocal(typeof(List<T>));
+            basic.Emit(OpCodes.Newobj, typeof(List<T>).GetConstructor(Type.EmptyTypes));
+            basic.Emit(OpCodes.Stloc_S, item);
+            return new FieldList<T>(item, basic);
+        }
+
         #endregion
 
         /// <summary>
@@ -228,20 +242,6 @@ namespace ILWheatBread.SmartEmit
         }
 
         /// <summary>
-        /// 核心实现方案(List)
-        /// </summary>
-        /// <param name="il"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        //internal static ListManager<T> NewList<T>(this EmitBasic basic)
-        //{
-        //    LocalBuilder item = basic.DeclareLocal(typeof(List<T>));
-        //    basic.Emit(OpCodes.Newobj, typeof(List<T>));
-        //    basic.Emit(OpCodes.Stloc_S, item);
-        //    return new ListManager<T>(item, basic);
-        //}
-
-        /// <summary>
         /// 获取属性结构
         /// </summary>
         /// <param name="Props"></param>
@@ -255,43 +255,6 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
-        /// <summary>
-        /// IL模式的Int32转成CodeDom模式的Int32值体现
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        //internal static Int32 ILInt32ToDomInt32(EmitBasic basic, LocalBuilder item)
-        //{
-        //    if (!CacheManager.DelegatePool.ContainsKey("ILInt32ToDomInt32"))
-        //    {
-        //        CacheManager.DelegatePool.Add("ILInt32ToDomInt32",
-        //           SmartBuilder.DynamicMethod<Func<EmitBasic, LocalBuilder, Int32>>("ILInt32ToDomInt32", func =>
-        //           {
-        //               func.Emit(OpCodes.Ldarg_0);
-        //           }));
-        //    }
-        //    return ((Func<EmitBasic, LocalBuilder, Int32>)CacheManager.DelegatePool["ILInt32ToDomInt32"])(basic, item);
-        //}
-
-        /// <summary>
-        /// 转换成CodeDom级别的实体
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        //internal static T ToCodeDomeLevel<T>() where T : class, Delegate
-        //{
-        //    Type type = typeof(T);
-        //    if (!CacheManager.DelegatePool.ContainsKey(type.FullName))
-        //    {
-        //        var tt = SmartBuilder.DynamicMethod<T>("testt", func =>
-        //        {
-        //            func.EmitParam(0);
-        //            func.EmitReturn();
-        //        });
-        //        CacheManager.DelegatePool.Add(type.FullName, tt);
-        //    }
-        //    return CacheManager.DelegatePool[type.FullName] as T;
-        //}
 
         #region 常用方法
 

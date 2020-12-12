@@ -84,7 +84,7 @@ namespace ILWheatBread.SmartEmit.Field
         {
             return ManagerGX.Comparer(
                 ManagerGX.Comparer(field, value, OpCodes.Ceq),
-                field.il.NewInt32(), OpCodes.Ceq);
+                field.NewInt32(), OpCodes.Ceq);
         }
 
         /// <summary>
@@ -112,12 +112,12 @@ namespace ILWheatBread.SmartEmit.Field
         {
             var assert = field.NewBoolean();
             var _true = field.DefineLabel();
-            field.Pop();
+            field.Output();
             field.Emit(OpCodes.Ldc_I4_1);
             field.Emit(OpCodes.Beq_S, _true);
             field.Emit(OpCodes.Ldc_I4_0);
-            assert.Push();
-            value.Pop();
+            assert.Input();
+            value.Output();
             field.Emit(OpCodes.Ldc_I4_1);
             field.Emit(OpCodes.Beq_S, _true);
             field.MarkLabel(_true);
@@ -134,14 +134,14 @@ namespace ILWheatBread.SmartEmit.Field
         {
             var assert = field.NewBoolean();
             var _false = field.DefineLabel();
-            field.Pop();
+            field.Output();
             field.Emit(OpCodes.Ldc_I4_0);
             field.Emit(OpCodes.Beq_S, _false);
-            value.Pop();
+            value.Output();
             field.Emit(OpCodes.Ldc_I4_0);
             field.Emit(OpCodes.Beq_S, _false);
             field.Emit(OpCodes.Ldc_I4_1);
-            assert.Push();
+            assert.Input();
             field.MarkLabel(_false);
             return assert;
         }

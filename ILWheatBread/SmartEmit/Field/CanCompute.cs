@@ -15,22 +15,11 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
-        //internal Func<EmitBasic, LocalBuilder, T> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<EmitBasic, LocalBuilder, T>>();
-
-        /// <summary>
-        /// 返回一个原始值
-        /// </summary>
-        /// <returns></returns>
-        //public T ToValueType()
-        //{
-        //    return ToCodeDomLevel(this, this);
-        //}
-
-        public static implicit operator FieldInt32(CanCompute<T> field) => new FieldInt32(field.stack, field.generator);
-        public static implicit operator FieldInt64(CanCompute<T> field) => new FieldInt64(field.stack, field.generator);
-        public static implicit operator FieldFloat(CanCompute<T> field) => new FieldFloat(field.stack, field.generator);
-        public static implicit operator FieldDouble(CanCompute<T> field) => new FieldDouble(field.stack, field.generator);
-        public static implicit operator FieldDecimal(CanCompute<T> field) => new FieldDecimal(field.stack, field.generator);
+        public static implicit operator FieldInt32(CanCompute<T> field) => new FieldInt32(field.instance, field.generator);
+        public static implicit operator FieldInt64(CanCompute<T> field) => new FieldInt64(field.instance, field.generator);
+        public static implicit operator FieldFloat(CanCompute<T> field) => new FieldFloat(field.instance, field.generator);
+        public static implicit operator FieldDouble(CanCompute<T> field) => new FieldDouble(field.instance, field.generator);
+        public static implicit operator FieldDecimal(CanCompute<T> field) => new FieldDecimal(field.instance, field.generator);
 
         #region 大于
 
@@ -867,7 +856,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FieldManager operator +(CanCompute<T> field, LocalBuilder value)
+        public static SmartEmit.VariableManager operator +(CanCompute<T> field, LocalBuilder value)
         {
             return ManagerGX.Compute<T>(field, value, OpCodes.Add);
         }
@@ -992,7 +981,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FieldManager operator -(CanCompute<T> field, LocalBuilder value)
+        public static SmartEmit.VariableManager operator -(CanCompute<T> field, LocalBuilder value)
         {
             return ManagerGX.Compute(field, value, OpCodes.Sub);
         }
@@ -1117,7 +1106,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FieldManager operator *(CanCompute<T> field, LocalBuilder value)
+        public static SmartEmit.VariableManager operator *(CanCompute<T> field, LocalBuilder value)
         {
             return ManagerGX.Compute(field, value, OpCodes.Mul);
         }
@@ -1242,7 +1231,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FieldManager operator /(CanCompute<T> field, LocalBuilder value)
+        public static SmartEmit.VariableManager operator /(CanCompute<T> field, LocalBuilder value)
         {
             return ManagerGX.Compute(field, value, OpCodes.Rem);
         }

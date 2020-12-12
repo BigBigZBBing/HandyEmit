@@ -110,7 +110,7 @@ namespace ILWheatBread.SmartEmit.Field
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FieldString operator +(FieldString field, LocalBuilder value)
+        public static VariableManager operator +(FieldString field, LocalBuilder value)
         {
             return ManagerGX.Compute(field, value, OpCodes.Add);
         }

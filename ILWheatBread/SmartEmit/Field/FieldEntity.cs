@@ -38,7 +38,7 @@ namespace ILWheatBread.SmartEmit.Field
             {
                 if (!ContanisKey(Name)) ManagerGX.ShowEx("Entity prop is null;");
                 LocalBuilder item = generator.DeclareLocal(EntityBody[Name].type);
-                Pop();
+                Output();
                 Emit(OpCodes.Callvirt, EntityBody[Name].get);
                 Emit(OpCodes.Stloc_S, item);
                 return item;
@@ -46,7 +46,7 @@ namespace ILWheatBread.SmartEmit.Field
             set
             {
                 if (!ContanisKey(Name)) ManagerGX.ShowEx("Entity prop is null;");
-                Pop();
+                Output();
                 Emit(OpCodes.Ldloc, value);
                 Emit(OpCodes.Callvirt, EntityBody[Name].set);
             }
@@ -61,7 +61,7 @@ namespace ILWheatBread.SmartEmit.Field
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");
             LocalBuilder item = generator.DeclareLocal(EntityBody[FieldName].type);
-            Pop();
+            Output();
             Emit(OpCodes.Callvirt, EntityBody[FieldName].get);
             Emit(OpCodes.Stloc_S, item);
             return item;
@@ -75,7 +75,7 @@ namespace ILWheatBread.SmartEmit.Field
         public void SetValue(String FieldName, LocalBuilder value)
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");
-            Pop();
+            Output();
             Emit(OpCodes.Ldloc, value);
             Emit(OpCodes.Callvirt, EntityBody[FieldName].set);
         }

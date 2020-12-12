@@ -238,10 +238,19 @@ namespace ILWheatBread.SmartEmit
         /// 初始化链表
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        //public ListManager<T> NewList<T>()
-        //{
-        //    return NewList<T>();
-        //}
+        public FieldList<T> NewList<T>()
+        {
+            return ManagerGX.NewList<T>(this);
+        }
+
+        /// <summary>
+        /// 初始化链表
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public FieldList<T> NewList<T>(LocalBuilder value)
+        {
+            return new FieldList<T>(value, this);
+        }
 
         #endregion
     }
