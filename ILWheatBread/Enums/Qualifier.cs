@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 
 namespace ILWheatBread.Enums
 {
-    /// <summary>
-    /// 常用修饰符(便捷)
-    /// </summary>
     public enum Qualifier
     {
         Public = TypeAttributes.Public | TypeAttributes.AutoClass | TypeAttributes.AnsiClass | TypeAttributes.BeforeFieldInit,

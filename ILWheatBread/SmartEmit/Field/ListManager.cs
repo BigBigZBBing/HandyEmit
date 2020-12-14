@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ILWheatBread.SmartEmit.Field
 {
@@ -28,10 +24,6 @@ namespace ILWheatBread.SmartEmit.Field
             Invoke("RemoveAt", value);
         }
 
-        /// <summary>
-        /// 获取链表长度
-        /// </summary>
-        /// <returns></returns>
         public FieldInt32 GetCount()
         {
             return new FieldInt32(Invoke("get_Count").ReturnRef(), generator);

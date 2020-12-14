@@ -1,70 +1,60 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ILWheatBread.SmartEmit.Field
 {
     public class FieldObject : FieldManager<Object>
     {
-        internal Type AsSourceType { get; set; }
+        internal Type asidentity { get; set; }
 
         internal FieldObject(LocalBuilder stack, ILGenerator generator) : base(stack, generator)
         {
+            asidentity = stack.LocalType;
         }
 
-        internal FieldObject(LocalBuilder stack, ILGenerator generator, Type assource) : base(stack, generator)
+        public FieldObject As<T>()
         {
-            AsSourceType = assource;
+            LocalBuilder temp = DeclareLocal(typeof(T));
+            Output();
+            Emit(OpCodes.Castclass, typeof(T));
+            Emit(OpCodes.Stloc_S, temp);
+            return new FieldObject(temp, this);
         }
 
-        #region 相等
+        public FieldObject As(Type type)
+        {
+            LocalBuilder temp = DeclareLocal(type);
+            Output();
+            Emit(OpCodes.Castclass, type);
+            Emit(OpCodes.Stloc_S, temp);
+            return new FieldObject(temp, this);
+        }
 
-        /// <summary>
-        /// 相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        public FieldBoolean IsNull()
+        {
+            LocalBuilder assert = DeclareLocal(typeof(Boolean));
+            Output();
+            Emit(OpCodes.Ldnull);
+            Emit(OpCodes.Ceq);
+            Emit(OpCodes.Stloc_S, assert);
+            return new FieldBoolean(assert, this);
+        }
+
         public static FieldBoolean operator ==(FieldObject field, Object value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator ==(FieldObject field, LocalBuilder value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator ==(FieldObject field, SmartEmit.VariableManager value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
-        #endregion
-
-        #region 不相等
-
-        /// <summary>
-        /// 不相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator !=(FieldObject field, Object value)
         {
             return ManagerGX.Comparer(
@@ -72,12 +62,6 @@ namespace ILWheatBread.SmartEmit.Field
                field.NewInt32(), OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 不相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator !=(FieldObject field, LocalBuilder value)
         {
             return ManagerGX.Comparer(
@@ -85,19 +69,11 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 不相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator !=(FieldObject field, SmartEmit.VariableManager value)
         {
             return ManagerGX.Comparer(
                ManagerGX.Comparer(field, value, OpCodes.Ceq),
                field.NewInt32(), OpCodes.Ceq);
         }
-
-        #endregion
     }
 }

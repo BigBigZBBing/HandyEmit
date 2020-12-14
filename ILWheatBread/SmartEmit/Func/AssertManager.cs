@@ -1,53 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection.Emit;
 
 namespace ILWheatBread.SmartEmit
 {
-    /// <summary>
-    /// 断言解决方案
-    /// </summary>
     public class AssertManager
     {
         private ILGenerator generator;
-        private List<(LocalBuilder, Action<ILGenerator>)> context = new List<(LocalBuilder, Action<ILGenerator>)>();
+        private List<(LocalBuilder, Action)> context = new List<(LocalBuilder, Action)>();
 
-        internal AssertManager(ILGenerator generator, (LocalBuilder, Action<ILGenerator>) context)
+        internal AssertManager(ILGenerator generator, (LocalBuilder, Action) context)
         {
             this.generator = generator;
             this.context.Add(context);
         }
 
-        /// <summary>
-        /// else if()
-        /// </summary>
-        /// <param name="assert"></param>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public AssertManager ElseIF(LocalBuilder assert, Action<ILGenerator> builder)
+        public AssertManager ElseIF(LocalBuilder assert, Action builder)
         {
             context.Add((assert, builder));
             return this;
         }
 
-        /// <summary>
-        /// else if()
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="assert"></param>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public AssertManager ElseIF<T>(FieldManager<T> assert, Action<ILGenerator> builder)
+        public AssertManager ElseIF<T>(FieldManager<T> assert, Action builder)
         {
             context.Add((assert, builder));
             return this;
         }
 
-        /// <summary>
-        /// else
-        /// </summary>
-        /// <param name="builder"></param>
         public void Else(Action<ILGenerator> builder)
         {
             Label end = generator.DefineLabel();
@@ -59,7 +38,7 @@ namespace ILWheatBread.SmartEmit
                 lab = generator.DefineLabel();
                 generator.Emit(OpCodes.Ldloc_S, item.Item1);
                 generator.Emit(OpCodes.Brfalse_S, lab);
-                item.Item2?.Invoke(generator);
+                item.Item2?.Invoke();
                 generator.Emit(OpCodes.Br_S, end);
                 first = false;
             }
@@ -69,9 +48,6 @@ namespace ILWheatBread.SmartEmit
             generator.MarkLabel(end);
         }
 
-        /// <summary>
-        /// end if
-        /// </summary>
         public void IFEnd()
         {
             Label end = generator.DefineLabel();
@@ -83,7 +59,7 @@ namespace ILWheatBread.SmartEmit
                 lab = generator.DefineLabel();
                 generator.Emit(OpCodes.Ldloc_S, item.Item1);
                 generator.Emit(OpCodes.Brfalse_S, lab);
-                item.Item2?.Invoke(generator);
+                item.Item2?.Invoke();
                 generator.Emit(OpCodes.Br_S, end);
                 first = false;
             }

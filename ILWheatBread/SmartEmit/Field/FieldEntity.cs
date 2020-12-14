@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ILWheatBread.SmartEmit.Field
 {
     public class FieldEntity<T> : FieldManager<T>
     {
-        /// <summary>
-        /// 实体结构
-        /// </summary>
         private Dictionary<String, EntityProperty> EntityBody => new Dictionary<String, EntityProperty>();
 
         public List<String> Fields => EntityBody.Keys.ToList();
@@ -27,11 +21,6 @@ namespace ILWheatBread.SmartEmit.Field
             }
         }
 
-        /// <summary>
-        /// 获取赋值
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <returns></returns>
         public LocalBuilder this[String Name]
         {
             get
@@ -47,16 +36,21 @@ namespace ILWheatBread.SmartEmit.Field
             {
                 if (!ContanisKey(Name)) ManagerGX.ShowEx("Entity prop is null;");
                 Output();
-                Emit(OpCodes.Ldloc, value);
+                Emit(OpCodes.Ldloc_S, value);
                 Emit(OpCodes.Callvirt, EntityBody[Name].set);
             }
         }
 
-        /// <summary>
-        /// 获取属性值
-        /// </summary>
-        /// <param name="FieldName"></param>
-        /// <returns></returns>
+        public FieldBoolean IsNull()
+        {
+            LocalBuilder assert = DeclareLocal(typeof(Boolean));
+            Output();
+            Emit(OpCodes.Ldnull);
+            Emit(OpCodes.Ceq);
+            Emit(OpCodes.Stloc_S, assert);
+            return new FieldBoolean(assert, this);
+        }
+
         public LocalBuilder GetValue(String FieldName)
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");
@@ -67,24 +61,14 @@ namespace ILWheatBread.SmartEmit.Field
             return item;
         }
 
-        /// <summary>
-        /// 属性赋值
-        /// </summary>
-        /// <param name="FieldName"></param>
-        /// <param name="value"></param>
         public void SetValue(String FieldName, LocalBuilder value)
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");
             Output();
-            Emit(OpCodes.Ldloc, value);
+            Emit(OpCodes.Ldloc_S, value);
             Emit(OpCodes.Callvirt, EntityBody[FieldName].set);
         }
 
-        /// <summary>
-        /// 排查是否存在属性名
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <returns></returns>
         private Boolean ContanisKey(String Name)
         {
             return EntityBody.ContainsKey(Name);

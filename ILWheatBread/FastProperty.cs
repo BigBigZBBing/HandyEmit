@@ -4,46 +4,21 @@ using System.Reflection.Emit;
 
 namespace ILWheatBread
 {
-    /// <summary>
-    /// 高速属性类型
-    /// </summary>
     public class FastProperty
     {
-        /// <summary>
-        /// 单一Set对象
-        /// </summary>
         private PropertySetterEmit setter;
 
-        /// <summary>
-        /// 单一Get对象
-        /// </summary>
         private PropertyGetterEmit getter;
 
-        /// <summary>
-        /// 属性名称
-        /// </summary>
         public String PropertyName { get; private set; }
 
-        /// <summary>
-        /// 属性类型
-        /// </summary>
         public Type PropertyType { get; private set; }
 
-        /// <summary>
-        /// 实例对象
-        /// </summary>
         public Object Instance { get; private set; }
 
-        /// <summary>
-        /// Get函数
-        /// </summary>
         public MethodInfo GetMethod { get; private set; }
 
-        /// <summary>
-        /// Set函数
-        /// </summary>
         public MethodInfo SetMethod { get; private set; }
-
 
         public FastProperty(PropertyInfo propertyInfo, Object Instance = null)
         {
@@ -73,11 +48,6 @@ namespace ILWheatBread
             this.Instance = Instance;
         }
 
-        /// <summary>
-        /// 属性赋值操作（Emit技术）
-        /// </summary>
-        /// <param name="instance"></param>
-        /// <param name="value"></param>
         public void Set(Object value)
         {
             if (Instance == null)
@@ -87,11 +57,6 @@ namespace ILWheatBread
             this.setter?.Invoke(Instance, value);
         }
 
-        /// <summary>
-        /// 属性取值操作(Emit技术)
-        /// </summary>
-        /// <param name="instance"></param>
-        /// <returns></returns>
         public Object Get()
         {
             if (Instance == null)
@@ -101,11 +66,6 @@ namespace ILWheatBread
             return this.getter?.Invoke(Instance);
         }
 
-        /// <summary>
-        /// 属性赋值操作（Emit技术）
-        /// </summary>
-        /// <param name="instance"></param>
-        /// <param name="value"></param>
         public void Set(Object instance, Object value)
         {
             if (instance == null)
@@ -115,11 +75,6 @@ namespace ILWheatBread
             this.setter?.Invoke(instance, value);
         }
 
-        /// <summary>
-        /// 属性取值操作(Emit技术)
-        /// </summary>
-        /// <param name="instance"></param>
-        /// <returns></returns>
         public Object Get(Object instance)
         {
             if (instance == null)
@@ -130,12 +85,8 @@ namespace ILWheatBread
         }
     }
 
-    /// <summary>
-    /// Emit 动态构造 Get方法
-    /// </summary>
     public class PropertyGetterEmit
     {
-
         private readonly Func<Object, Object> getter;
 
         public PropertyGetterEmit(PropertyInfo propertyInfo)
@@ -158,29 +109,23 @@ namespace ILWheatBread
             if (property == null)
                 throw new ArgumentNullException("property");
 
-            //获取方法信息
             MethodInfo getMethod = property.GetGetMethod(true);
 
-            //创建一个IL空间内的方法 [PropertyGetter]
             DynamicMethod dm = new DynamicMethod("PropertyGetter", typeof(Object), new Type[] { typeof(Object) }, property.DeclaringType, true);
 
-            //创建IL生产者
             ILGenerator il = dm.GetILGenerator();
 
-            //判断方法是否为静态
             if (!getMethod.IsStatic)
             {
                 il.Emit(OpCodes.Ldarg_0);
-                //非静态调用
+
                 il.EmitCall(OpCodes.Callvirt, getMethod, null);
             }
             else
             {
-                //静态调用
                 il.EmitCall(OpCodes.Call, getMethod, null);
             }
 
-            //如果是值类型 就转成Object类型进行装箱
             if (property.PropertyType.IsValueType)
                 il.Emit(OpCodes.Box, property.PropertyType);
 
@@ -190,12 +135,8 @@ namespace ILWheatBread
         }
     }
 
-    /// <summary>
-    /// Emit动态构造Set方法
-    /// </summary>
     public class PropertySetterEmit
     {
-
         private readonly Action<Object, Object> setFunc;
 
         public PropertySetterEmit(PropertyInfo propertyInfo)
@@ -246,12 +187,10 @@ namespace ILWheatBread
         {
             if (type.IsValueType)
             {
-                //如果已经转成Object类型(已装箱) 标记为未装箱
                 il.Emit(OpCodes.Unbox_Any, type);
             }
             else
             {
-                //类型转换
                 il.Emit(OpCodes.Castclass, type);
             }
         }

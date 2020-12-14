@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection.Emit;
-using System.Text;
 
 namespace ILWheatBread.SmartEmit.Field
 {
@@ -11,62 +9,21 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
-        //internal Func<LocalBuilder, Boolean> ToCodeDomLevel = ManagerGX.ToCodeDomeLevel<Func<LocalBuilder, Boolean>>();
-
-        /// <summary>
-        /// 返回一个原始值
-        /// </summary>
-        /// <returns></returns>
-        //public Boolean ToBoolean()
-        //{
-        //    return ToCodeDomLevel(this);
-        //}
-
-        #region 相等
-
-        /// <summary>
-        /// 相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator ==(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator ==(FieldBoolean field, LocalBuilder value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator ==(FieldBoolean field, FieldBoolean value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
-        #endregion
-
-        #region 不相等
-
-        /// <summary>
-        /// 不相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator !=(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(
@@ -74,12 +31,6 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 不相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator !=(FieldBoolean field, LocalBuilder value)
         {
             return ManagerGX.Comparer(
@@ -87,12 +38,6 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
-        /// <summary>
-        /// 不相等
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator !=(FieldBoolean field, FieldBoolean value)
         {
             return ManagerGX.Comparer(
@@ -100,14 +45,6 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
-        #endregion
-
-        /// <summary>
-        /// 或者
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator |(FieldBoolean field, FieldBoolean value)
         {
             var assert = field.NewBoolean();
@@ -124,12 +61,6 @@ namespace ILWheatBread.SmartEmit.Field
             return assert;
         }
 
-        /// <summary>
-        /// 并且
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static FieldBoolean operator &(FieldBoolean field, FieldBoolean value)
         {
             var assert = field.NewBoolean();

@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection.Emit;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Reflection;
-using System.Diagnostics.SymbolStore;
-using System.Runtime.InteropServices;
-using System.Linq;
+﻿using ILWheatBread.SmartEmit.Field;
 using ILWheatBread.SmartEmit.Func;
-using ILWheatBread.SmartEmit.Field;
+using System;
+using System.Reflection.Emit;
 
 namespace ILWheatBread.SmartEmit
 {
-    /// <summary>
-    /// 函数内快速构建方案
-    /// </summary>
     public partial class FuncGenerator : EmitBasic
     {
         internal FuncGenerator(ILGenerator generator) : base(generator)
@@ -24,44 +12,22 @@ namespace ILWheatBread.SmartEmit
             this.generator = generator;
         }
 
-        #region 功能型语法
-
-        #region For
-
-        /// <summary>
-        /// 基础For正循环
-        /// </summary>
-        /// <param name="init"></param>
-        /// <param name="length"></param>
-        /// <param name="builder"></param>
         public void For(Int32 init, LocalBuilder length, Action<FieldInt32> build)
         {
             ManagerGX.For(this, init, length, build);
         }
 
-        /// <summary>
-        /// 基础For正循环
-        /// </summary>
-        /// <param name="init"></param>
-        /// <param name="length"></param>
-        /// <param name="builder"></param>
         public void For(LocalBuilder init, LocalBuilder length, Action<FieldInt32> build)
         {
             ManagerGX.For(this, init, length, build);
         }
 
-        /// <summary>
-        /// 基础For正循环
-        /// </summary>
-        /// <param name="init"></param>
-        /// <param name="length"></param>
-        /// <param name="builder"></param>
         public void For(Int32 init, Int32 length, Action<FieldInt32> build)
         {
             Label _for = DefineLabel();
             Label _endfor = DefineLabel();
             LocalBuilder index = DeclareLocal(typeof(Int32));
-            this.Int32Map(init);
+            this.IntegerMap(init);
             Emit(OpCodes.Stloc_S, index);
             Emit(OpCodes.Br, _endfor);
             MarkLabel(_for);
@@ -72,21 +38,11 @@ namespace ILWheatBread.SmartEmit
             Emit(OpCodes.Stloc_S, index);
             MarkLabel(_endfor);
             Emit(OpCodes.Ldloc_S, index);
-            this.Int32Map(length);
+            this.IntegerMap(length);
             Emit(OpCodes.Clt);
             Emit(OpCodes.Brtrue_S, _for);
         }
 
-        #endregion
-
-        #region Forr
-
-        /// <summary>
-        /// 基础For倒循环
-        /// </summary>
-        /// <param name="init"></param>
-        /// <param name="length"></param>
-        /// <param name="builder"></param>
         public void Forr(LocalBuilder init, Action<FieldInt32> builder)
         {
             Label _for = DefineLabel();
@@ -113,51 +69,33 @@ namespace ILWheatBread.SmartEmit
             Emit(OpCodes.Brtrue_S, _for);
         }
 
-        #endregion
-
-        #region IF
-
-        /// <summary>
-        /// IF判断
-        /// </summary>
-        /// <param name="assert"></param>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public AssertManager IF(LocalBuilder assert, Action<ILGenerator> builder)
+        public AssertManager IF(LocalBuilder assert, Action builder)
         {
             return new AssertManager(generator, (assert, builder));
         }
 
-        /// <summary>
-        /// IF判断
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="assert"></param>
-        /// <param name="builder"></param>
-        /// <returns></returns>
-        public AssertManager IF<T>(FieldManager<T> assert, Action<ILGenerator> builder)
+        public AssertManager IF<T>(FieldManager<T> assert, Action builder)
         {
             return new AssertManager(generator, (assert, builder));
         }
 
-        #endregion
+        public void While(Action assert, Action builder)
+        {
+            var START = DefineLabel();
+            var FALSE = DefineLabel();
+            MarkLabel(START);
+            assert();
+            Emit(OpCodes.Brfalse_S, FALSE);
+            builder();
+            Emit(OpCodes.Br_S, START);
+            MarkLabel(FALSE);
+        }
 
-        #region Try
-
-        /// <summary>
-        /// Try捕获
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <returns></returns>
         public TryCatchManager Try(Action builder)
         {
             BeginExceptionBlock();
             builder();
             return new TryCatchManager(generator);
         }
-
-        #endregion
-
-        #endregion
     }
 }
