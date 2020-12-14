@@ -32,7 +32,7 @@ namespace ILWheatBread.SmartEmit
             }
             else if (typeof(T) == typeof(Byte))
             {
-                basic.IntegerMap(Convert.ToByte(value));
+                basic.IntegerMap((SByte)Convert.ToByte(value));
             }
             else if (typeof(T) == typeof(Int16))
             {
@@ -40,7 +40,7 @@ namespace ILWheatBread.SmartEmit
             }
             else if (typeof(T) == typeof(UInt16))
             {
-                basic.IntegerMap(Convert.ToUInt16(value));
+                basic.IntegerMap((Int16)Convert.ToUInt16(value));
             }
             else if (typeof(T) == typeof(Int32))
             {
@@ -48,15 +48,15 @@ namespace ILWheatBread.SmartEmit
             }
             else if (typeof(T) == typeof(UInt32))
             {
-                basic.IntegerMap((int)Convert.ToUInt32(value));
+                basic.IntegerMap((Int32)Convert.ToUInt32(value));
             }
             else if (typeof(T) == typeof(Int64))
             {
-                basic.Emit(OpCodes.Ldc_I8, Convert.ToInt64(value));
+                basic.IntegerMap(Convert.ToInt64(value));
             }
             else if (typeof(T) == typeof(UInt64))
             {
-                basic.Emit(OpCodes.Ldc_I8, Convert.ToUInt64(value));
+                basic.IntegerMap((Int64)Convert.ToUInt64(value));
             }
             else if (typeof(T) == typeof(Single))
             {
