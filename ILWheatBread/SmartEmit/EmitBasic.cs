@@ -68,9 +68,9 @@ namespace ILWheatBread.SmartEmit
 
         public void MarkLabel(Label loc) => generator.MarkLabel(loc);
 
-        public LocalBuilder DeclareLocal(Type localType, Boolean pinned) => generator.DeclareLocal(localType, pinned);
+        public LocalBuilder DeclareLocal(Type localType, Boolean pinned) => RedirectLocal(localType, pinned);
 
-        public LocalBuilder DeclareLocal(Type localType) => generator.DeclareLocal(localType);
+        public LocalBuilder DeclareLocal(Type localType) => RedirectLocal(localType);
 
         public Label DefineLabel() => generator.DefineLabel();
 
@@ -94,14 +94,9 @@ namespace ILWheatBread.SmartEmit
 
         public void UsingNamespace(string usingNamespace) => generator.UsingNamespace(usingNamespace);
 
-        private void DispatchEmit(OpCode opcode, LocalBuilder value)
-        {
-            CheckOverLength(ref opcode, value);
-            DispatchEmit<LocalBuilder>(opcode, value);
-        }
-
         private void DispatchEmit<T>(OpCode opcode, T value)
         {
+            //CheckOverLength(ref opcode);
             if (CacheManager.retValue) generator.Emit(OpCodes.Pop);
             ((Action<OpCode, T>)CacheMethod<T>()).Invoke(opcode, value);
         }
@@ -112,14 +107,38 @@ namespace ILWheatBread.SmartEmit
             generator.Emit(opcode);
         }
 
-        private void CheckOverLength(ref OpCode opcode, LocalBuilder value)
+        private void CheckOverLength(ref OpCode opcode)
         {
-            if (value.LocalIndex < SByte.MinValue || value.LocalIndex > SByte.MaxValue)
+            if (generator.ILOffset > Byte.MaxValue)
             {
                 if (OpCodes.Stloc_S == opcode) opcode = OpCodes.Stloc;
                 if (OpCodes.Ldloc_S == opcode) opcode = OpCodes.Ldloc;
                 if (OpCodes.Ldloca_S == opcode) opcode = OpCodes.Ldloca;
+                if (OpCodes.Beq_S == opcode) opcode = OpCodes.Beq;
+                if (OpCodes.Bge_S == opcode) opcode = OpCodes.Bge;
+                if (OpCodes.Bge_Un_S == opcode) opcode = OpCodes.Bge_Un;
+                if (OpCodes.Bgt_S == opcode) opcode = OpCodes.Bgt;
+                if (OpCodes.Bgt_Un_S == opcode) opcode = OpCodes.Bgt_Un;
+                if (OpCodes.Ble_S == opcode) opcode = OpCodes.Ble;
+                if (OpCodes.Ble_Un_S == opcode) opcode = OpCodes.Ble_Un;
+                if (OpCodes.Blt_S == opcode) opcode = OpCodes.Blt;
+                if (OpCodes.Blt_Un_S == opcode) opcode = OpCodes.Blt_Un;
+                if (OpCodes.Bne_Un_S == opcode) opcode = OpCodes.Bne_Un;
+                if (OpCodes.Br_S == opcode) opcode = OpCodes.Br;
+                if (OpCodes.Brfalse_S == opcode) opcode = OpCodes.Brfalse;
+                if (OpCodes.Brtrue_S == opcode) opcode = OpCodes.Brtrue;
+                if (OpCodes.Ldarg_S == opcode) opcode = OpCodes.Ldarg;
+                if (OpCodes.Ldarga_S == opcode) opcode = OpCodes.Ldarga;
+                if (OpCodes.Ldc_I4_S == opcode) opcode = OpCodes.Ldc_I4;
+                if (OpCodes.Leave_S == opcode) opcode = OpCodes.Leave;
+                if (OpCodes.Starg_S == opcode) opcode = OpCodes.Starg;
             }
+        }
+
+        private LocalBuilder RedirectLocal(Type localType, Boolean pinned = false)
+        {
+            var local = generator.DeclareLocal(localType, pinned);
+            return local;
         }
 
         private Delegate CacheMethod<T>()

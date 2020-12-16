@@ -37,14 +37,14 @@ namespace ILWheatBread.SmartEmit
                 if (!first) generator.MarkLabel(lab);
                 lab = generator.DefineLabel();
                 generator.Emit(OpCodes.Ldloc_S, item.Item1);
-                generator.Emit(OpCodes.Brfalse_S, lab);
+                generator.Emit(OpCodes.Brfalse, lab);
                 item.Item2?.Invoke();
-                generator.Emit(OpCodes.Br_S, end);
+                generator.Emit(OpCodes.Br, end);
                 first = false;
             }
             generator.MarkLabel(lab);
             builder?.Invoke(generator);
-            generator.Emit(OpCodes.Br_S, end);
+            generator.Emit(OpCodes.Br, end);
             generator.MarkLabel(end);
         }
 
@@ -58,9 +58,9 @@ namespace ILWheatBread.SmartEmit
                 if (!first) generator.MarkLabel(lab);
                 lab = generator.DefineLabel();
                 generator.Emit(OpCodes.Ldloc_S, item.Item1);
-                generator.Emit(OpCodes.Brfalse_S, lab);
+                generator.Emit(OpCodes.Brfalse, lab);
                 item.Item2?.Invoke();
-                generator.Emit(OpCodes.Br_S, end);
+                generator.Emit(OpCodes.Br, end);
                 first = false;
             }
             generator.MarkLabel(lab);

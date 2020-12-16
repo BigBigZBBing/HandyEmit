@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ILWheatBread.SmartEmit.Func;
+using System;
 using System.Reflection.Emit;
 
 namespace ILWheatBread.SmartEmit.Field
@@ -38,6 +39,11 @@ namespace ILWheatBread.SmartEmit.Field
             Emit(OpCodes.Ceq);
             Emit(OpCodes.Stloc_S, assert);
             return new FieldBoolean(assert, this);
+        }
+
+        public override MethodManager Invoke(String methodName, params LocalBuilder[] parameters)
+        {
+            return this.CallvirtMethod(methodName, asidentity, parameters);
         }
 
         public static FieldBoolean operator ==(FieldObject field, Object value)

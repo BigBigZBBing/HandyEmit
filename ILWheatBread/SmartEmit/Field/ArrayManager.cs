@@ -69,7 +69,7 @@ namespace ILWheatBread.SmartEmit.Field
                 Emit(OpCodes.Brfalse, falseTo);
                 Emit(OpCodes.Ldc_I4_1);
                 result.Input();
-                Emit(OpCodes.Br_S, trueTo);
+                Emit(OpCodes.Br, trueTo);
                 MarkLabel(falseTo);
             });
             MarkLabel(trueTo);
@@ -89,7 +89,7 @@ namespace ILWheatBread.SmartEmit.Field
                 Emit(OpCodes.Brfalse, falseTo);
                 build.Output();
                 result.Input();
-                Emit(OpCodes.Br_S, trueTo);
+                Emit(OpCodes.Br, trueTo);
                 MarkLabel(falseTo);
             });
             MarkLabel(trueTo);

@@ -188,7 +188,11 @@ namespace ILWheatBread.SmartEmit
                 case 7: basic.Emit(OpCodes.Ldc_I4_7); break;
                 case 8: basic.Emit(OpCodes.Ldc_I4_8); break;
                 default:
-                    if (value < Int32.MinValue || value > Int32.MaxValue)
+                    if (value < Int64.MinValue || value > Int64.MaxValue)
+                    {
+                        ShowEx("IntegerMap 数值溢出");
+                    }
+                    else if (value < Int32.MinValue || value > Int32.MaxValue)
                     {
                         basic.Emit(OpCodes.Ldc_I8, value);
                     }

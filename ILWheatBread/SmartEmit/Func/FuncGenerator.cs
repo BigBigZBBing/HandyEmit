@@ -40,7 +40,7 @@ namespace ILWheatBread.SmartEmit
             Emit(OpCodes.Ldloc_S, index);
             this.IntegerMap(length);
             Emit(OpCodes.Clt);
-            Emit(OpCodes.Brtrue_S, _for);
+            Emit(OpCodes.Brtrue, _for);
         }
 
         public void Forr(LocalBuilder init, Action<FieldInt32> builder)
@@ -66,7 +66,7 @@ namespace ILWheatBread.SmartEmit
             Emit(OpCodes.Clt);
             Emit(OpCodes.Ldc_I4_0);
             Emit(OpCodes.Ceq);
-            Emit(OpCodes.Brtrue_S, _for);
+            Emit(OpCodes.Brtrue, _for);
         }
 
         public AssertManager IF(LocalBuilder assert, Action builder)
@@ -85,9 +85,9 @@ namespace ILWheatBread.SmartEmit
             var FALSE = DefineLabel();
             MarkLabel(START);
             assert();
-            Emit(OpCodes.Brfalse_S, FALSE);
+            Emit(OpCodes.Brfalse, FALSE);
             builder();
-            Emit(OpCodes.Br_S, START);
+            Emit(OpCodes.Br, START);
             MarkLabel(FALSE);
         }
 

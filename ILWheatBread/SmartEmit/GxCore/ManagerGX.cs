@@ -106,7 +106,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Ldloc_S, length);
 
             basic.Emit(OpCodes.Clt);
-            basic.Emit(OpCodes.Brtrue_S, _for);
+            basic.Emit(OpCodes.Brtrue, _for);
         }
 
         internal static void For(this EmitBasic basic, Int32 init, LocalBuilder length, Action<FieldInt32> build)
@@ -128,7 +128,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Ldloc_S, length);
 
             basic.Emit(OpCodes.Clt);
-            basic.Emit(OpCodes.Brtrue_S, _for);
+            basic.Emit(OpCodes.Brtrue, _for);
         }
 
         internal static IEnumerable<KeyValuePair<String, FastProperty>> GetProps(PropertyInfo[] Props, Object Instance)

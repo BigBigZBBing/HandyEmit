@@ -30,7 +30,7 @@ namespace ILWheatBread.SmartEmit
             return temp;
         }
 
-        public MethodManager Invoke(String methodName, params LocalBuilder[] parameters)
+        public virtual MethodManager Invoke(String methodName, params LocalBuilder[] parameters)
         {
             return this.CallvirtMethod(methodName, identity, parameters);
         }
