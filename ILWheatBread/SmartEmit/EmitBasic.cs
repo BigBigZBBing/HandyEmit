@@ -96,7 +96,7 @@ namespace ILWheatBread.SmartEmit
 
         private void DispatchEmit<T>(OpCode opcode, T value)
         {
-            //CheckOverLength(ref opcode);
+            CheckOverLength(ref opcode);
             if (CacheManager.retValue) generator.Emit(OpCodes.Pop);
             ((Action<OpCode, T>)CacheMethod<T>()).Invoke(opcode, value);
         }
