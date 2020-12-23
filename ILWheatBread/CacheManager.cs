@@ -9,8 +9,6 @@ namespace ILWheatBread
     {
         internal static ConcurrentDictionary<String, FastProperty[]> EntityCache => new ConcurrentDictionary<String, FastProperty[]>();
 
-        internal static Dictionary<String, Delegate> DelegatePool => new Dictionary<String, Delegate>();
-
         internal static Boolean retValue { get; set; }
 
         internal static FastProperty[] CachePropsManager(this Type type)

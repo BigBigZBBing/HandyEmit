@@ -109,8 +109,10 @@ namespace ILWheatBread.SmartEmit
 
         private void CheckOverLength(ref OpCode opcode)
         {
+#if NET48
             if (generator.ILOffset > Byte.MaxValue)
             {
+#endif
                 if (OpCodes.Stloc_S == opcode) opcode = OpCodes.Stloc;
                 if (OpCodes.Ldloc_S == opcode) opcode = OpCodes.Ldloc;
                 if (OpCodes.Ldloca_S == opcode) opcode = OpCodes.Ldloca;
@@ -132,7 +134,9 @@ namespace ILWheatBread.SmartEmit
                 if (OpCodes.Ldc_I4_S == opcode) opcode = OpCodes.Ldc_I4;
                 if (OpCodes.Leave_S == opcode) opcode = OpCodes.Leave;
                 if (OpCodes.Starg_S == opcode) opcode = OpCodes.Starg;
+#if NET48
             }
+#endif
         }
 
         private LocalBuilder RedirectLocal(Type localType, Boolean pinned = false)

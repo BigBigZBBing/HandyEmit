@@ -8,10 +8,6 @@ namespace ILWheatBread.SmartEmit
 {
     public static class EmitBasicExtension
     {
-        public static void EmitReturn(this EmitBasic basic)
-        {
-            basic.Emit(OpCodes.Ret);
-        }
 
         public static void EmitParam(this EmitBasic basic, Int32 index)
         {
@@ -23,6 +19,17 @@ namespace ILWheatBread.SmartEmit
                 case 3: basic.Emit(OpCodes.Ldarg_3); break;
                 default: basic.Emit(OpCodes.Ldarg_S, index); break;
             }
+        }
+
+        public static LocalBuilder EmitParamRef<T>(this EmitBasic basic, Int32 index) where T : class
+        {
+            LocalBuilder local = basic.DeclareLocal(typeof(LocalBuilder));
+            LocalBuilder param = basic.DeclareLocal(typeof(T));
+            basic.EmitParam(index);
+            basic.Emit(OpCodes.Stloc_S, local);
+            basic.Emit(OpCodes.Ldloc_S, local);
+            basic.Emit(OpCodes.Stloc_S, param);
+            return param;
         }
 
         public static LocalBuilder EmitParamRef(this EmitBasic basic, Int32 index, Type type)

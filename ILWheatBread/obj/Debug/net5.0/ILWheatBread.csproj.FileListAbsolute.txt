@@ -13,7 +13,6 @@ C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Debug\net5.0\I
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Debug\net5.0\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Debug\net5.0\ref\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\bin\Debug\net5.0\ILWheatBread.pdb
-C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net5.0\ILWheatBread.csprojAssemblyReference.cache
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net5.0\ILWheatBread.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net5.0\ILWheatBread.AssemblyInfoInputs.cache
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Debug\net5.0\ILWheatBread.AssemblyInfo.cs

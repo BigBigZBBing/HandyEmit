@@ -82,10 +82,6 @@ namespace ILWheatBread.SmartEmit
                 basic.Emit(OpCodes.Ldc_I8, Convert.ToDateTime(value).Ticks);
                 basic.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
             }
-            else if (typeof(T).CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(EmitSerialization)) != null)
-            {
-                basic.Emit(OpCodes.Ldloc_S, basic.MapToEntity(value));
-            }
             else
             {
                 throw new Exception("not exist datatype!");
@@ -162,10 +158,6 @@ namespace ILWheatBread.SmartEmit
             {
                 basic.Emit(OpCodes.Ldc_I8, Convert.ToDateTime(value).Ticks);
                 basic.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
-            }
-            else if (type.CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(EmitSerialization)) != null)
-            {
-                basic.Emit(OpCodes.Ldloc_S, basic.MapToEntity(value, type));
             }
             else
             {
@@ -262,10 +254,6 @@ namespace ILWheatBread.SmartEmit
             {
                 basic.Emit(OpCodes.Ldelem);
             }
-            else if (type.CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(EmitSerialization)) != null)
-            {
-                basic.Emit(OpCodes.Ldelem);
-            }
             else
             {
                 throw new Exception("not exist datatype!");
@@ -323,10 +311,6 @@ namespace ILWheatBread.SmartEmit
                 basic.Emit(OpCodes.Stelem_R8);
             }
             else if (type == typeof(Decimal))
-            {
-                basic.Emit(OpCodes.Stelem);
-            }
-            else if (type.CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(EmitSerialization)) != null)
             {
                 basic.Emit(OpCodes.Stelem);
             }

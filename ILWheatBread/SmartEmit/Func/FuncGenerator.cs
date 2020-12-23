@@ -97,5 +97,10 @@ namespace ILWheatBread.SmartEmit
             builder();
             return new TryCatchManager(generator);
         }
+
+        public void EmitReturn()
+        {
+            Emit(OpCodes.Ret);
+        }
     }
 }

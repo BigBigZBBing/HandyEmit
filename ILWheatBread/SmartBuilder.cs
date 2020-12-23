@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Threading;
 
 namespace ILWheatBread
 {
@@ -21,6 +22,8 @@ namespace ILWheatBread
         private ILGenerator MainIL;
         private Type _dymaticType;
         private Object _instance;
+
+        private static Int32 _lock = 0;
 
         public object Instance { get => _instance; set => _instance = value; }
 
@@ -96,7 +99,7 @@ namespace ILWheatBread
             propertyBuilder.SetSetMethod(methodBuilder);
         }
 
-        public void SaveClass()
+        private void SaveClass()
         {
             _dymaticType = typeBuilder.CreateTypeInfo();
         }
@@ -105,6 +108,7 @@ namespace ILWheatBread
 
         public void Save()
         {
+            SaveClass();
             assemblyBuilder.Save($"{assmblyName.Name}.dll");
         }
 
@@ -146,9 +150,12 @@ namespace ILWheatBread
                 retType = types.Last();
                 types.RemoveAt(types.Count - 1);
             }
+            Interlocked.Increment(ref _lock);
             DynamicMethod dynamicBuilder = new DynamicMethod(MethodName, retType, types.ToArray());
             builder?.Invoke(new FuncGenerator(dynamicBuilder.GetILGenerator()));
-            return dynamicBuilder.CreateDelegate(typeof(T)) as T;
+            T deleg = dynamicBuilder.CreateDelegate(typeof(T)) as T;
+            Interlocked.Decrement(ref _lock);
+            return deleg;
         }
     }
 }
