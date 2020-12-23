@@ -17,3 +17,4 @@ C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Release\net48\
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Release\net48\ILWheatBread.csproj.CopyComplete
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Release\net48\ILWheatBread.dll
 C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Release\net48\ILWheatBread.pdb
+C:\Users\zbb58\source\repos\zbb5896\ILWheatBread\ILWheatBread\obj\Release\net48\ILWheatBread.csprojAssemblyReference.cache

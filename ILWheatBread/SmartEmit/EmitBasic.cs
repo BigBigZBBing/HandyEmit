@@ -109,32 +109,33 @@ namespace ILWheatBread.SmartEmit
 
         private void CheckOverLength(ref OpCode opcode)
         {
-#if NET48
+
+#if NOTSHORTFORMAT
             if (generator.ILOffset > Byte.MaxValue)
             {
 #endif
-                if (OpCodes.Stloc_S == opcode) opcode = OpCodes.Stloc;
-                if (OpCodes.Ldloc_S == opcode) opcode = OpCodes.Ldloc;
-                if (OpCodes.Ldloca_S == opcode) opcode = OpCodes.Ldloca;
-                if (OpCodes.Beq_S == opcode) opcode = OpCodes.Beq;
-                if (OpCodes.Bge_S == opcode) opcode = OpCodes.Bge;
-                if (OpCodes.Bge_Un_S == opcode) opcode = OpCodes.Bge_Un;
-                if (OpCodes.Bgt_S == opcode) opcode = OpCodes.Bgt;
-                if (OpCodes.Bgt_Un_S == opcode) opcode = OpCodes.Bgt_Un;
-                if (OpCodes.Ble_S == opcode) opcode = OpCodes.Ble;
-                if (OpCodes.Ble_Un_S == opcode) opcode = OpCodes.Ble_Un;
-                if (OpCodes.Blt_S == opcode) opcode = OpCodes.Blt;
-                if (OpCodes.Blt_Un_S == opcode) opcode = OpCodes.Blt_Un;
-                if (OpCodes.Bne_Un_S == opcode) opcode = OpCodes.Bne_Un;
-                if (OpCodes.Br_S == opcode) opcode = OpCodes.Br;
-                if (OpCodes.Brfalse_S == opcode) opcode = OpCodes.Brfalse;
-                if (OpCodes.Brtrue_S == opcode) opcode = OpCodes.Brtrue;
-                if (OpCodes.Ldarg_S == opcode) opcode = OpCodes.Ldarg;
-                if (OpCodes.Ldarga_S == opcode) opcode = OpCodes.Ldarga;
-                if (OpCodes.Ldc_I4_S == opcode) opcode = OpCodes.Ldc_I4;
-                if (OpCodes.Leave_S == opcode) opcode = OpCodes.Leave;
-                if (OpCodes.Starg_S == opcode) opcode = OpCodes.Starg;
-#if NET48
+            if (OpCodes.Stloc_S == opcode) opcode = OpCodes.Stloc;
+            if (OpCodes.Ldloc_S == opcode) opcode = OpCodes.Ldloc;
+            if (OpCodes.Ldloca_S == opcode) opcode = OpCodes.Ldloca;
+            if (OpCodes.Beq_S == opcode) opcode = OpCodes.Beq;
+            if (OpCodes.Bge_S == opcode) opcode = OpCodes.Bge;
+            if (OpCodes.Bge_Un_S == opcode) opcode = OpCodes.Bge_Un;
+            if (OpCodes.Bgt_S == opcode) opcode = OpCodes.Bgt;
+            if (OpCodes.Bgt_Un_S == opcode) opcode = OpCodes.Bgt_Un;
+            if (OpCodes.Ble_S == opcode) opcode = OpCodes.Ble;
+            if (OpCodes.Ble_Un_S == opcode) opcode = OpCodes.Ble_Un;
+            if (OpCodes.Blt_S == opcode) opcode = OpCodes.Blt;
+            if (OpCodes.Blt_Un_S == opcode) opcode = OpCodes.Blt_Un;
+            if (OpCodes.Bne_Un_S == opcode) opcode = OpCodes.Bne_Un;
+            if (OpCodes.Br_S == opcode) opcode = OpCodes.Br;
+            if (OpCodes.Brfalse_S == opcode) opcode = OpCodes.Brfalse;
+            if (OpCodes.Brtrue_S == opcode) opcode = OpCodes.Brtrue;
+            if (OpCodes.Ldarg_S == opcode) opcode = OpCodes.Ldarg;
+            if (OpCodes.Ldarga_S == opcode) opcode = OpCodes.Ldarga;
+            if (OpCodes.Ldc_I4_S == opcode) opcode = OpCodes.Ldc_I4;
+            if (OpCodes.Leave_S == opcode) opcode = OpCodes.Leave;
+            if (OpCodes.Starg_S == opcode) opcode = OpCodes.Starg;
+#if NOTSHORTFORMAT
             }
 #endif
         }
