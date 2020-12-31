@@ -130,6 +130,11 @@ namespace ILWheatBread.SmartEmit
             return new FieldEntity<T>(value, this);
         }
 
+        public FieldEntity<T> NewEntity<T>(T value)
+        {
+            return ManagerGX.NewEntity<T>(this, value);
+        }
+
         public FieldList<T> NewList<T>()
         {
             return ManagerGX.NewList<T>(this);

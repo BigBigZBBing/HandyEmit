@@ -61,6 +61,11 @@ namespace ILWheatBread.SmartEmit
             return new FieldEntity<T>(item, basic);
         }
 
+        internal static FieldEntity<T> NewEntity<T>(this EmitBasic basic, T value)
+        {
+            return new FieldEntity<T>(basic.MapToEntity(value), basic);
+        }
+
         internal static FieldArray<T> NewArray<T>(this EmitBasic basic, Int32 length = default(Int32))
         {
             LocalBuilder item = basic.DeclareLocal(typeof(T[]));
