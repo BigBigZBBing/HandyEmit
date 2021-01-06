@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -10,9 +11,23 @@ namespace ILWheatBread.Compress
     public class BasicAnalytics
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Byte[] GetBytes(Char[] value)
+        {
+            Int32 i;
+            List<Byte> bytes = new List<Byte>();
+            for (i = 0; i < value.Length; i++)
+            {
+                bytes.AddRange(GetBytes(value[i]));
+            }
+            return bytes.ToArray();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe static Byte[] GetBytes(Char value)
         {
-            Byte[] bytes = new Byte[1];
+            UInt32 ChLen = 1;
+            if (value >= SByte.MaxValue) ChLen = 2;
+            Byte[] bytes = new Byte[ChLen];
             fixed (Byte* buf = bytes)
             {
                 *(Char*)buf = value;
@@ -76,6 +91,31 @@ namespace ILWheatBread.Compress
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Byte[] GetBytes(Decimal value)
+        {
+            Int32 i;
+            List<Byte> bytes = new List<Byte>();
+            Int32[] bits = Decimal.GetBits(value);
+            for (i = 0; i < bits.Length; i++)
+            {
+                bytes.AddRange(GetBytes(bits[i]));
+            }
+            return bytes.ToArray();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static String BitToString(Byte[] data)
+        {
+            return Encoding.UTF8.GetString(data);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Char[] BitToCharArray(Byte[] data)
+        {
+            return Encoding.UTF8.GetChars(data);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe static Char BitToChar(Byte[] data)
         {
             fixed (Byte* pbyte = &data[0])
@@ -129,5 +169,15 @@ namespace ILWheatBread.Compress
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Decimal BitToDecimal(Byte[] data)
+        {
+            return new Decimal(new Int32[] {
+                BitToInt32(data.AsSpan(0, 4).ToArray()),
+                BitToInt32(data.AsSpan(4, 4).ToArray()),
+                BitToInt32(data.AsSpan(8, 4).ToArray()),
+                BitToInt32(data.AsSpan(12, 4).ToArray()),
+            });
+        }
     }
 }

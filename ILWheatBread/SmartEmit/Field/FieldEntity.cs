@@ -44,12 +44,7 @@ namespace ILWheatBread.SmartEmit.Field
 
         public FieldBoolean IsNull()
         {
-            LocalBuilder assert = DeclareLocal(typeof(Boolean));
-            Output();
-            Emit(OpCodes.Ldnull);
-            Emit(OpCodes.Ceq);
-            Emit(OpCodes.Stloc_S, assert);
-            return new FieldBoolean(assert, this);
+            return this.IsNull(this);
         }
 
         public LocalBuilder GetValue(String FieldName)

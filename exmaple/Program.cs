@@ -110,11 +110,10 @@ namespace exmaple
             //    func.EmitReturn();
             //});
 
-            //CopyBenchmark copyBenchmark = new CopyBenchmark();
-            //copyBenchmark.SimdCopy();
-
             //数值数组Copy性能测试
-            BenchmarkRunner.Run<CopyBenchmark>();
+            BenchmarkRunner.Run<ByteCopyBenchmark>();
+            //BenchmarkRunner.Run<UInt32CopyBenchmark>();
+            //结果Int32比Byte更有效
 
 
             Console.ReadKey();

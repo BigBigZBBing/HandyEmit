@@ -11,12 +11,13 @@ namespace ILWheatBread.SmartEmit.Field
 
         public FieldBoolean IsNull()
         {
-            LocalBuilder assert = DeclareLocal(typeof(Boolean));
+            return this.IsNull(this);
+        }
+
+        public FieldBoolean IsNullOrEmpty()
+        {
             Output();
-            Emit(OpCodes.Ldnull);
-            Emit(OpCodes.Ceq);
-            Emit(OpCodes.Stloc_S, assert);
-            return new FieldBoolean(assert, this);
+            return new FieldBoolean(this.CallMethod("IsNullOrEmpty", typeof(String)).ReturnRef(), this);
         }
 
         public static FieldBoolean operator ==(FieldString field, String value)

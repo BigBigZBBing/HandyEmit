@@ -144,6 +144,16 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
+        internal static FieldBoolean IsNull(this EmitBasic basic, LocalBuilder value)
+        {
+            LocalBuilder assert = basic.DeclareLocal(typeof(Boolean));
+            basic.Emit(OpCodes.Ldloc_S, value);
+            basic.Emit(OpCodes.Ldnull);
+            basic.Emit(OpCodes.Ceq);
+            basic.Emit(OpCodes.Stloc_S, assert);
+            return new FieldBoolean(assert, basic);
+        }
+
         internal static void ShowEx(String Message)
         {
             throw new Exception(Message);
@@ -203,5 +213,6 @@ namespace ILWheatBread.SmartEmit
             }
             return model;
         }
+
     }
 }

@@ -11,13 +11,13 @@ using ILWheatBread.Optimizing;
 
 namespace exmaple
 {
-    public class CopyBenchmark
+    public class ByteCopyBenchmark
     {
-        static int count = 320000008;
+        static int count = 4096;
 
         byte[] test1 = new byte[count];
 
-        public CopyBenchmark()
+        public ByteCopyBenchmark()
         {
             Random random = new Random();
             for (int i = 0; i < count; i++)
