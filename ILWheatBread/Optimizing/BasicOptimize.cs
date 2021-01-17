@@ -13,7 +13,7 @@ using System.Runtime.Intrinsics;
 
 namespace ILWheatBread.Optimizing
 {
-    public static class BasicOptimize
+    public static partial class BasicOptimize
     {
 
 #if NETCORE5

@@ -59,62 +59,18 @@ namespace exmaple
 
         static void Main(string[] args)
         {
-            //SmartBuilder.DynamicMethod<Func<IDataReader, DbPager, Model>>(string.Empty, func =>
-            //{
-            //    FieldList<Model> retList = func.NewList<Model>();
-            //    FieldObject dread = func.NewObject(func.EmitParamRef(0, typeof(IDataReader)));
-            //    FieldEntity<DbPager> refpager = func.NewEntity<DbPager>(func.EmitParamRef(1, typeof(DbPager)));
-            //    FieldObject drecord = dread.As<IDataRecord>();
 
-            //    func.While(() =>
-            //    {
-            //        func.NewBoolean(dread.Invoke("Read").ReturnRef()).Output();
-            //    }, () =>
-            //    {
-            //        func.IF(refpager.IsNull() == false, () =>
-            //        {
-            //            var pos = drecord.Invoke("GetOrdinal", func.NewString("TotalCount")).ReturnRef();
-            //            func.IF(func.NewBoolean(drecord.Invoke("IsDBNull", pos).ReturnRef()) == false, () =>
-            //            {
-            //                var value = drecord.Invoke("GetInt64", pos).ReturnRef();
-            //                refpager.SetValue("TotalCount", value);
-            //            }).IFEnd();
+            decimal tt = 3.4564m;
 
-            //        }).IFEnd();
-
-            //        FieldEntity<Model> model = func.NewEntity<Model>();
-            //        var methods = typeof(IDataRecord).GetMethods().ToList();
-            //        foreach (var prop in typeof(Model).GetProperties())
-            //        {
-            //            string propTypeName;
-            //            propTypeName = prop.PropertyType.Name;
-
-            //            if (prop.PropertyType.Name == "Nullable`1" || prop.PropertyType.Name.StartsWith("Nullable"))
-            //                propTypeName = prop.PropertyType.GenericTypeArguments?[0].Name;
-
-            //            var method = methods.FirstOrDefault(x => x.Name == "Get" + (propTypeName.Equals("Single") ? "Float" : propTypeName));
-            //            if (method != null)
-            //            {
-            //                var pos = drecord.Invoke("GetOrdinal", func.NewString(prop.Name)).ReturnRef();
-            //                func.IF(func.NewBoolean(drecord.Invoke("IsDBNull", pos).ReturnRef()) == func.NewBoolean(false), () =>
-            //                {
-            //                    var value = drecord.Invoke(method.Name, pos).ReturnRef();
-            //                    model.SetValue(prop.Name, value);
-            //                }).IFEnd();
-            //            }
-            //        }
-            //        retList.Add(model);
-            //    });
-
-            //    retList.Output();
-            //    func.EmitReturn();
-            //});
+            string test = tt.ToString();
 
             //数值数组Copy性能测试
-            BenchmarkRunner.Run<ByteCopyBenchmark>();
+            //BenchmarkRunner.Run<ByteCopyBenchmark>();
             //BenchmarkRunner.Run<UInt32CopyBenchmark>();
             //结果Int32比Byte更有效
 
+            //测试位运算计算
+            BenchmarkRunner.Run<OperatorBanchmark>();
 
             Console.ReadKey();
         }

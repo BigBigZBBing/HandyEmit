@@ -130,13 +130,8 @@ namespace ILWheatBread
         public FastDynamic InitEntity()
         {
             SaveClass();
-            var props = _dymaticType.GetProperties();
             Build();
-            return new FastDynamic()
-            {
-                Properties = new ConcurrentDictionary<String, FastProperty>(ManagerGX.GetProps(props, Instance)),
-                Instance = Instance
-            };
+            return FastDynamic.GetFastDynamic(_instance);
         }
 
         public static T DynamicMethod<T>(String MethodName, Action<FuncGenerator> builder) where T : class

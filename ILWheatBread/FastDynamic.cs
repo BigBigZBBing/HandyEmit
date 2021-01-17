@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ILWheatBread.SmartEmit;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -8,7 +9,7 @@ namespace ILWheatBread
 {
     public sealed class FastDynamic : IEnumerable
     {
-        public FastDynamic()
+        private FastDynamic()
         {
         }
 
@@ -45,6 +46,15 @@ namespace ILWheatBread
             }
             doc.Add(classNode);
             return doc.ToString();
+        }
+
+        public static FastDynamic GetFastDynamic<T>(T entity) where T : class, new()
+        {
+            return new FastDynamic()
+            {
+                Properties = new ConcurrentDictionary<String, FastProperty>(ManagerGX.GetProps(entity.GetType().GetProperties(), entity)),
+                Instance = entity
+            };
         }
 
         IEnumerator IEnumerable.GetEnumerator()
