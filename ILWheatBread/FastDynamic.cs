@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 namespace ILWheatBread
@@ -25,14 +27,16 @@ namespace ILWheatBread
             }
         }
 
-        public ConcurrentDictionary<String, FastProperty> Properties { get; internal set; }
+        public IDictionary<String, FastProperty> Properties { get; internal set; }
 
         internal Object Instance { get; set; }
+
 
         public String ToJson()
         {
             return JsonConvert.SerializeObject(this.Instance);
         }
+
 
         public String ToXml()
         {
@@ -47,6 +51,7 @@ namespace ILWheatBread
             doc.Add(classNode);
             return doc.ToString();
         }
+
 
         public static FastDynamic GetFastDynamic<T>(T entity) where T : class, new()
         {

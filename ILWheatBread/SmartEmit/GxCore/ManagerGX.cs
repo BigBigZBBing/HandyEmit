@@ -3,55 +3,66 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit
 {
     internal static partial class ManagerGX
     {
+
         internal static FieldString NewString(this EmitBasic basic, String value = default(String))
         {
             return new FieldString(NewField(basic, value), basic);
         }
+
 
         internal static FieldBoolean NewBoolean(this EmitBasic basic, Boolean value = default(Boolean))
         {
             return new FieldBoolean(NewField(basic, value), basic);
         }
 
+
         internal static FieldInt32 NewInt32(this EmitBasic basic, Int32 value = default(Int32))
         {
             return new FieldInt32(NewField(basic, value), basic);
         }
+
 
         internal static FieldInt64 NewInt64(this EmitBasic basic, Int64 value = default(Int64))
         {
             return new FieldInt64(NewField(basic, value), basic);
         }
 
+
         internal static FieldFloat NewFloat(this EmitBasic basic, Single value = default(Single))
         {
             return new FieldFloat(NewField(basic, value), basic);
         }
+
 
         internal static FieldDouble NewDouble(this EmitBasic basic, Double value = default(Double))
         {
             return new FieldDouble(NewField(basic, value), basic);
         }
 
+
         internal static FieldDecimal NewDecimal(this EmitBasic basic, Decimal value = default(Decimal))
         {
             return new FieldDecimal(NewField(basic, value), basic);
         }
+
 
         internal static FieldDateTime NewDateTime(this EmitBasic basic, DateTime value = default(DateTime))
         {
             return new FieldDateTime(NewField(basic, value), basic);
         }
 
+
         internal static FieldObject NewObject(this EmitBasic basic, Object value = default(Object))
         {
             return new FieldObject(NewField(basic, value), basic);
         }
+
 
         internal static FieldEntity<T> NewEntity<T>(this EmitBasic basic)
         {
@@ -61,10 +72,12 @@ namespace ILWheatBread.SmartEmit
             return new FieldEntity<T>(item, basic);
         }
 
+
         internal static FieldEntity<T> NewEntity<T>(this EmitBasic basic, T value)
         {
             return new FieldEntity<T>(basic.MapToEntity(value), basic);
         }
+
 
         internal static FieldArray<T> NewArray<T>(this EmitBasic basic, Int32 length = default(Int32))
         {
@@ -75,6 +88,7 @@ namespace ILWheatBread.SmartEmit
             return new FieldArray<T>(item, basic, length);
         }
 
+
         internal static FieldArray<T> NewArray<T>(this EmitBasic basic, LocalBuilder length)
         {
             LocalBuilder item = basic.DeclareLocal(typeof(T[]));
@@ -84,6 +98,7 @@ namespace ILWheatBread.SmartEmit
             return new FieldArray<T>(item, basic, -1);
         }
 
+
         internal static FieldList<T> NewList<T>(this EmitBasic basic)
         {
             LocalBuilder item = basic.DeclareLocal(typeof(List<T>));
@@ -91,6 +106,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Stloc_S, item);
             return new FieldList<T>(item, basic);
         }
+
 
         internal static void For(this EmitBasic basic, LocalBuilder init, LocalBuilder length, Action<FieldInt32> build)
         {
@@ -114,6 +130,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Brtrue, _for);
         }
 
+
         internal static void For(this EmitBasic basic, Int32 init, LocalBuilder length, Action<FieldInt32> build)
         {
             Label _for = basic.DefineLabel();
@@ -136,6 +153,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Brtrue, _for);
         }
 
+
         internal static IEnumerable<KeyValuePair<String, FastProperty>> GetProps(PropertyInfo[] Props, Object Instance)
         {
             foreach (var Prop in Props)
@@ -143,6 +161,7 @@ namespace ILWheatBread.SmartEmit
                 yield return new KeyValuePair<String, FastProperty>(Prop.Name, new FastProperty(Prop, Instance));
             }
         }
+
 
         internal static FieldBoolean IsNull(this EmitBasic basic, LocalBuilder value)
         {
@@ -154,10 +173,12 @@ namespace ILWheatBread.SmartEmit
             return new FieldBoolean(assert, basic);
         }
 
+
         internal static void ShowEx(String Message)
         {
             throw new Exception(Message);
         }
+
 
         private static LocalBuilder NewField<T>(EmitBasic basic, T value)
         {
@@ -166,6 +187,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Stloc_S, item);
             return item;
         }
+
 
         private static LocalBuilder MapToEntity<T>(this EmitBasic basic, T Entity)
         {
@@ -190,6 +212,7 @@ namespace ILWheatBread.SmartEmit
             }
             return model;
         }
+
 
         private static LocalBuilder MapToEntity(this EmitBasic basic, Object instance, Type type)
         {

@@ -169,6 +169,7 @@ namespace ILWheatBread.Compress
             }
         }
 
+#if NETCORE5
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Decimal BitToDecimal(Byte[] data)
         {
@@ -179,5 +180,7 @@ namespace ILWheatBread.Compress
                 BitToInt32(data.AsSpan(12, 4).ToArray()),
             });
         }
+#endif
+
     }
 }

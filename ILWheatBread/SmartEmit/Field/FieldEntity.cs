@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit.Field
 {
@@ -42,11 +43,13 @@ namespace ILWheatBread.SmartEmit.Field
             }
         }
 
+        
         public FieldBoolean IsNull()
         {
             return this.IsNull(this);
         }
 
+        
         public LocalBuilder GetValue(String FieldName)
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");
@@ -57,6 +60,7 @@ namespace ILWheatBread.SmartEmit.Field
             return item;
         }
 
+        
         public void SetValue(String FieldName, LocalBuilder value)
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");

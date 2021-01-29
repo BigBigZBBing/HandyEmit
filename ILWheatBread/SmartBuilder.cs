@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace ILWheatBread
@@ -23,7 +24,7 @@ namespace ILWheatBread
         private Type _dymaticType;
         private Object _instance;
 
-        private static Int32 _lock = 0;
+        private static readonly Object _lock = new Object();
 
         public object Instance { get => _instance; set => _instance = value; }
 
@@ -99,7 +100,7 @@ namespace ILWheatBread
             propertyBuilder.SetSetMethod(methodBuilder);
         }
 
-        private void SaveClass()
+        public void SaveClass()
         {
             _dymaticType = typeBuilder.CreateTypeInfo();
         }
@@ -114,7 +115,7 @@ namespace ILWheatBread
 
 #endif
 
-        private void Build()
+        public void Build()
         {
             _instance = Activator.CreateInstance(_dymaticType);
         }
@@ -134,22 +135,33 @@ namespace ILWheatBread
             return FastDynamic.GetFastDynamic(_instance);
         }
 
+
         public static T DynamicMethod<T>(String MethodName, Action<FuncGenerator> builder) where T : class
         {
             var type = typeof(T);
-            if (!type.Name.StartsWith("Func`") && !type.Name.StartsWith("Action")) throw new Exception("please use Func or Action");
+
+            if (!type.Name.StartsWith("Func`") && !type.Name.StartsWith("Action"))
+                throw new Exception("please use Func or Action");
+
             var types = type.GenericTypeArguments.ToList();
+
             Type retType = null;
             if (type.Name.StartsWith("Func`") && types != null && types.Count > 0)
             {
                 retType = types.Last();
                 types.RemoveAt(types.Count - 1);
             }
-            Interlocked.Increment(ref _lock);
+
+            Monitor.Enter(_lock);
+
             DynamicMethod dynamicBuilder = new DynamicMethod(MethodName, retType, types.ToArray());
+
             builder?.Invoke(new FuncGenerator(dynamicBuilder.GetILGenerator()));
+
             T deleg = dynamicBuilder.CreateDelegate(typeof(T)) as T;
-            Interlocked.Decrement(ref _lock);
+
+            Monitor.Exit(_lock);
+
             return deleg;
         }
     }

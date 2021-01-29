@@ -23,40 +23,6 @@ namespace exmaple
 {
     class Program
     {
-        public class DbPager
-        {
-            /// <summary>
-            /// 页数
-            /// </summary>
-            public Int32 PagerIndex { get; set; } = 1;
-
-            /// <summary>
-            /// 每页显示数
-            /// </summary>
-            public Int32 PagerSize { get; set; } = 15;
-
-            /// <summary>
-            /// 数据总数
-            /// </summary>
-            public Int64 TotalCount { get; set; }
-        }
-
-        public class Model
-        {
-            public long? Id { get; set; }
-            public string Name { get; set; }
-            public int? Old { get; set; }
-            public DateTime? LoginTime { get; set; }
-            public DateTime? LoginTime1 { get; set; }
-            public DateTime? LoginTime2 { get; set; }
-            public DateTime? LoginTime3 { get; set; }
-            public DateTime? LoginTime4 { get; set; }
-            public DateTime? LoginTime5 { get; set; }
-
-        }
-
-        //static IRepository _Repository { get; set; }
-
         static void Main(string[] args)
         {
 
@@ -70,7 +36,10 @@ namespace exmaple
             //结果Int32比Byte更有效
 
             //测试位运算计算
-            BenchmarkRunner.Run<OperatorBanchmark>();
+            //BenchmarkRunner.Run<OperatorBanchmark>();
+
+            //BenchmarkRunner.Run<ReflectCreate>();
+            BenchmarkRunner.Run<ReflectGetSet>();
 
             Console.ReadKey();
         }

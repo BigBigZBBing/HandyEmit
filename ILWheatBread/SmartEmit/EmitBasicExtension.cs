@@ -1,13 +1,19 @@
-﻿using ILWheatBread.SmartEmit.Func;
+﻿using ILWheatBread.SmartEmit.Field;
+using ILWheatBread.SmartEmit.Func;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit
 {
     public static class EmitBasicExtension
     {
+        public static FieldNullable<T> AsNullable<T>(this CanCompute<T> field) where T : struct
+        {
+            return new FieldNullable<T>(field, field.generator);
+        }
 
         public static void EmitParam(this EmitBasic basic, Int32 index)
         {
@@ -21,27 +27,24 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
+
         public static LocalBuilder EmitParamRef<T>(this EmitBasic basic, Int32 index) where T : class
         {
-            LocalBuilder local = basic.DeclareLocal(typeof(LocalBuilder));
             LocalBuilder param = basic.DeclareLocal(typeof(T));
             basic.EmitParam(index);
-            basic.Emit(OpCodes.Stloc_S, local);
-            basic.Emit(OpCodes.Ldloc_S, local);
             basic.Emit(OpCodes.Stloc_S, param);
             return param;
         }
 
+
         public static LocalBuilder EmitParamRef(this EmitBasic basic, Int32 index, Type type)
         {
-            LocalBuilder local = basic.DeclareLocal(typeof(LocalBuilder));
             LocalBuilder param = basic.DeclareLocal(type);
             basic.EmitParam(index);
-            basic.Emit(OpCodes.Stloc_S, local);
-            basic.Emit(OpCodes.Ldloc_S, local);
             basic.Emit(OpCodes.Stloc_S, param);
             return param;
         }
+
 
         public static void EmitThrow(this EmitBasic basic, LocalBuilder ex)
         {
@@ -54,6 +57,7 @@ namespace ILWheatBread.SmartEmit
             basic.Emit(OpCodes.Throw);
         }
 
+
         public static MethodManager CallvirtMethod<T>(this VariableManager basic, String MethodName)
         {
             Type type = typeof(T);
@@ -63,6 +67,7 @@ namespace ILWheatBread.SmartEmit
             if (method.ReturnType != null && method.ReturnType != typeof(void)) CacheManager.retValue = true;
             return new MethodManager(basic, method.ReturnType);
         }
+
 
         public static MethodManager CallvirtMethod<T>(this VariableManager basic, String MethodName, params LocalBuilder[] parameters)
         {
@@ -75,6 +80,7 @@ namespace ILWheatBread.SmartEmit
             return new MethodManager(basic, method.ReturnType);
         }
 
+
         public static MethodManager CallvirtMethod(this VariableManager basic, String MethodName, Type type)
         {
             MethodInfo method = type.GetMethod(MethodName, Type.EmptyTypes);
@@ -83,6 +89,7 @@ namespace ILWheatBread.SmartEmit
             if (method.ReturnType != null && method.ReturnType != typeof(void)) CacheManager.retValue = true;
             return new MethodManager(basic, method.ReturnType);
         }
+
 
         public static MethodManager CallvirtMethod(this VariableManager basic, String MethodName, Type type, params LocalBuilder[] parameters)
         {
@@ -94,6 +101,7 @@ namespace ILWheatBread.SmartEmit
             return new MethodManager(basic, method.ReturnType);
         }
 
+
         public static MethodManager CallMethod(this EmitBasic basic, String MethodName, Type type)
         {
             MethodInfo method = type.GetMethod(MethodName, Type.EmptyTypes);
@@ -101,6 +109,7 @@ namespace ILWheatBread.SmartEmit
             if (method.ReturnType != null && method.ReturnType != typeof(void)) CacheManager.retValue = true;
             return new MethodManager(basic, method.ReturnType);
         }
+
 
         public static MethodManager CallMethod(this EmitBasic basic, String MethodName, Type type, params LocalBuilder[] parameters)
         {

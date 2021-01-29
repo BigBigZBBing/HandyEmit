@@ -1,4 +1,5 @@
 ﻿using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit
 {
@@ -11,11 +12,13 @@ namespace ILWheatBread.SmartEmit
             this.instance = stack;
         }
 
+        
         public void Output()
         {
             base.Emit(OpCodes.Ldloc_S, this.instance);
         }
 
+        
         public void Input()
         {
             base.Emit(OpCodes.Stloc_S, this.instance);

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit
 {
     internal static partial class ManagerGX
     {
+        
         internal static void EmitValue<T>(this EmitBasic basic, T value)
         {
             if (value == null)
@@ -87,6 +89,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
+        
         internal static void EmitValue(this EmitBasic basic, Object value, Type type)
         {
             if (type == typeof(String))
@@ -164,6 +167,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
+        
         internal static void IntegerMap(this EmitBasic basic, Int64 value)
         {
             switch (value)
@@ -199,6 +203,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
+        
         internal static void PopArray(this EmitBasic basic, Type type)
         {
             if (type == typeof(String))
@@ -259,6 +264,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
+        
         internal static void PushArray(this EmitBasic basic, Type type)
         {
             if (type == typeof(String))

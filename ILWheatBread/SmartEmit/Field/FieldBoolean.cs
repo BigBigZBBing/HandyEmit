@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit.Field
 {
@@ -9,21 +10,25 @@ namespace ILWheatBread.SmartEmit.Field
         {
         }
 
+        
         public static FieldBoolean operator ==(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator ==(FieldBoolean field, LocalBuilder value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator ==(FieldBoolean field, FieldBoolean value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator !=(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(
@@ -31,6 +36,7 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator !=(FieldBoolean field, LocalBuilder value)
         {
             return ManagerGX.Comparer(
@@ -38,6 +44,7 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator !=(FieldBoolean field, FieldBoolean value)
         {
             return ManagerGX.Comparer(
@@ -45,6 +52,7 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator |(FieldBoolean field, FieldBoolean value)
         {
             var assert = field.NewBoolean();
@@ -61,6 +69,7 @@ namespace ILWheatBread.SmartEmit.Field
             return assert;
         }
 
+        
         public static FieldBoolean operator &(FieldBoolean field, FieldBoolean value)
         {
             var assert = field.NewBoolean();

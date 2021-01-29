@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit
 {
@@ -15,18 +16,21 @@ namespace ILWheatBread.SmartEmit
             this.context.Add(context);
         }
 
+        
         public AssertManager ElseIF(LocalBuilder assert, Action builder)
         {
             context.Add((assert, builder));
             return this;
         }
 
+        
         public AssertManager ElseIF<T>(FieldManager<T> assert, Action builder)
         {
             context.Add((assert, builder));
             return this;
         }
 
+        
         public void Else(Action<ILGenerator> builder)
         {
             Label end = generator.DefineLabel();
@@ -48,6 +52,7 @@ namespace ILWheatBread.SmartEmit
             generator.MarkLabel(end);
         }
 
+        
         public void IFEnd()
         {
             Label end = generator.DefineLabel();

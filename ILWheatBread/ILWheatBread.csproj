@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
+    <TargetFrameworks>net48;netcoreapp3.1;netcoreapp5.0</TargetFrameworks>
     <Authors>zhangbingbin</Authors>
     <Description>比表达式树性能更方便的反射框架</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -18,18 +18,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)' == 'Release|AnyCPU|net48'">
     <OutputPath>.\bin\Release\</OutputPath>
     <DefineConstants>NET48</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)' == 'Debug|AnyCPU|netcoreapp2.1'">
-    <OutputPath>.\bin\Debug\</OutputPath>
-    <DefineConstants>NETCORE21</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)' == 'Release|AnyCPU|netcoreapp2.1'">
-    <OutputPath>.\bin\Release\</OutputPath>
-    <DefineConstants>NETCORE21</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -55,16 +43,13 @@
     <DefineConstants>NETCORE5</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  
   <ItemGroup>
     <Compile Remove="Compress\Test.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SmartReflect\" />
   </ItemGroup>
 
 </Project>

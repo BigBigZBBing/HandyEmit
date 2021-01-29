@@ -2,6 +2,7 @@
 using ILWheatBread.SmartEmit.Func;
 using System;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit
 {
@@ -12,16 +13,19 @@ namespace ILWheatBread.SmartEmit
             this.generator = generator;
         }
 
+        
         public void For(Int32 init, LocalBuilder length, Action<FieldInt32> build)
         {
             ManagerGX.For(this, init, length, build);
         }
 
+        
         public void For(LocalBuilder init, LocalBuilder length, Action<FieldInt32> build)
         {
             ManagerGX.For(this, init, length, build);
         }
 
+        
         public void For(Int32 init, Int32 length, Action<FieldInt32> build)
         {
             Label _for = DefineLabel();
@@ -43,6 +47,7 @@ namespace ILWheatBread.SmartEmit
             Emit(OpCodes.Brtrue, _for);
         }
 
+        
         public void Forr(LocalBuilder init, Action<FieldInt32> builder)
         {
             Label _for = DefineLabel();
@@ -69,16 +74,19 @@ namespace ILWheatBread.SmartEmit
             Emit(OpCodes.Brtrue, _for);
         }
 
+        
         public AssertManager IF(LocalBuilder assert, Action builder)
         {
             return new AssertManager(generator, (assert, builder));
         }
 
+        
         public AssertManager IF<T>(FieldManager<T> assert, Action builder)
         {
             return new AssertManager(generator, (assert, builder));
         }
 
+        
         public void While(Action assert, Action builder)
         {
             var START = DefineLabel();
@@ -91,6 +99,7 @@ namespace ILWheatBread.SmartEmit
             MarkLabel(FALSE);
         }
 
+        
         public TryCatchManager Try(Action builder)
         {
             BeginExceptionBlock();
@@ -98,6 +107,7 @@ namespace ILWheatBread.SmartEmit
             return new TryCatchManager(generator);
         }
 
+        
         public void EmitReturn()
         {
             Emit(OpCodes.Ret);

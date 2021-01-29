@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit.Func
 {
@@ -12,6 +13,7 @@ namespace ILWheatBread.SmartEmit.Func
             this.generator = generator;
         }
 
+        
         public TryCatchManager Catch(Action<LocalBuilder> builder)
         {
             generator.BeginCatchBlock(typeof(Exception));
@@ -21,6 +23,7 @@ namespace ILWheatBread.SmartEmit.Func
             return this;
         }
 
+        
         public TryCatchManager Finally(Action builder)
         {
             generator.BeginFinallyBlock();
@@ -28,6 +31,7 @@ namespace ILWheatBread.SmartEmit.Func
             return this;
         }
 
+        
         public void TryEnd()
         {
             generator.EndExceptionBlock();

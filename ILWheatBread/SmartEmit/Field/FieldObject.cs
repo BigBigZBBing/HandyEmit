@@ -1,6 +1,7 @@
 ﻿using ILWheatBread.SmartEmit.Func;
 using System;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit.Field
 {
@@ -13,6 +14,7 @@ namespace ILWheatBread.SmartEmit.Field
             asidentity = stack.LocalType;
         }
 
+        
         public FieldObject As<T>()
         {
             LocalBuilder temp = DeclareLocal(typeof(T));
@@ -22,6 +24,7 @@ namespace ILWheatBread.SmartEmit.Field
             return new FieldObject(temp, this);
         }
 
+        
         public FieldObject As(Type type)
         {
             LocalBuilder temp = DeclareLocal(type);
@@ -31,6 +34,7 @@ namespace ILWheatBread.SmartEmit.Field
             return new FieldObject(temp, this);
         }
 
+        
         public FieldBoolean IsNull()
         {
             LocalBuilder assert = DeclareLocal(typeof(Boolean));
@@ -41,26 +45,31 @@ namespace ILWheatBread.SmartEmit.Field
             return new FieldBoolean(assert, this);
         }
 
+        
         public override MethodManager Invoke(String methodName, params LocalBuilder[] parameters)
         {
             return this.CallvirtMethod(methodName, asidentity, parameters);
         }
 
+        
         public static FieldBoolean operator ==(FieldObject field, Object value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator ==(FieldObject field, LocalBuilder value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator ==(FieldObject field, SmartEmit.VariableManager value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator !=(FieldObject field, Object value)
         {
             return ManagerGX.Comparer(
@@ -68,6 +77,7 @@ namespace ILWheatBread.SmartEmit.Field
                field.NewInt32(), OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator !=(FieldObject field, LocalBuilder value)
         {
             return ManagerGX.Comparer(
@@ -75,6 +85,7 @@ namespace ILWheatBread.SmartEmit.Field
                 field.NewInt32(), OpCodes.Ceq);
         }
 
+        
         public static FieldBoolean operator !=(FieldObject field, SmartEmit.VariableManager value)
         {
             return ManagerGX.Comparer(

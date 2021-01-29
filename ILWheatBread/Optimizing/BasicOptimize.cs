@@ -31,7 +31,7 @@ namespace ILWheatBread.Optimizing
                 Avx2.Store((pbyte2 + i), v1);
             }
         }
-#endif
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void TCopy<T>(T[] arr1, T[] arr2, Int32 count) where T : struct
         {
@@ -56,7 +56,7 @@ namespace ILWheatBread.Optimizing
                 Buffer.BlockCopy(arr1, 0, arr2, 0, count);
             }
         }
-
+#endif
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Copy(Char[] arr1, Char[] arr2, Int32 count)
         {

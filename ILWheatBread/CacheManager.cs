@@ -2,32 +2,31 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ILWheatBread
 {
     internal static class CacheManager
     {
-        internal static ConcurrentDictionary<String, FastProperty[]> EntityCache => new ConcurrentDictionary<String, FastProperty[]>();
+        internal static Dictionary<String, FastProperty[]> EntityCache => new Dictionary<String, FastProperty[]>();
 
         internal static Boolean retValue { get; set; }
 
         internal static FastProperty[] CachePropsManager(this Type type)
         {
-            if (!EntityCache.TryGetValue(type.FullName, out FastProperty[] props))
+            if (!EntityCache.ContainsKey(type.FullName))
             {
-                props = EntityCache.GetOrAdd(type.FullName, x =>
-                {
-                    var nprops = type.GetProperties();
-                    FastProperty[] tempemits = new FastProperty[nprops.Length];
-                    for (int i = 0; i < nprops.Length; i++)
-                    {
-                        tempemits[i] = new FastProperty(nprops[i]);
-                    }
-                    return tempemits;
-                });
-                if (props == null) ManagerGX.ShowEx("cache get is null");
+                EntityCache.Add(type.FullName, EnumerableProp(type).ToArray());
             }
-            return props;
+            return EntityCache[type.FullName];
+        }
+
+        static IEnumerable<FastProperty> EnumerableProp(Type type)
+        {
+            foreach (var prop in type.GetProperties())
+            {
+                yield return new FastProperty(prop);
+            }
         }
     }
 }

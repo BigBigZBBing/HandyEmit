@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread
 {
@@ -20,6 +21,7 @@ namespace ILWheatBread
 
         public MethodInfo SetMethod { get; private set; }
 
+        
         public FastProperty(PropertyInfo propertyInfo, Object Instance = null)
         {
             if (propertyInfo == null)
@@ -48,6 +50,7 @@ namespace ILWheatBread
             this.Instance = Instance;
         }
 
+        
         public void Set(Object value)
         {
             if (Instance == null)
@@ -57,6 +60,7 @@ namespace ILWheatBread
             this.setter?.Invoke(Instance, value);
         }
 
+        
         public Object Get()
         {
             if (Instance == null)
@@ -66,6 +70,7 @@ namespace ILWheatBread
             return this.getter?.Invoke(Instance);
         }
 
+        
         public void Set(Object instance, Object value)
         {
             if (instance == null)
@@ -75,6 +80,7 @@ namespace ILWheatBread
             this.setter?.Invoke(instance, value);
         }
 
+        
         public Object Get(Object instance)
         {
             if (instance == null)
@@ -89,6 +95,7 @@ namespace ILWheatBread
     {
         private readonly Func<Object, Object> getter;
 
+        
         public PropertyGetterEmit(PropertyInfo propertyInfo)
         {
             if (propertyInfo == null)
@@ -99,6 +106,7 @@ namespace ILWheatBread
             this.getter = CreateGetterEmit(propertyInfo);
         }
 
+        
         public Object Invoke(Object instance)
         {
             return getter?.Invoke(instance);
@@ -139,6 +147,7 @@ namespace ILWheatBread
     {
         private readonly Action<Object, Object> setFunc;
 
+        
         public PropertySetterEmit(PropertyInfo propertyInfo)
         {
             if (propertyInfo == null)
@@ -195,6 +204,7 @@ namespace ILWheatBread
             }
         }
 
+        
         public void Invoke(Object instance, Object value)
         {
             this.setFunc?.Invoke(instance, value);
