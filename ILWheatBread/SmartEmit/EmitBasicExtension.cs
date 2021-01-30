@@ -10,7 +10,7 @@ namespace ILWheatBread.SmartEmit
 {
     public static class EmitBasicExtension
     {
-        public static FieldNullable<T> AsNullable<T>(this CanCompute<T> field) where T : struct
+        public static FieldNullable<T> AsNullable<T>(this FieldManager<T> field) where T : struct
         {
             return new FieldNullable<T>(field, field.generator);
         }
