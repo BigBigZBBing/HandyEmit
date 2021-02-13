@@ -21,15 +21,30 @@ using BenchmarkDotNet.Configs;
 
 namespace exmaple
 {
+    public class TestModel
+    {
+        public string Name { get; set; }
+        public int Old { get; set; }
+    }
+
+    public class Model
+    {
+        public long? Id { get; set; }
+        public string Name { get; set; }
+        public int? Old { get; set; }
+        public DateTime? LoginTime { get; set; }
+        public DateTime? LoginTime1 { get; set; }
+        public DateTime? LoginTime2 { get; set; }
+        public DateTime? LoginTime3 { get; set; }
+        public DateTime? LoginTime4 { get; set; }
+        public DateTime? LoginTime5 { get; set; }
+
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-
-            decimal tt = 3.4564m;
-
-            string test = tt.ToString();
-
             //数值数组Copy性能测试
             //BenchmarkRunner.Run<ByteCopyBenchmark>();
             //BenchmarkRunner.Run<UInt32CopyBenchmark>();

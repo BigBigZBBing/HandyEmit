@@ -15,7 +15,7 @@ namespace ILWheatBread.SmartEmit
             return new FieldNullable<T>(field, field.generator);
         }
 
-        public static void EmitParam(this EmitBasic basic, Int32 index)
+        public static void Argument(this EmitBasic basic, Int32 index)
         {
             switch (index)
             {
@@ -28,19 +28,19 @@ namespace ILWheatBread.SmartEmit
         }
 
 
-        public static LocalBuilder EmitParamRef<T>(this EmitBasic basic, Int32 index) where T : class
+        public static LocalBuilder ArgumentRef<T>(this EmitBasic basic, Int32 index) where T : class
         {
             LocalBuilder param = basic.DeclareLocal(typeof(T));
-            basic.EmitParam(index);
+            basic.Argument(index);
             basic.Emit(OpCodes.Stloc_S, param);
             return param;
         }
 
 
-        public static LocalBuilder EmitParamRef(this EmitBasic basic, Int32 index, Type type)
+        public static LocalBuilder ArgumentRef(this EmitBasic basic, Int32 index, Type type)
         {
             LocalBuilder param = basic.DeclareLocal(type);
-            basic.EmitParam(index);
+            basic.Argument(index);
             basic.Emit(OpCodes.Stloc_S, param);
             return param;
         }
@@ -58,7 +58,7 @@ namespace ILWheatBread.SmartEmit
         }
 
 
-        public static MethodManager CallvirtMethod<T>(this VariableManager basic, String MethodName)
+        public static MethodManager ReflectMethod<T>(this VariableManager basic, String MethodName)
         {
             Type type = typeof(T);
             MethodInfo method = type.GetMethod(MethodName, Type.EmptyTypes);
@@ -69,7 +69,7 @@ namespace ILWheatBread.SmartEmit
         }
 
 
-        public static MethodManager CallvirtMethod<T>(this VariableManager basic, String MethodName, params LocalBuilder[] parameters)
+        public static MethodManager ReflectMethod<T>(this VariableManager basic, String MethodName, params LocalBuilder[] parameters)
         {
             Type type = typeof(T);
             MethodInfo method = type.GetMethod(MethodName, parameters.Select(x => x.LocalType).ToArray());
@@ -81,7 +81,7 @@ namespace ILWheatBread.SmartEmit
         }
 
 
-        public static MethodManager CallvirtMethod(this VariableManager basic, String MethodName, Type type)
+        public static MethodManager ReflectMethod(this VariableManager basic, String MethodName, Type type)
         {
             MethodInfo method = type.GetMethod(MethodName, Type.EmptyTypes);
             basic.Output();
@@ -91,9 +91,10 @@ namespace ILWheatBread.SmartEmit
         }
 
 
-        public static MethodManager CallvirtMethod(this VariableManager basic, String MethodName, Type type, params LocalBuilder[] parameters)
+        public static MethodManager ReflectMethod(this VariableManager basic, String MethodName, Type type, params LocalBuilder[] parameters)
         {
             MethodInfo method = type.GetMethod(MethodName, parameters.Select(x => x.LocalType).ToArray());
+            if (method == null) throw new MethodAccessException("Not exists this method!");
             basic.Output();
             parameters.ToList().ForEach(x => basic.Emit(OpCodes.Ldloc_S, x));
             basic.Emit(OpCodes.Callvirt, method);
@@ -102,7 +103,7 @@ namespace ILWheatBread.SmartEmit
         }
 
 
-        public static MethodManager CallMethod(this EmitBasic basic, String MethodName, Type type)
+        public static MethodManager ReflectStaticMethod(this EmitBasic basic, String MethodName, Type type)
         {
             MethodInfo method = type.GetMethod(MethodName, Type.EmptyTypes);
             basic.Emit(OpCodes.Call, method);
@@ -111,7 +112,7 @@ namespace ILWheatBread.SmartEmit
         }
 
 
-        public static MethodManager CallMethod(this EmitBasic basic, String MethodName, Type type, params LocalBuilder[] parameters)
+        public static MethodManager ReflectStaticMethod(this EmitBasic basic, String MethodName, Type type, params LocalBuilder[] parameters)
         {
             MethodInfo method = type.GetMethod(MethodName, parameters.Select(x => x.LocalType).ToArray());
             parameters.ToList().ForEach(x => basic.Emit(OpCodes.Ldloc_S, x));

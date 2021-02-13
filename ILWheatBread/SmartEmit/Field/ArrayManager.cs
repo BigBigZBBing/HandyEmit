@@ -14,7 +14,8 @@ namespace ILWheatBread.SmartEmit.Field
             this.Length = Length;
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldBoolean IsNull()
         {
             return this.IsNull(this);
@@ -22,6 +23,7 @@ namespace ILWheatBread.SmartEmit.Field
 
         public LocalBuilder this[Int32 index]
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 Emit(OpCodes.Ldloc_S, instance);
@@ -29,6 +31,7 @@ namespace ILWheatBread.SmartEmit.Field
                 this.PopArray(identity);
                 return null;
             }
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 Emit(OpCodes.Ldloc_S, instance);
@@ -38,7 +41,8 @@ namespace ILWheatBread.SmartEmit.Field
             }
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void GetValue(CanCompute<Int32> index)
         {
             Emit(OpCodes.Ldloc_S, instance);
@@ -46,7 +50,8 @@ namespace ILWheatBread.SmartEmit.Field
             this.PopArray(identity);
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetValue(CanCompute<Int32> index, LocalBuilder value)
         {
             Emit(OpCodes.Ldloc_S, instance);
@@ -55,7 +60,8 @@ namespace ILWheatBread.SmartEmit.Field
             this.PushArray(identity);
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldBoolean Exists(LocalBuilder value)
         {
             var result = this.NewBoolean();
@@ -76,7 +82,8 @@ namespace ILWheatBread.SmartEmit.Field
             return result;
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldInt32 FindIndex(LocalBuilder value)
         {
             var result = this.NewInt32(-1);
@@ -97,7 +104,8 @@ namespace ILWheatBread.SmartEmit.Field
             return result;
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Copy(FieldArray<T> target, FieldInt32 length)
         {
             this.For(0, length, int1 =>
@@ -109,7 +117,8 @@ namespace ILWheatBread.SmartEmit.Field
             });
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldInt32 GetLength()
         {
             if ((object)ILLength == null)

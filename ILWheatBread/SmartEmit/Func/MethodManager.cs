@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace ILWheatBread.SmartEmit.Func
 {
@@ -12,6 +13,7 @@ namespace ILWheatBread.SmartEmit.Func
             ReturnType = returnType;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LocalBuilder ReturnRef()
         {
             CacheManager.retValue = false;

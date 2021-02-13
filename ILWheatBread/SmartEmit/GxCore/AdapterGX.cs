@@ -8,17 +8,18 @@ namespace ILWheatBread.SmartEmit
     internal static partial class ManagerGX
     {
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void EmitValue<T>(this EmitBasic basic, T value)
         {
             if (value == null)
             {
                 basic.Emit(OpCodes.Ldnull);
             }
-            else if (typeof(T) == typeof(String))
+            else if (value.GetType() == typeof(String))
             {
                 basic.Emit(OpCodes.Ldstr, Convert.ToString(value));
             }
-            else if (typeof(T) == typeof(Boolean))
+            else if (value.GetType() == typeof(Boolean))
             {
                 switch (Convert.ToBoolean(value))
                 {
@@ -27,47 +28,47 @@ namespace ILWheatBread.SmartEmit
                     default: throw new Exception("boolean to error!");
                 }
             }
-            else if (typeof(T) == typeof(SByte))
+            else if (value.GetType() == typeof(SByte))
             {
                 basic.IntegerMap(Convert.ToSByte(value));
             }
-            else if (typeof(T) == typeof(Byte))
+            else if (value.GetType() == typeof(Byte))
             {
                 basic.IntegerMap((SByte)Convert.ToByte(value));
             }
-            else if (typeof(T) == typeof(Int16))
+            else if (value.GetType() == typeof(Int16))
             {
                 basic.IntegerMap(Convert.ToInt16(value));
             }
-            else if (typeof(T) == typeof(UInt16))
+            else if (value.GetType() == typeof(UInt16))
             {
                 basic.IntegerMap((Int16)Convert.ToUInt16(value));
             }
-            else if (typeof(T) == typeof(Int32))
+            else if (value.GetType() == typeof(Int32))
             {
                 basic.IntegerMap(Convert.ToInt32(value));
             }
-            else if (typeof(T) == typeof(UInt32))
+            else if (value.GetType() == typeof(UInt32))
             {
                 basic.IntegerMap((Int32)Convert.ToUInt32(value));
             }
-            else if (typeof(T) == typeof(Int64))
+            else if (value.GetType() == typeof(Int64))
             {
                 basic.IntegerMap(Convert.ToInt64(value));
             }
-            else if (typeof(T) == typeof(UInt64))
+            else if (value.GetType() == typeof(UInt64))
             {
                 basic.IntegerMap((Int64)Convert.ToUInt64(value));
             }
-            else if (typeof(T) == typeof(Single))
+            else if (value.GetType() == typeof(Single))
             {
                 basic.Emit(OpCodes.Ldc_R4, Convert.ToSingle(value));
             }
-            else if (typeof(T) == typeof(Double))
+            else if (value.GetType() == typeof(Double))
             {
                 basic.Emit(OpCodes.Ldc_R8, Convert.ToDouble(value));
             }
-            else if (typeof(T) == typeof(Decimal))
+            else if (value.GetType() == typeof(Decimal))
             {
                 Int32[] bits = Decimal.GetBits(Convert.ToDecimal(value));
                 basic.IntegerMap(bits[0]);
@@ -78,7 +79,7 @@ namespace ILWheatBread.SmartEmit
                 basic.Emit(OpCodes.Newobj, typeof(Decimal)
                     .GetConstructor(new Type[] { typeof(Int32), typeof(Int32), typeof(Int32), typeof(Boolean), typeof(Byte) }));
             }
-            else if (typeof(T) == typeof(DateTime))
+            else if (value.GetType() == typeof(DateTime))
             {
                 basic.Emit(OpCodes.Ldc_I8, Convert.ToDateTime(value).Ticks);
                 basic.Emit(OpCodes.Newobj, typeof(DateTime).GetConstructor(new Type[] { typeof(Int64) }));
@@ -89,7 +90,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
-        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void EmitValue(this EmitBasic basic, Object value, Type type)
         {
             if (type == typeof(String))
@@ -167,7 +168,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
-        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void IntegerMap(this EmitBasic basic, Int64 value)
         {
             switch (value)
@@ -203,7 +204,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
-        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void PopArray(this EmitBasic basic, Type type)
         {
             if (type == typeof(String))
@@ -264,7 +265,7 @@ namespace ILWheatBread.SmartEmit
             }
         }
 
-        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void PushArray(this EmitBasic basic, Type type)
         {
             if (type == typeof(String))

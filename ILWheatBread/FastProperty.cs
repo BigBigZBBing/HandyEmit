@@ -51,6 +51,7 @@ namespace ILWheatBread
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Set(Object value)
         {
             if (Instance == null)
@@ -61,6 +62,7 @@ namespace ILWheatBread
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Object Get()
         {
             if (Instance == null)
@@ -71,6 +73,7 @@ namespace ILWheatBread
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Set(Object instance, Object value)
         {
             if (instance == null)
@@ -81,6 +84,7 @@ namespace ILWheatBread
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Object Get(Object instance)
         {
             if (instance == null)
@@ -91,7 +95,7 @@ namespace ILWheatBread
         }
     }
 
-    public class PropertyGetterEmit
+    internal class PropertyGetterEmit
     {
         private readonly Func<Object, Object> getter;
 
@@ -107,11 +111,13 @@ namespace ILWheatBread
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Object Invoke(Object instance)
         {
             return getter?.Invoke(instance);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Func<Object, Object> CreateGetterEmit(PropertyInfo property)
         {
             if (property == null)
@@ -143,11 +149,10 @@ namespace ILWheatBread
         }
     }
 
-    public class PropertySetterEmit
+    internal class PropertySetterEmit
     {
         private readonly Action<Object, Object> setFunc;
 
-        
         public PropertySetterEmit(PropertyInfo propertyInfo)
         {
             if (propertyInfo == null)
@@ -158,6 +163,7 @@ namespace ILWheatBread
             this.setFunc = CreatePropertySetter(propertyInfo);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Action<Object, Object> CreatePropertySetter(PropertyInfo property)
         {
             if (property == null)
@@ -192,6 +198,7 @@ namespace ILWheatBread
             return (Action<Object, Object>)dm.CreateDelegate(typeof(Action<Object, Object>));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void EmitCastToReference(ILGenerator il, Type type)
         {
             if (type.IsValueType)
@@ -204,7 +211,7 @@ namespace ILWheatBread
             }
         }
 
-        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Invoke(Object instance, Object value)
         {
             this.setFunc?.Invoke(instance, value);

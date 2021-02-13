@@ -32,12 +32,14 @@ namespace ILWheatBread
         internal Object Instance { get; set; }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public String ToJson()
         {
             return JsonConvert.SerializeObject(this.Instance);
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public String ToXml()
         {
             XDocument doc = new XDocument();
@@ -53,6 +55,7 @@ namespace ILWheatBread
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FastDynamic GetFastDynamic<T>(T entity) where T : class, new()
         {
             return new FastDynamic()

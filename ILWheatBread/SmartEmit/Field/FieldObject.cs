@@ -15,6 +15,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldObject As<T>()
         {
             LocalBuilder temp = DeclareLocal(typeof(T));
@@ -25,6 +26,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldObject As(Type type)
         {
             LocalBuilder temp = DeclareLocal(type);
@@ -35,6 +37,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldBoolean IsNull()
         {
             LocalBuilder assert = DeclareLocal(typeof(Boolean));
@@ -46,30 +49,35 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override MethodManager Invoke(String methodName, params LocalBuilder[] parameters)
         {
-            return this.CallvirtMethod(methodName, asidentity, parameters);
+            return this.ReflectMethod(methodName, asidentity, parameters);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldObject field, Object value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldObject field, LocalBuilder value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
-        public static FieldBoolean operator ==(FieldObject field, SmartEmit.VariableManager value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static FieldBoolean operator ==(FieldObject field, VariableManager value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldObject field, Object value)
         {
             return ManagerGX.Comparer(
@@ -78,6 +86,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldObject field, LocalBuilder value)
         {
             return ManagerGX.Comparer(
@@ -86,7 +95,8 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
-        public static FieldBoolean operator !=(FieldObject field, SmartEmit.VariableManager value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static FieldBoolean operator !=(FieldObject field, VariableManager value)
         {
             return ManagerGX.Comparer(
                ManagerGX.Comparer(field, value, OpCodes.Ceq),

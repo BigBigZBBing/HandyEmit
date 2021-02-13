@@ -25,6 +25,7 @@ namespace ILWheatBread.SmartEmit.Field
 
         public LocalBuilder this[String Name]
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (!ContanisKey(Name)) ManagerGX.ShowEx("Entity prop is null;");
@@ -34,6 +35,7 @@ namespace ILWheatBread.SmartEmit.Field
                 Emit(OpCodes.Stloc_S, item);
                 return item;
             }
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (!ContanisKey(Name)) ManagerGX.ShowEx("Entity prop is null;");
@@ -43,13 +45,15 @@ namespace ILWheatBread.SmartEmit.Field
             }
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldBoolean IsNull()
         {
             return this.IsNull(this);
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public LocalBuilder GetValue(String FieldName)
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");
@@ -60,7 +64,8 @@ namespace ILWheatBread.SmartEmit.Field
             return item;
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetValue(String FieldName, LocalBuilder value)
         {
             if (!ContanisKey(FieldName)) ManagerGX.ShowEx("Entity property is null;");
@@ -69,6 +74,7 @@ namespace ILWheatBread.SmartEmit.Field
             Emit(OpCodes.Callvirt, EntityBody[FieldName].set);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private Boolean ContanisKey(String Name)
         {
             return EntityBody.ContainsKey(Name);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +35,7 @@ namespace ILWheatBread.SmartEmit.Field
             return NullValue;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldBoolean HasValue()
         {
             LocalBuilder Has = DeclareLocal(typeof(Boolean));
@@ -43,6 +45,7 @@ namespace ILWheatBread.SmartEmit.Field
             return new FieldBoolean(Has, generator);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CanCompute<T> Value()
         {
             LocalBuilder Original = generator.DeclareLocal(typeof(T));
@@ -52,6 +55,7 @@ namespace ILWheatBread.SmartEmit.Field
             return new CanCompute<T>(Original, generator);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public CanCompute<T> GetValueOrDefault()
         {
             LocalBuilder Default = generator.DeclareLocal(typeof(T));

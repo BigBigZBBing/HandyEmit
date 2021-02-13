@@ -44,7 +44,7 @@ namespace exmaple
                 if (deleg == null)
                     deleg = SmartBuilder.DynamicMethod<Action<Model>>(string.Empty, builder =>
                     {
-                        var value = builder.EmitParamRef<Model>(0);
+                        var value = builder.ArgumentRef<Model>(0);
                         var entity = builder.NewEntity<Model>(value);
                         entity.SetValue("Id", builder.NewInt64(9999));
                         entity.SetValue("Name", builder.NewString("张炳彬"));
@@ -55,7 +55,7 @@ namespace exmaple
                         entity.SetValue("LoginTime3", builder.NewDateTime());
                         entity.SetValue("LoginTime4", builder.NewDateTime());
                         entity.SetValue("LoginTime5", builder.NewDateTime());
-                        builder.EmitReturn();
+                        builder.Return();
                     });
 
                 deleg.Invoke(model);

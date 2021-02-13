@@ -11,24 +11,28 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldBoolean field, LocalBuilder value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldBoolean field, FieldBoolean value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldBoolean field, Boolean value)
         {
             return ManagerGX.Comparer(
@@ -37,6 +41,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldBoolean field, LocalBuilder value)
         {
             return ManagerGX.Comparer(
@@ -45,6 +50,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldBoolean field, FieldBoolean value)
         {
             return ManagerGX.Comparer(
@@ -53,6 +59,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator |(FieldBoolean field, FieldBoolean value)
         {
             var assert = field.NewBoolean();
@@ -70,6 +77,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator &(FieldBoolean field, FieldBoolean value)
         {
             var assert = field.NewBoolean();

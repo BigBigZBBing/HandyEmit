@@ -14,6 +14,7 @@ namespace ILWheatBread.SmartEmit.Func
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TryCatchManager Catch(Action<LocalBuilder> builder)
         {
             generator.BeginCatchBlock(typeof(Exception));
@@ -24,6 +25,7 @@ namespace ILWheatBread.SmartEmit.Func
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TryCatchManager Finally(Action builder)
         {
             generator.BeginFinallyBlock();
@@ -32,6 +34,7 @@ namespace ILWheatBread.SmartEmit.Func
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void TryEnd()
         {
             generator.EndExceptionBlock();

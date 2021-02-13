@@ -16,6 +16,7 @@ namespace ILWheatBread.SmartEmit
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FieldObject AsObject()
         {
             var temp = this.NewObject();
@@ -33,9 +34,10 @@ namespace ILWheatBread.SmartEmit
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public virtual MethodManager Invoke(String methodName, params LocalBuilder[] parameters)
         {
-            return this.CallvirtMethod(methodName, identity, parameters);
+            return this.ReflectMethod(methodName, identity, parameters);
         }
 
         

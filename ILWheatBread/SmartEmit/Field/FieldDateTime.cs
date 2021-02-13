@@ -11,24 +11,28 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldDateTime field, DateTime value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldDateTime field, LocalBuilder value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator ==(FieldDateTime field, FieldDateTime value)
         {
             return ManagerGX.Comparer(field, value, OpCodes.Ceq);
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldDateTime field, DateTime value)
         {
             return ManagerGX.Comparer(
@@ -37,6 +41,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldDateTime field, LocalBuilder value)
         {
             return ManagerGX.Comparer(
@@ -45,6 +50,7 @@ namespace ILWheatBread.SmartEmit.Field
         }
 
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FieldBoolean operator !=(FieldDateTime field, FieldDateTime value)
         {
             return ManagerGX.Comparer(

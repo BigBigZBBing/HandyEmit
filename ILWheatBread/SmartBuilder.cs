@@ -33,6 +33,7 @@ namespace ILWheatBread
             this.dllName = dllName;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SmartBuilder Assembly()
         {
             assmblyName = new AssemblyName(dllName);
@@ -52,12 +53,14 @@ namespace ILWheatBread
             return this;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public SmartBuilder Class(String ClassName, Qualifier ClassType = Qualifier.Public)
         {
             typeBuilder = moduleBuilder.DefineType(ClassName, (TypeAttributes)ClassType);
             return this;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Field(String FieldName, Type Type, FieldAttributes Attr = FieldAttributes.Private, Object ConstValue = null)
         {
             fieldBuilder = typeBuilder.DefineField(FieldName, Type, Attr);
@@ -65,11 +68,13 @@ namespace ILWheatBread
                 fieldBuilder.SetConstant(ConstValue);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Property(String PropertyName, Type Type, PropertyAttributes Attr = PropertyAttributes.None)
         {
             propertyBuilder = typeBuilder.DefineProperty(PropertyName, Attr, Type, null);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Method(String MethodName, Action<FuncGenerator> builder, Type RetType = null, Type[] ParamTypes = null, MethodAttributes Attr = MethodAttributes.Public)
         {
             methodBuilder = typeBuilder.DefineMethod(MethodName, Attr, RetType, ParamTypes);
@@ -77,6 +82,7 @@ namespace ILWheatBread
             builder?.Invoke(new FuncGenerator(methodBuilder.GetILGenerator()));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void get_Item(Type Type)
         {
             Method("get_Item", null, Type, Type.EmptyTypes, MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig);
@@ -88,6 +94,7 @@ namespace ILWheatBread
             propertyBuilder.SetGetMethod(methodBuilder);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void set_Item(Type Type)
         {
             Method("set_Item", null, null, new Type[] { Type }, MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig);
@@ -100,6 +107,7 @@ namespace ILWheatBread
             propertyBuilder.SetSetMethod(methodBuilder);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SaveClass()
         {
             _dymaticType = typeBuilder.CreateTypeInfo();
@@ -107,6 +115,7 @@ namespace ILWheatBread
 
 #if NET48
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Save()
         {
             SaveClass();
@@ -115,11 +124,13 @@ namespace ILWheatBread
 
 #endif
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Build()
         {
             _instance = Activator.CreateInstance(_dymaticType);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CreateProperty(String FieldName, Type FieldType)
         {
             Field($"_{FieldName}", FieldType);
@@ -128,6 +139,7 @@ namespace ILWheatBread
             set_Item(FieldType);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public FastDynamic InitEntity()
         {
             SaveClass();
@@ -136,6 +148,7 @@ namespace ILWheatBread
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T DynamicMethod<T>(String MethodName, Action<FuncGenerator> builder) where T : class
         {
             var type = typeof(T);
